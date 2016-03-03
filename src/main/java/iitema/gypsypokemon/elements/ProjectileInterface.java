@@ -1,4 +1,4 @@
 package iitema.gypsypokemon.elements;
 
-public interface PayloadInterface {
+public interface ProjectileInterface {
 }

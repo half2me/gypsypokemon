@@ -2,7 +2,12 @@ package iitema.gypsypokemon.elements.blocks;
 
 import iitema.gypsypokemon.elements.ProjectileInterface;
 
-public class Player implements PlayerInterface{
+public class Door implements FieldInterface{
+    @java.lang.Override
+    public void placeOn(MovableInterface movable) {
+
+    }
+
     @java.lang.Override
     public void stepOn(PlayerInterface player) {
 
