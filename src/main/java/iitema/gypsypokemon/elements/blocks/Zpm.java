@@ -3,7 +3,7 @@ package iitema.gypsypokemon.elements.blocks;
 import iitema.gypsypokemon.elements.Direction;
 import iitema.gypsypokemon.elements.ProjectileInterface;
 
-public class Zpm implements ObstacleInterface {
+public class Zpm implements CollectableInterface {
 
     /**
      * Step on a a field
