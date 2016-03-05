@@ -7,7 +7,7 @@ public interface ProjectileInterface {
     /**
      * Color of projectile
      */
-    enum CartridgeColor {YELLOW, BLUE}
+    enum ProjectileColor {YELLOW, BLUE}
 
     /**
      * Get the direction of a projectile
@@ -21,5 +21,5 @@ public interface ProjectileInterface {
      *
      * @return color
      */
-    CartridgeColor getColor();
+    ProjectileColor getColor();
 }
