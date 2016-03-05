@@ -25,6 +25,11 @@ public class Player implements PlayerInterface{
 
     }
 
+    @Override
+    public void shoot(Direction direction, ProjectileInterface.ProjectileColor pColor) {
+
+    }
+
     /**
      * Step on a a field
      * <p>

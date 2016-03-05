@@ -1,6 +1,7 @@
 package iitema.gypsypokemon.elements.blocks;
 
 import iitema.gypsypokemon.elements.Direction;
+import iitema.gypsypokemon.elements.ProjectileInterface;
 
 /**
  * A player in the game
@@ -20,4 +21,12 @@ public interface PlayerInterface extends BlockInterface{
      * @param field field to place player on
      */
     void changePostition(FieldInterface field);
+
+    /**
+     * Shoot projectile of pColor towards direction.
+     *
+     * @param direction direction
+     * @param pColor projectile color
+     */
+    void shoot(Direction direction, ProjectileInterface.ProjectileColor pColor);
 }
