@@ -3,7 +3,7 @@ package iitema.gypsypokemon.elements.blocks;
 import iitema.gypsypokemon.elements.Direction;
 import iitema.gypsypokemon.elements.ProjectileInterface;
 
-public class Scale implements FieldInterface{
+public class Scale implements ContainerFieldInterface{
     /**
      * Place a movable block on this field
      *
@@ -55,6 +55,11 @@ public class Scale implements FieldInterface{
      */
     @Override
     public void shootAt(ProjectileInterface projectile) {
+
+    }
+
+    @Override
+    public void removeContent() {
 
     }
 }

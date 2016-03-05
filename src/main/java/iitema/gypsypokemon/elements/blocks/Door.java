@@ -3,7 +3,7 @@ package iitema.gypsypokemon.elements.blocks;
 import iitema.gypsypokemon.elements.Direction;
 import iitema.gypsypokemon.elements.ProjectileInterface;
 
-public class Door implements FieldInterface{
+public class Door implements ContainerFieldInterface{
 
     /**
      * Place a movable block on this field
@@ -56,6 +56,11 @@ public class Door implements FieldInterface{
      */
     @Override
     public void shootAt(ProjectileInterface projectile) {
+
+    }
+
+    @Override
+    public void removeContent() {
 
     }
 }

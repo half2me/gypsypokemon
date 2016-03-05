@@ -6,7 +6,7 @@ import iitema.gypsypokemon.elements.ProjectileInterface;
 /**
  * A field the player can move on, shoot through, or place a items on it.
  */
-public class Ground implements FieldInterface{
+public class Ground implements ContainerFieldInterface{
     @Override
     public void placeOn(MovableInterface movable) {
 
@@ -29,6 +29,11 @@ public class Ground implements FieldInterface{
 
     @Override
     public void shootAt(ProjectileInterface projectile) {
+
+    }
+
+    @Override
+    public void removeContent() {
 
     }
 }
