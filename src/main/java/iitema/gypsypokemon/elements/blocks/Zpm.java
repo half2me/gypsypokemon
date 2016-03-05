@@ -27,4 +27,9 @@ public class Zpm implements ObstacleInterface {
     public void shootAt(ProjectileInterface projectile) {
 
     }
+
+    @Override
+    public MovableInterface pickUp() {
+        return null;
+    }
 }

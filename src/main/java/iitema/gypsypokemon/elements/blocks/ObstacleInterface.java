@@ -22,4 +22,10 @@ public interface ObstacleInterface {
      * @param projectile projectile
      */
     void shootAt(ProjectileInterface projectile);
+
+    /**
+     * Pickup a movable block from this field
+     * @return a movable block which is on this field
+     */
+    MovableInterface pickUp();
 }

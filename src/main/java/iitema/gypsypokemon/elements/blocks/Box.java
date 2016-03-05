@@ -26,4 +26,9 @@ public class Box implements MovableInterface{
     public void shootAt(ProjectileInterface projectile) {
 
     }
+
+    @Override
+    public MovableInterface pickUp() {
+        return null;
+    }
 }

@@ -16,12 +16,6 @@ public interface FieldInterface extends ObstacleInterface {
     void placeOn(MovableInterface movable);
 
     /**
-     * Pickup a movable block from this field
-     * @return a movable block which is on this field
-     */
-    MovableInterface pickUp();
-
-    /**
      * Get a neighbor of this field
      * @param direction direction to look for the neighbor
      * @return neighbor in the direction specified

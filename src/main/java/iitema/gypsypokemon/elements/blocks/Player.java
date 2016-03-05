@@ -52,4 +52,9 @@ public class Player implements PlayerInterface{
     public void shootAt(ProjectileInterface projectile) {
 
     }
+
+    @Override
+    public MovableInterface pickUp() {
+        return null;
+    }
 }
