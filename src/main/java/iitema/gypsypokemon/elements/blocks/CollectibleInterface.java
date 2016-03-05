@@ -3,5 +3,5 @@ package iitema.gypsypokemon.elements.blocks;
 /**
  * Items that can be collected by walking over.
  */
-public interface CollectableInterface extends ObstacleInterface{
+public interface CollectibleInterface extends ObstacleInterface{
 }
