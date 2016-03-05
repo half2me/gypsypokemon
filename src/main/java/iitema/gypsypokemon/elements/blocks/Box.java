@@ -1,5 +1,6 @@
 package iitema.gypsypokemon.elements.blocks;
 
+import iitema.gypsypokemon.elements.Direction;
 import iitema.gypsypokemon.elements.ProjectileInterface;
 
 public class Box implements MovableInterface{
@@ -12,7 +13,7 @@ public class Box implements MovableInterface{
      * @param direction direction player is moving
      */
     @Override
-    public void stepOn(PlayerInterface player, int direction) {
+    public void stepOn(PlayerInterface player, Direction direction) {
 
     }
 

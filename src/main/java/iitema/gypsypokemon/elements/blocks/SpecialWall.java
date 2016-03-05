@@ -1,5 +1,7 @@
 package iitema.gypsypokemon.elements.blocks;
 
+import iitema.gypsypokemon.elements.Direction;
+
 public class SpecialWall extends Wall {
     /**
      * Place a movable block on this field
@@ -7,7 +9,7 @@ public class SpecialWall extends Wall {
      * @param movable movable block to place
      */
     @Override
-    public void placekOn(MovableInterface movable) {
+    public void placeOn(MovableInterface movable) {
 
     }
 
@@ -28,7 +30,7 @@ public class SpecialWall extends Wall {
      * @return neighbor in the direction specified
      */
     @Override
-    public FieldInterface getNeighbor(int direction) {
+    public FieldInterface getNeighbor(Direction direction) {
         return null;
     }
 
@@ -41,7 +43,7 @@ public class SpecialWall extends Wall {
      * @param direction direction player is moving
      */
     @Override
-    public void stepOn(PlayerInterface player, int direction) {
+    public void stepOn(PlayerInterface player, Direction direction) {
 
     }
 }

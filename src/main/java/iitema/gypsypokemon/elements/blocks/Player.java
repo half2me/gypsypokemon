@@ -1,5 +1,6 @@
 package iitema.gypsypokemon.elements.blocks;
 
+import iitema.gypsypokemon.elements.Direction;
 import iitema.gypsypokemon.elements.ProjectileInterface;
 
 public class Player implements PlayerInterface{
@@ -10,7 +11,7 @@ public class Player implements PlayerInterface{
      * @param direction direction to move player
      */
     @Override
-    public void move(int direction) {
+    public void move(Direction direction) {
 
     }
 
@@ -33,7 +34,7 @@ public class Player implements PlayerInterface{
      * @param direction direction player is moving
      */
     @Override
-    public void stepOn(PlayerInterface player, int direction) {
+    public void stepOn(PlayerInterface player, Direction direction) {
 
     }
 
