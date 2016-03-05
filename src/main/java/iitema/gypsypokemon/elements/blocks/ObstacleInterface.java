@@ -6,7 +6,7 @@ import iitema.gypsypokemon.elements.ProjectileInterface;
 /**
  * A block on the map
  */
-public interface BlockInterface {
+public interface ObstacleInterface {
 
     /**
      * Step on a a field

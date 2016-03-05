@@ -8,7 +8,7 @@ import iitema.gypsypokemon.elements.Direction;
  * Blocks can be places on a field
  * Fields store their 4 neighbors
  */
-public interface FieldInterface extends BlockInterface{
+public interface FieldInterface extends ObstacleInterface {
     /**
      * Place a movable block on this field
      * @param movable movable block to place

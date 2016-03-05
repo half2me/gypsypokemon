@@ -6,7 +6,7 @@ import iitema.gypsypokemon.elements.ProjectileInterface;
 /**
  * A player in the game
  */
-public interface PlayerInterface extends BlockInterface{
+public interface PlayerInterface extends ObstacleInterface {
 
     /**
      * Move player in a direction
