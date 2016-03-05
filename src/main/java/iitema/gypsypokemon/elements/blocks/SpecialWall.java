@@ -46,4 +46,13 @@ public class SpecialWall extends Wall {
     public void stepOn(PlayerInterface player, Direction direction) {
 
     }
+
+    /**
+     * Teleport player to this SpecialWall
+     *
+     * @param palyer player
+     */
+    public void teleportTo(PlayerInterface palyer){
+
+    }
 }
