@@ -3,13 +3,27 @@ package iitema.gypsypokemon.elements.blocks;
 import iitema.gypsypokemon.elements.ProjectileInterface;
 
 public class Zpm implements BlockInterface{
-    @java.lang.Override
-    public void stepOn(PlayerInterface player) {
+
+    /**
+     * Step on a a field
+     * <p>
+     * When a player wants to step on this field
+     *
+     * @param player    player
+     * @param direction direction player is moving
+     */
+    @Override
+    public void stepOn(PlayerInterface player, int direction) {
 
     }
 
-    @java.lang.Override
-    public void shootAt(ProjectileInterface payload) {
+    /**
+     * Shoot a projectile at this block
+     *
+     * @param projectile projectile
+     */
+    @Override
+    public void shootAt(ProjectileInterface projectile) {
 
     }
 }
