@@ -1,5 +1,7 @@
 package iitema.gypsypokemon.elements.blocks;
 
+import iitema.gypsypokemon.elements.Direction;
+
 /**
  * A player in the game
  */
@@ -10,12 +12,12 @@ public interface PlayerInterface extends BlockInterface{
      *
      * @param direction direction to move player
      */
-    public void move(int direction);
+    void move(Direction direction);
 
     /**
      * Change position of the player to a field specified
      *
      * @param field field to place player on
      */
-    public void changePostition(FieldInterface field);
+    void changePostition(FieldInterface field);
 }

@@ -1,5 +1,6 @@
 package iitema.gypsypokemon.elements.blocks;
 
+import iitema.gypsypokemon.elements.Direction;
 import iitema.gypsypokemon.elements.ProjectileInterface;
 
 public class Abyss implements FieldInterface{
@@ -9,7 +10,7 @@ public class Abyss implements FieldInterface{
      * @param movable movable block to place
      */
     @Override
-    public void placekOn(MovableInterface movable) {
+    public void placeOn(MovableInterface movable) {
 
     }
 
@@ -30,7 +31,7 @@ public class Abyss implements FieldInterface{
      * @return neighbor in the direction specified
      */
     @Override
-    public FieldInterface getNeighbor(int direction) {
+    public FieldInterface getNeighbor(Direction direction) {
         return null;
     }
 
@@ -43,7 +44,7 @@ public class Abyss implements FieldInterface{
      * @param direction direction player is moving
      */
     @Override
-    public void stepOn(PlayerInterface player, int direction) {
+    public void stepOn(PlayerInterface player, Direction direction) {
 
     }
 
