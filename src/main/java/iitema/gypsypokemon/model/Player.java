@@ -51,7 +51,7 @@ public class Player implements PlayerInterface{
      * @param projectile projectile
      */
     @Override
-    public void shootAt(ProjectileInterface projectile) {
+    public void shootAt(Projectile projectile) {
 
     }
 

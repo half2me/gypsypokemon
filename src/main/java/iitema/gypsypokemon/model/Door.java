@@ -52,7 +52,7 @@ public class Door extends AbstractContainerField{
      * @param projectile projectile
      */
     @Override
-    public void shootAt(ProjectileInterface projectile) {
+    public void shootAt(Projectile projectile) {
 
     }
 

@@ -25,7 +25,7 @@ public class Ground extends AbstractContainerField{
     }
 
     @Override
-    public void shootAt(ProjectileInterface projectile) {
+    public void shootAt(Projectile projectile) {
 
     }
 

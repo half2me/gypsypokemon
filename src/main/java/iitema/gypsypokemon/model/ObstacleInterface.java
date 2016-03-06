@@ -18,7 +18,7 @@ public interface ObstacleInterface {
      * Shoot a projectile at this block
      * @param projectile projectile
      */
-    void shootAt(ProjectileInterface projectile);
+    void shootAt(Projectile projectile);
 
     /**
      * Pickup a movable block from this field

@@ -13,7 +13,7 @@ public abstract class AbstractContainerField implements ContainerFieldInterface 
     }
 
     @Override
-    public void shootAt(ProjectileInterface projectile) {
+    public void shootAt(Projectile projectile) {
 
     }
 }

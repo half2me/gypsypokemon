@@ -3,19 +3,23 @@ package iitema.gypsypokemon.model;
 /**
  * A projectile which can be shot
  */
-public interface ProjectileInterface {
+public class Projectile {
 
     /**
      * Get the direction of a projectile
      *
      * @return direction
      */
-    Direction getDirection();
+    public Direction getDirection(){
+        return null;
+    }
 
     /**
      * Get the color of a projectile
      *
      * @return color
      */
-    PortalColor getColor();
+    public PortalColor getColor(){
+        return null;
+    }
 }

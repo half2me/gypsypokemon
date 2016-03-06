@@ -21,7 +21,7 @@ public class Zpm implements CollectibleInterface {
      * @param projectile projectile
      */
     @Override
-    public void shootAt(ProjectileInterface projectile) {
+    public void shootAt(Projectile projectile) {
 
     }
 
