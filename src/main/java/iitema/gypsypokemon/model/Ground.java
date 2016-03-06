@@ -15,22 +15,7 @@ public class Ground extends AbstractContainerField{
     }
 
     @Override
-    public FieldInterface getNeighbor(Direction direction) {
-        return null;
-    }
-
-    @Override
     public void stepOn(PlayerInterface player, Direction direction) {
-
-    }
-
-    @Override
-    public void shootAt(Projectile projectile) {
-
-    }
-
-    @Override
-    public void removeContent() {
 
     }
 }

@@ -22,17 +22,6 @@ public class SpecialWall extends Wall {
     }
 
     /**
-     * Get a neighbor of this field
-     *
-     * @param direction direction to look for the neighbor
-     * @return neighbor in the direction specified
-     */
-    @Override
-    public FieldInterface getNeighbor(Direction direction) {
-        return null;
-    }
-
-    /**
      * Step on a a field
      * <p>
      * When a player wants to step on this field
@@ -43,6 +32,11 @@ public class SpecialWall extends Wall {
     @Override
     public void stepOn(PlayerInterface player, Direction direction) {
 
+    }
+
+    @Override
+    public void shootAt(Projectile projectile) {
+        super.shootAt(projectile);
     }
 
     /**

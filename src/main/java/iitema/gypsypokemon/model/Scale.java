@@ -22,17 +22,6 @@ public class Scale extends AbstractContainerField{
     }
 
     /**
-     * Get a neighbor of this field
-     *
-     * @param direction direction to look for the neighbor
-     * @return neighbor in the direction specified
-     */
-    @Override
-    public FieldInterface getNeighbor(Direction direction) {
-        return null;
-    }
-
-    /**
      * Step on a a field
      * <p>
      * When a player wants to step on this field
@@ -42,21 +31,6 @@ public class Scale extends AbstractContainerField{
      */
     @Override
     public void stepOn(PlayerInterface player, Direction direction) {
-
-    }
-
-    /**
-     * Shoot a projectile at this block
-     *
-     * @param projectile projectile
-     */
-    @Override
-    public void shootAt(Projectile projectile) {
-
-    }
-
-    @Override
-    public void removeContent() {
 
     }
 }

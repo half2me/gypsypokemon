@@ -22,17 +22,6 @@ public class Abyss extends AbstractField {
     }
 
     /**
-     * Get a neighbor of this field
-     *
-     * @param direction direction to look for the neighbor
-     * @return neighbor in the direction specified
-     */
-    @Override
-    public FieldInterface getNeighbor(Direction direction) {
-        return null;
-    }
-
-    /**
      * Step on a a field
      * <p>
      * When a player wants to step on this field
