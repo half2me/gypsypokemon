@@ -26,4 +26,11 @@ public interface PlayerInterface extends ObstacleInterface {
      * @param pColor projectile color
      */
     void shoot(Direction direction, PortalColor pColor);
+
+    /**
+     * Collects item, called by a CollectibleInterface when stepOn(...)
+     *
+     * @param item item to collect
+     */
+    void collect(CollectibleInterface item);
 }

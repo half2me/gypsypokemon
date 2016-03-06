@@ -27,6 +27,11 @@ public class Player implements PlayerInterface{
 
     }
 
+    @Override
+    public void collect(CollectibleInterface item) {
+
+    }
+
     /**
      * Step on a a field
      * <p>
