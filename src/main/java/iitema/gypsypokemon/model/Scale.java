@@ -1,6 +1,6 @@
 package iitema.gypsypokemon.model;
 
-public class Scale implements ContainerFieldInterface{
+public class Scale extends AbstractContainerField{
     /**
      * Place a movable block on this field
      *

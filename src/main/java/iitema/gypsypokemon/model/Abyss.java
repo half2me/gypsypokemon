@@ -1,6 +1,6 @@
 package iitema.gypsypokemon.model;
 
-public class Abyss implements FieldInterface{
+public class Abyss extends AbstractField {
     /**
      * Place a movable block on this field
      *

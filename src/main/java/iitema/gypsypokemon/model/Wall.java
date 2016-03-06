@@ -1,6 +1,6 @@
 package iitema.gypsypokemon.model;
 
-public class Wall implements FieldInterface{
+public class Wall extends AbstractField{
 
     /**
      * Place a movable block on this field

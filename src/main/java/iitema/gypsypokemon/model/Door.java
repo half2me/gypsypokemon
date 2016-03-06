@@ -1,6 +1,6 @@
 package iitema.gypsypokemon.model;
 
-public class Door implements ContainerFieldInterface{
+public class Door extends AbstractContainerField{
 
     /**
      * Place a movable block on this field
