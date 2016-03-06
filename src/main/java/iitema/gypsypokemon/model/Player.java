@@ -1,6 +1,7 @@
 package iitema.gypsypokemon.model;
 
 public class Player implements PlayerInterface{
+    private int numZpm = 0;
 
     /**
      * Move player in a direction

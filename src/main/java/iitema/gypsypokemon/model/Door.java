@@ -1,6 +1,7 @@
 package iitema.gypsypokemon.model;
 
 public class Door extends AbstractContainerField{
+    private boolean open = false;
 
     /**
      * Place a movable block on this field

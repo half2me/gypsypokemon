@@ -1,6 +1,11 @@
 package iitema.gypsypokemon.model;
 
 public class SpecialWall extends Wall {
+    private static SpecialWall blueWall = null;
+    private static Direction blueSide;
+    private static SpecialWall yellowWall = null;
+    private static Direction yellowSide;
+
     /**
      * Place a movable block on this field
      *

@@ -4,6 +4,8 @@ package iitema.gypsypokemon.model;
  * A projectile which can be shot
  */
 public class Projectile {
+    private Direction direction;
+    private PortalColor color;
 
     /**
      * Get the direction of a projectile

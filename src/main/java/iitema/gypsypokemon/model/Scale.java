@@ -1,6 +1,8 @@
 package iitema.gypsypokemon.model;
 
 public class Scale extends AbstractContainerField{
+    private Door door;
+
     /**
      * Place a movable block on this field
      *
