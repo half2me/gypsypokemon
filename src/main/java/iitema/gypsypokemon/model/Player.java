@@ -1,6 +1,8 @@
 package iitema.gypsypokemon.model;
 
 public class Player implements PlayerInterface{
+    private Direction lookDir;
+    private MovableInterface heldItem = null;
     private int numZpm = 0;
 
     /**
@@ -30,6 +32,11 @@ public class Player implements PlayerInterface{
 
     @Override
     public void collect(CollectibleInterface item) {
+
+    }
+
+    @Override
+    public void kill() {
 
     }
 

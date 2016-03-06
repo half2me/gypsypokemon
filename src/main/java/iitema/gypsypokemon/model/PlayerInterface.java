@@ -33,4 +33,9 @@ public interface PlayerInterface extends ObstacleInterface {
      * @param item item to collect
      */
     void collect(CollectibleInterface item);
+
+    /**
+     * Kills the player.
+     */
+    void kill();
 }
