@@ -1,9 +1,7 @@
-package iitema.gypsypokemon.elements.blocks;
+package iitema.gypsypokemon.model;
 
-import iitema.gypsypokemon.elements.Direction;
-import iitema.gypsypokemon.elements.ProjectileInterface;
+public class Zpm implements CollectibleInterface {
 
-public class Box implements MovableInterface{
     /**
      * Step on a a field
      * <p>

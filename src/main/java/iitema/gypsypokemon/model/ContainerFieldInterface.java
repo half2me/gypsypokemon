@@ -1,4 +1,4 @@
-package iitema.gypsypokemon.elements.blocks;
+package iitema.gypsypokemon.model;
 
 /**
  * A field that can hold items or the player itself.

@@ -1,9 +1,31 @@
-package iitema.gypsypokemon.elements.blocks;
+package iitema.gypsypokemon.model;
 
-import iitema.gypsypokemon.elements.Direction;
-import iitema.gypsypokemon.elements.ProjectileInterface;
+public class Player implements PlayerInterface{
 
-public class Zpm implements CollectibleInterface {
+    /**
+     * Move player in a direction
+     *
+     * @param direction direction to move player
+     */
+    @Override
+    public void move(Direction direction) {
+
+    }
+
+    /**
+     * Change position of the player to a field specified
+     *
+     * @param field field to place player on
+     */
+    @Override
+    public void changePostition(FieldInterface field) {
+
+    }
+
+    @Override
+    public void shoot(Direction direction, PortalColor pColor) {
+
+    }
 
     /**
      * Step on a a field

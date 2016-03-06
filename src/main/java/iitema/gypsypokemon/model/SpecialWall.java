@@ -1,10 +1,6 @@
-package iitema.gypsypokemon.elements.blocks;
+package iitema.gypsypokemon.model;
 
-import iitema.gypsypokemon.elements.Direction;
-import iitema.gypsypokemon.elements.ProjectileInterface;
-
-public class Wall implements FieldInterface{
-
+public class SpecialWall extends Wall {
     /**
      * Place a movable block on this field
      *
@@ -50,12 +46,11 @@ public class Wall implements FieldInterface{
     }
 
     /**
-     * Shoot a projectile at this block
+     * Teleport player to this SpecialWall
      *
-     * @param projectile projectile
+     * @param palyer player
      */
-    @Override
-    public void shootAt(ProjectileInterface projectile) {
+    public void teleportTo(PlayerInterface palyer, PortalColor source){
 
     }
 }

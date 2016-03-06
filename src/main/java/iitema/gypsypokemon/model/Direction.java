@@ -1,4 +1,4 @@
-package iitema.gypsypokemon.elements;
+package iitema.gypsypokemon.model;
 
 /**
  * Direction

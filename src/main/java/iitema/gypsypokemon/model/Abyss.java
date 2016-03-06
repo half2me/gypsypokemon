@@ -1,8 +1,6 @@
-package iitema.gypsypokemon.elements.blocks;
+package iitema.gypsypokemon.model;
 
-import iitema.gypsypokemon.elements.Direction;
-
-public class SpecialWall extends Wall {
+public class Abyss implements FieldInterface{
     /**
      * Place a movable block on this field
      *
@@ -48,11 +46,12 @@ public class SpecialWall extends Wall {
     }
 
     /**
-     * Teleport player to this SpecialWall
+     * Shoot a projectile at this block
      *
-     * @param palyer player
+     * @param projectile projectile
      */
-    public void teleportTo(PlayerInterface palyer){
+    @Override
+    public void shootAt(ProjectileInterface projectile) {
 
     }
 }

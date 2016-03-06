@@ -1,9 +1,7 @@
-package iitema.gypsypokemon.elements.blocks;
+package iitema.gypsypokemon.model;
 
-import iitema.gypsypokemon.elements.Direction;
-import iitema.gypsypokemon.elements.ProjectileInterface;
+public class Wall implements FieldInterface{
 
-public class Abyss implements FieldInterface{
     /**
      * Place a movable block on this field
      *

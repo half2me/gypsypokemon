@@ -1,7 +1,4 @@
-package iitema.gypsypokemon.elements.blocks;
-
-import iitema.gypsypokemon.elements.Direction;
-import iitema.gypsypokemon.elements.ProjectileInterface;
+package iitema.gypsypokemon.model;
 
 /**
  * A player in the game
@@ -28,5 +25,5 @@ public interface PlayerInterface extends ObstacleInterface {
      * @param direction direction
      * @param pColor projectile color
      */
-    void shoot(Direction direction, ProjectileInterface.ProjectileColor pColor);
+    void shoot(Direction direction, PortalColor pColor);
 }

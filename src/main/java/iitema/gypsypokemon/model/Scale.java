@@ -1,7 +1,4 @@
-package iitema.gypsypokemon.elements.blocks;
-
-import iitema.gypsypokemon.elements.Direction;
-import iitema.gypsypokemon.elements.ProjectileInterface;
+package iitema.gypsypokemon.model;
 
 public class Scale implements ContainerFieldInterface{
     /**

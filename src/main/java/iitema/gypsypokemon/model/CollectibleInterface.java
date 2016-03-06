@@ -1,4 +1,4 @@
-package iitema.gypsypokemon.elements.blocks;
+package iitema.gypsypokemon.model;
 
 /**
  * Items that can be collected by walking over.

@@ -1,13 +1,9 @@
-package iitema.gypsypokemon.elements;
+package iitema.gypsypokemon.model;
 
 /**
  * A projectile which can be shot
  */
 public interface ProjectileInterface {
-    /**
-     * Color of projectile
-     */
-    enum ProjectileColor {YELLOW, BLUE}
 
     /**
      * Get the direction of a projectile
@@ -21,5 +17,5 @@ public interface ProjectileInterface {
      *
      * @return color
      */
-    ProjectileColor getColor();
+    PortalColor getColor();
 }

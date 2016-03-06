@@ -1,4 +1,4 @@
-package iitema.gypsypokemon.elements.blocks;
+package iitema.gypsypokemon.model;
 
 /**
  * A block which is movable

@@ -1,7 +1,4 @@
-package iitema.gypsypokemon.elements.blocks;
-
-import iitema.gypsypokemon.elements.Direction;
-import iitema.gypsypokemon.elements.ProjectileInterface;
+package iitema.gypsypokemon.model;
 
 /**
  * A field the player can move on, shoot through, or place a items on it.
