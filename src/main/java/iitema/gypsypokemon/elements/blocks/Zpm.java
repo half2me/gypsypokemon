@@ -1,9 +1,17 @@
 package iitema.gypsypokemon.elements.blocks;
 
-import iitema.gypsypokemon.elements.Color;
 import iitema.gypsypokemon.elements.Direction;
 
 public class Zpm implements ItemInterface{
+
+    public static int total = 30;
+    public static int collected = 0;
+    private FieldInterface field;
+
+    public Zpm(FieldInterface field){
+        this.field = field;
+    }
+
     /**
      * Returns solidity for item
      * If an item is solid, projectiles and players cannot walk over or step on.
@@ -18,13 +26,15 @@ public class Zpm implements ItemInterface{
     }
 
     /**
-     * Shoot at the item
+     * Executes operation when the Item is picked up
      *
-     * @param color color of the projectile
-     * @param side  side to shoot at
+     * @return if the Item can be picked up
      */
-    @java.lang.Override
-    public void shootAt(Color color, Direction side) {
-
+    @Override
+    public boolean pickUp() {
+        Zpm.collected++;
+        this.field.removeItem(Direction.DOWN); // in case ZPM is in the door
+        this.field.removeItem(Direction.LEFT); // in case ZPM is in the door
+        return false; // ZPM should no be picked up
     }
 }

@@ -1,5 +1,6 @@
 package iitema.gypsypokemon.elements.blocks;
 
+import iitema.gypsypokemon.elements.Color;
 import iitema.gypsypokemon.elements.Direction;
 
 import java.util.ArrayList;
@@ -7,8 +8,8 @@ import java.util.EnumMap;
 
 public class Door extends SimpleField {
 
-    protected EnumMap<Direction, Boolean> openSides = new EnumMap<Direction, Boolean>(Direction.class);
-    protected Direction orientation;
+    private EnumMap<Direction, Boolean> openSides = new EnumMap<Direction, Boolean>(Direction.class);
+    private Direction orientation;
 
     public Door(Direction dir) {
         this.orientation = dir;
@@ -96,5 +97,18 @@ public class Door extends SimpleField {
             }
         }
         return false;
+    }
+
+    /**
+     * Opens a door from both sides
+     */
+    public void open() {
+        openSides.put(this.orientation, true);
+        openSides.put(this.orientation.getOpposite(), true);
+    }
+
+    public void close() {
+        openSides.put(this.orientation, false);
+        openSides.put(this.orientation.getOpposite(), false);
     }
 }

@@ -1,5 +1,6 @@
 package iitema.gypsypokemon.elements.blocks;
 
+import iitema.gypsypokemon.elements.Color;
 import iitema.gypsypokemon.elements.Direction;
 
 /**
@@ -65,4 +66,11 @@ public interface FieldInterface{
      * @return true on removed item, false if there is no item to remove
      */
     boolean removeItem(Direction dir);
+
+    /**
+     * Shoot at a field
+     * @param color color of projectile
+     * @param dir direction projectile is travelling
+     */
+    void shootAt(Color color, Direction dir);
 }

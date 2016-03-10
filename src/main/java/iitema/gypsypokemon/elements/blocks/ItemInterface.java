@@ -1,6 +1,5 @@
 package iitema.gypsypokemon.elements.blocks;
 
-import iitema.gypsypokemon.elements.Color;
 import iitema.gypsypokemon.elements.Direction;
 
 public interface ItemInterface {
@@ -12,13 +11,6 @@ public interface ItemInterface {
      * @return solidity
      */
     boolean solid(Direction side);
-
-    /**
-     * Shoot at the item
-     * @param color color of the projectile
-     * @param side side to shoot at
-     */
-    void shootAt(Color color, Direction side);
 
     /**
      * Executes operation when the Item is picked up

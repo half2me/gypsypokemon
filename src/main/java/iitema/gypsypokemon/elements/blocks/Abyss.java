@@ -1,5 +1,6 @@
 package iitema.gypsypokemon.elements.blocks;
 
+import iitema.gypsypokemon.elements.Color;
 import iitema.gypsypokemon.elements.Direction;
 
 public class Abyss extends SimpleField{
@@ -64,7 +65,7 @@ public class Abyss extends SimpleField{
      * @return true on removed item, false if there is no item to remove
      */
     @Override
-    public boolean removeItem() {
+    public boolean removeItem(Direction dir) {
         return false;
     }
 }

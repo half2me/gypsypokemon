@@ -1,6 +1,5 @@
 package iitema.gypsypokemon.elements.blocks;
 
-import iitema.gypsypokemon.elements.Color;
 import iitema.gypsypokemon.elements.Direction;
 
 public class Box implements ItemInterface{
@@ -14,17 +13,16 @@ public class Box implements ItemInterface{
      */
     @java.lang.Override
     public boolean solid(Direction side) {
-        return false;
+        return true;
     }
 
     /**
-     * Shoot at the item
+     * Executes operation when the Item is picked up
      *
-     * @param color color of the projectile
-     * @param side  side to shoot at
+     * @return if the Item can be picked up
      */
-    @java.lang.Override
-    public void shootAt(Color color, Direction side) {
-
+    @Override
+    public boolean pickUp() {
+        return true;
     }
 }

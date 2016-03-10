@@ -70,7 +70,7 @@ public class Player implements PlayerInterface{
         do {
             field = this.field.getNeighbor(this.dir);
         } while (!field.solid(this.dir));
-        field.getItem(this.dir).shootAt(color, this.dir);
+        field.shootAt(color, this.dir);
     }
 
     /**

@@ -1,5 +1,6 @@
 package iitema.gypsypokemon.elements.blocks;
 
+import iitema.gypsypokemon.elements.Color;
 import iitema.gypsypokemon.elements.Direction;
 
 import java.util.EnumMap;
@@ -56,5 +57,16 @@ public abstract class SimpleField implements FieldInterface{
         }
         this.item = null;
         return true;
+    }
+
+    /**
+     * Shoot at a field
+     *
+     * @param color color of projectile
+     * @param dir   direction projectile is travelling
+     */
+    @Override
+    public void shootAt(Color color, Direction dir) {
+
     }
 }

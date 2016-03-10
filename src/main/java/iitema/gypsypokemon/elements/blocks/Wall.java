@@ -3,7 +3,7 @@ package iitema.gypsypokemon.elements.blocks;
 import iitema.gypsypokemon.elements.Color;
 import iitema.gypsypokemon.elements.Direction;
 
-public class Wall implements ItemInterface{
+public class Wall extends SimpleField{
 
     /**
      * Returns solidity for item
@@ -15,17 +15,25 @@ public class Wall implements ItemInterface{
      */
     @java.lang.Override
     public boolean solid(Direction side) {
-        return false;
+        return true;
     }
 
     /**
-     * Shoot at the item
+     * Try to step on a field
      *
-     * @param color color of the projectile
-     * @param side  side to shoot at
+     * @param dir    direction the player is facing
+     * @param player the player that is stepping on the field
      */
-    @java.lang.Override
-    public void shootAt(Color color, Direction side) {
+    @Override
+    public void stepOn(Direction dir, PlayerInterface player) {
+
+    }
+
+    /**
+     * Leave a field
+     */
+    @Override
+    public void stepOff() {
 
     }
 }
