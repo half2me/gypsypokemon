@@ -1,30 +1,40 @@
 package iitema.gypsypokemon.elements.blocks;
 
 import iitema.gypsypokemon.elements.Direction;
-import iitema.gypsypokemon.elements.ProjectileInterface;
 
-public class Zpm implements BlockInterface{
+public class Zpm implements ItemInterface{
 
-    /**
-     * Step on a a field
-     * <p>
-     * When a player wants to step on this field
-     *
-     * @param player    player
-     * @param direction direction player is moving
-     */
-    @Override
-    public void stepOn(PlayerInterface player, Direction direction) {
+    public static int total = 30;
+    public static int collected = 0;
+    private FieldInterface field;
 
+    public Zpm(FieldInterface field){
+        this.field = field;
     }
 
     /**
-     * Shoot a projectile at this block
+     * Returns solidity for item
+     * If an item is solid, projectiles and players cannot walk over or step on.
+     * If an item is not solid, projectiles can be shot through and players can walk over or step on.
      *
-     * @param projectile projectile
+     * @param side side of the item to check
+     * @return solidity
+     */
+    @java.lang.Override
+    public boolean solid(Direction side) {
+        return false;
+    }
+
+    /**
+     * Executes operation when the Item is picked up
+     *
+     * @return if the Item can be picked up
      */
     @Override
-    public void shootAt(ProjectileInterface projectile) {
-
+    public boolean pickUp() {
+        Zpm.collected++;
+        this.field.removeItem(Direction.DOWN); // in case ZPM is in the door
+        this.field.removeItem(Direction.LEFT); // in case ZPM is in the door
+        return false; // ZPM should no be picked up
     }
 }

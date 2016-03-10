@@ -1,49 +1,95 @@
 package iitema.gypsypokemon.elements.blocks;
 
+import iitema.gypsypokemon.elements.Color;
 import iitema.gypsypokemon.elements.Direction;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SpecialWall extends Wall {
+
+    private static HashMap<Color, FieldInterface> portalsField = new HashMap<Color, FieldInterface>();
+    private static HashMap<Color, Direction> portalsSide = new HashMap<Color, Direction>();
+
     /**
-     * Place a movable block on this field
+     * Shoot at a field
      *
-     * @param movable movable block to place
+     * @param color color of projectile
+     * @param dir   direction projectile is travelling
      */
     @Override
-    public void placeOn(MovableInterface movable) {
+    public void shootAt(Color color, Direction dir) {
+        SpecialWall.portalsField.put(color, this);
+        SpecialWall.portalsSide.put(color, dir.getOpposite());
+    }
 
+    @Override
+    public boolean placeOn(Direction dir, ItemInterface item) {
+        if (this.checkPortal(dir.getOpposite())) {
+            // Needs re-routing
+            Color c = null;
+            for (Map.Entry<Color, FieldInterface> e : SpecialWall.portalsField.entrySet()) {
+                if (e.getValue() == this) {
+                    c = e.getKey();
+                }
+            }
+            return SpecialWall.portalsField.get(c.getOpposite()).placeOn(SpecialWall.portalsSide.get(c), item);
+        }
+        return false;
     }
 
     /**
-     * Pickup a movable block from this field
+     * Remove the item on the field (if any)
      *
-     * @return a movable block which is on this field
+     * @return true on removed item, false if there is no item to remove
      */
     @Override
-    public MovableInterface pickUp() {
-        return null;
+    public boolean removeItem(Direction dir) {
+        if (this.checkPortal(dir.getOpposite())) {
+            // Needs re-routing
+            Color c = null;
+            for (Map.Entry<Color, FieldInterface> e : SpecialWall.portalsField.entrySet()) {
+                if (e.getValue() == this) {
+                    c = e.getKey();
+                }
+            }
+            return SpecialWall.portalsField.get(c.getOpposite()).removeItem(SpecialWall.portalsSide.get(c));
+        }
+        return false;
     }
 
     /**
-     * Get a neighbor of this field
+     * Try to step on a field
      *
-     * @param direction direction to look for the neighbor
-     * @return neighbor in the direction specified
+     * @param dir    direction the player is facing
+     * @param player the player that is stepping on the field
      */
     @Override
-    public FieldInterface getNeighbor(Direction direction) {
-        return null;
+    public void stepOn(Direction dir, PlayerInterface player) {
+        if (this.checkPortal(dir.getOpposite())) {
+            // Needs re-routing
+            Color c = null;
+            for (Map.Entry<Color, FieldInterface> e : SpecialWall.portalsField.entrySet()) {
+                if (e.getValue() == this) {
+                    c = e.getKey();
+                }
+            }
+            SpecialWall.portalsField.get(c.getOpposite()).stepOn(SpecialWall.portalsSide.get(c), player);
+        }
     }
 
     /**
-     * Step on a a field
-     * <p>
-     * When a player wants to step on this field
+     * Check if there is an active portal on a side of the wall
      *
-     * @param player    player
-     * @param direction direction player is moving
+     * @param side side
+     * @return if there is an active portal or not
      */
-    @Override
-    public void stepOn(PlayerInterface player, Direction direction) {
-
+    private boolean checkPortal(Direction side) {
+        if (SpecialWall.portalsField.containsValue(this)) {
+            if (SpecialWall.portalsSide.containsValue(side)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

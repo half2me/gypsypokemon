@@ -1,50 +1,83 @@
 package iitema.gypsypokemon.elements.blocks;
 
+import iitema.gypsypokemon.Game;
+import iitema.gypsypokemon.elements.Color;
 import iitema.gypsypokemon.elements.Direction;
-import iitema.gypsypokemon.elements.ProjectileInterface;
 
 public class Player implements PlayerInterface{
 
-    /**
-     * Move player in a direction
-     *
-     * @param direction direction to move player
-     */
-    @Override
-    public void move(Direction direction) {
+    private FieldInterface field;
+    private ItemInterface item;
+    private Direction dir;
+    private Game game;
 
+    public Player(Game game, FieldInterface field){
+        this.field = field;
+        this.dir = Direction.RIGHT;
+        this.game = game;
     }
 
     /**
-     * Change position of the player to a field specified
+     * Move player to a field
      *
-     * @param field field to place player on
+     * @param field direction to move player
      */
-    @Override
-    public void changePostition(FieldInterface field) {
-
+    @java.lang.Override
+    public void move(FieldInterface field) {
+        this.field.stepOff();
+        this.field = field;
     }
 
     /**
-     * Step on a a field
-     * <p>
-     * When a player wants to step on this field
+     * Turn or move in a direction
+     * If the player is facing in a different direction, this will turn him around
+     * If the player is facing in the same direction, the player will move one block
      *
-     * @param player    player
-     * @param direction direction player is moving
+     * @param dir direction
      */
-    @Override
-    public void stepOn(PlayerInterface player, Direction direction) {
-
+    @java.lang.Override
+    public void step(Direction dir) {
+        if(this.dir == dir) {
+            this.field.getNeighbor(dir).stepOn(dir, this);
+        } else {
+            this.dir = dir;
+        }
     }
 
     /**
-     * Shoot a projectile at this block
-     *
-     * @param projectile projectile
+     * Try to pickup an item from the field in front of the player if hands are empty, or
+     * Try to put down an item on the field in front of the player if hands are full.
      */
-    @Override
-    public void shootAt(ProjectileInterface projectile) {
+    @java.lang.Override
+    public void action() {
+        if(this.item == null) {
+            this.item = this.field.getNeighbor(this.dir).getItem(this.dir);
+        } else {
+            boolean result = this.field.getNeighbor(this.dir).placeOn(this.dir, this.item);
+            if(result) {
+                this.item = null;
+            }
+        }
+    }
 
+    /**
+     * Shoots in the direction the player is facing
+     *
+     * @param color color of the projectile
+     */
+    @java.lang.Override
+    public void shoot(Color color) {
+        do {
+            field = this.field.getNeighbor(this.dir);
+        } while (!field.solid(this.dir));
+        field.shootAt(color, this.dir);
+    }
+
+    /**
+     * Kills the player
+     */
+    @java.lang.Override
+    public void kill() {
+        this.game.endGame();
     }
 }

@@ -1,60 +1,69 @@
 package iitema.gypsypokemon.elements.blocks;
 
+import iitema.gypsypokemon.elements.Color;
 import iitema.gypsypokemon.elements.Direction;
-import iitema.gypsypokemon.elements.ProjectileInterface;
 
-public class Scale implements FieldInterface{
-    /**
-     * Place a movable block on this field
-     *
-     * @param movable movable block to place
-     */
-    @Override
-    public void placeOn(MovableInterface movable) {
+public class Scale extends SimpleField{
 
+    private Door door;
+
+    public Scale(Door door){
+        this.door = door;
     }
 
     /**
-     * Pickup a movable block from this field
+     * Returns solidity for item
+     * If an item is solid, projectiles and players cannot walk over or step on.
+     * If an item is not solid, projectiles can be shot through and players can walk over or step on.
      *
-     * @return a movable block which is on this field
+     * @param dir direction projectile is going
+     * @return solidity
      */
     @Override
-    public MovableInterface pickUp() {
-        return null;
+    public boolean solid(Direction dir) {
+        return false;
     }
 
     /**
-     * Get a neighbor of this field
+     * Try to step on a field
      *
-     * @param direction direction to look for the neighbor
-     * @return neighbor in the direction specified
+     * @param dir    direction the player is facing
+     * @param player the player that is stepping on the field
      */
     @Override
-    public FieldInterface getNeighbor(Direction direction) {
-        return null;
+    public void stepOn(Direction dir, PlayerInterface player) {
+        this.door.open();
     }
 
     /**
-     * Step on a a field
-     * <p>
-     * When a player wants to step on this field
-     *
-     * @param player    player
-     * @param direction direction player is moving
+     * Leave a field
      */
     @Override
-    public void stepOn(PlayerInterface player, Direction direction) {
+    public void stepOff() {
+        this.door.close();
+    }
 
+    @Override
+    public boolean placeOn(Direction dir, ItemInterface item) {
+        if(this.item == null) {
+            this.item = item;
+            this.door.open();
+            return true;
+        }
+        return false;
     }
 
     /**
-     * Shoot a projectile at this block
-     *
-     * @param projectile projectile
+     * Remove the item on the field (if any)
+     * @return true on removed item, false if there is no item to remove
      */
     @Override
-    public void shootAt(ProjectileInterface projectile) {
-
+    public boolean removeItem(Direction dir){
+        if(this.item == null) {
+            return false;
+        }
+        this.item = null;
+        this.door.close();
+        return true;
     }
 }

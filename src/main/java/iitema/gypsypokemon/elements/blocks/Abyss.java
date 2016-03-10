@@ -1,60 +1,71 @@
 package iitema.gypsypokemon.elements.blocks;
 
+import iitema.gypsypokemon.elements.Color;
 import iitema.gypsypokemon.elements.Direction;
-import iitema.gypsypokemon.elements.ProjectileInterface;
 
-public class Abyss implements FieldInterface{
+public class Abyss extends SimpleField{
     /**
-     * Place a movable block on this field
+     * Returns solidity for item
+     * If an item is solid, projectiles and players cannot walk over or step on.
+     * If an item is not solid, projectiles can be shot through and players can walk over or step on.
      *
-     * @param movable movable block to place
+     * @param dir direction projectile is going
+     * @return solidity
      */
     @Override
-    public void placeOn(MovableInterface movable) {
+    public boolean solid(Direction dir) {
+        return false;
+    }
+
+    /**
+     * Try to step on a field
+     *
+     * @param dir    direction the player is facing
+     * @param player the player that is stepping on the field
+     */
+    @Override
+    public void stepOn(Direction dir, PlayerInterface player) {
+        player.kill();
+    }
+
+    /**
+     * Leave a field
+     */
+    @Override
+    public void stepOff() {
 
     }
 
     /**
-     * Pickup a movable block from this field
+     * If an item is on this field, return reference to it
      *
-     * @return a movable block which is on this field
+     * @param dir the direction the player is facing
+     * @return an item on the field or null if none
      */
     @Override
-    public MovableInterface pickUp() {
+    public ItemInterface getItem(Direction dir) {
         return null;
     }
 
     /**
-     * Get a neighbor of this field
+     * Place an item on this field if there is space
      *
-     * @param direction direction to look for the neighbor
-     * @return neighbor in the direction specified
+     * @param dir  direction player is facing
+     * @param item item to place
+     * @return true if item could be placed, false if there is no space
      */
     @Override
-    public FieldInterface getNeighbor(Direction direction) {
-        return null;
+    public boolean placeOn(Direction dir, ItemInterface item) {
+        return false;
     }
 
     /**
-     * Step on a a field
-     * <p>
-     * When a player wants to step on this field
+     * Remove the item on the field (if any)
      *
-     * @param player    player
-     * @param direction direction player is moving
+     * @return true on removed item, false if there is no item to remove
      */
     @Override
-    public void stepOn(PlayerInterface player, Direction direction) {
-
-    }
-
-    /**
-     * Shoot a projectile at this block
-     *
-     * @param projectile projectile
-     */
-    @Override
-    public void shootAt(ProjectileInterface projectile) {
-
+    public boolean removeItem(Direction dir) {
+        return false;
     }
 }
