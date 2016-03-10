@@ -2,46 +2,59 @@ package iitema.gypsypokemon.elements.blocks;
 
 import iitema.gypsypokemon.elements.Direction;
 
-public class Abyss implements FieldInterface{
+public class Abyss extends SimpleField{
+    /**
+     * Returns solidity for item
+     * If an item is solid, projectiles and players cannot walk over or step on.
+     * If an item is not solid, projectiles can be shot through and players can walk over or step on.
+     *
+     * @param dir direction projectile is going
+     * @return solidity
+     */
+    @Override
+    public boolean solid(Direction dir) {
+        return false;
+    }
+
     /**
      * Try to step on a field
      *
-     * @param side   the side of the field the player is coming from
+     * @param dir    direction the player is facing
      * @param player the player that is stepping on the field
      */
-    @java.lang.Override
-    public void stepOn(Direction side, PlayerInterface player) {
+    @Override
+    public void stepOn(Direction dir, PlayerInterface player) {
+        player.kill();
+    }
+
+    /**
+     * Leave a field
+     */
+    @Override
+    public void stepOff() {
 
     }
 
     /**
      * If an item is on this field, return reference to it
      *
+     * @param dir the direction the player is facing
      * @return an item on the field or null if none
      */
-    @java.lang.Override
-    public ItemInterface getItem() {
-        return null;
-    }
-
-    /**
-     * Get a neighbor of this field
-     *
-     * @param dir@return neighbor in the direction specified
-     */
-    @java.lang.Override
-    public FieldInterface getNeighbor(Direction dir) {
+    @Override
+    public ItemInterface getItem(Direction dir) {
         return null;
     }
 
     /**
      * Place an item on this field if there is space
      *
+     * @param dir  direction player is facing
      * @param item item to place
      * @return true if item could be placed, false if there is no space
      */
-    @java.lang.Override
-    public boolean placeOn(ItemInterface item) {
+    @Override
+    public boolean placeOn(Direction dir, ItemInterface item) {
         return false;
     }
 
@@ -50,7 +63,7 @@ public class Abyss implements FieldInterface{
      *
      * @return true on removed item, false if there is no item to remove
      */
-    @java.lang.Override
+    @Override
     public boolean removeItem() {
         return false;
     }

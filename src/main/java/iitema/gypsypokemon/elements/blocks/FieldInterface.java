@@ -9,6 +9,14 @@ import iitema.gypsypokemon.elements.Direction;
  * Fields store their 4 neighbors
  */
 public interface FieldInterface{
+    /**
+     * Returns solidity for item
+     * If an item is solid, projectiles and players cannot walk over or step on.
+     * If an item is not solid, projectiles can be shot through and players can walk over or step on.
+     * @param dir direction projectile is going
+     * @return solidity
+     */
+    boolean solid(Direction dir);
 
     /**
      * Try to step on a field
@@ -38,6 +46,7 @@ public interface FieldInterface{
 
     /**
      * If an item is on this field, return reference to it
+     * @param dir the direction the player is facing
      * @return an item on the field or null if none
      */
     ItemInterface getItem(Direction dir);
@@ -52,7 +61,8 @@ public interface FieldInterface{
 
     /**
      * Remove the item on the field (if any)
+     * @param dir direction player is facing
      * @return true on removed item, false if there is no item to remove
      */
-    boolean removeItem();
+    boolean removeItem(Direction dir);
 }

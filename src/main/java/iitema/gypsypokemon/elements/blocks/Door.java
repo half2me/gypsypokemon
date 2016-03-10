@@ -1,42 +1,100 @@
 package iitema.gypsypokemon.elements.blocks;
 
-
-import iitema.gypsypokemon.elements.Color;
 import iitema.gypsypokemon.elements.Direction;
 
-public class Door implements ItemInterface{
+import java.util.ArrayList;
+import java.util.EnumMap;
+
+public class Door extends SimpleField {
+
+    protected EnumMap<Direction, Boolean> openSides = new EnumMap<Direction, Boolean>(Direction.class);
+    protected Direction orientation;
+
+    public Door(Direction dir) {
+        this.orientation = dir;
+        openSides.put(Direction.LEFT, false);
+        openSides.put(Direction.RIGHT, false);
+        openSides.put(Direction.DOWN, false);
+        openSides.put(Direction.UP, false);
+    }
 
     /**
      * Returns solidity for item
      * If an item is solid, projectiles and players cannot walk over or step on.
      * If an item is not solid, projectiles can be shot through and players can walk over or step on.
      *
-     * @param side side of the item to check
+     * @param dir direction projectile is going
      * @return solidity
      */
-    @java.lang.Override
-    public boolean solid(Direction side) {
+    @Override
+    public boolean solid(Direction dir) {
+        return this.openSides.get(dir);
+    }
+
+    /**
+     * Try to step on a field
+     *
+     * @param dir    direction the player is facing
+     * @param player the player that is stepping on the field
+     */
+    @Override
+    public void stepOn(Direction dir, PlayerInterface player) {
+        if (this.openSides.get(dir)) {
+            player.move(this);
+        }
+    }
+
+    /**
+     * Leave a field
+     */
+    @Override
+    public void stepOff() {
+
+    }
+
+    /**
+     * If an item is on this field, return reference to it
+     *
+     * @param dir the direction the player is facing
+     * @return an item on the field or null if none
+     */
+    @Override
+    public ItemInterface getItem(Direction dir) {
+        if (this.openSides.get(dir)) {
+            return this.item;
+        }
+        return null;
+    }
+
+    /**
+     * Place an item on this field if there is space
+     *
+     * @param dir  direction player is facing
+     * @param item item to place
+     * @return true if item could be placed, false if there is no space
+     */
+    @Override
+    public boolean placeOn(Direction dir, ItemInterface item) {
+        if (this.openSides.get(dir)) {
+            this.item = item;
+            return true;
+        }
         return false;
     }
 
     /**
-     * Shoot at the item
+     * Remove the item on the field (if any)
      *
-     * @param color color of the projectile
-     * @param side  side to shoot at
+     * @return true on removed item, false if there is no item to remove
      */
-    @java.lang.Override
-    public void shootAt(Color color, Direction side) {
-
-    }
-
-    /**
-     * Executes operation when the Item is picked up
-     *
-     * @return if the Item can be picked up
-     */
-    @java.lang.Override
-    public boolean pickUp() {
+    @Override
+    public boolean removeItem(Direction dir) {
+        if (this.openSides.get(dir)) {
+            if (this.item != null) {
+                this.item = null;
+                return true;
+            }
+        }
         return false;
     }
 }
