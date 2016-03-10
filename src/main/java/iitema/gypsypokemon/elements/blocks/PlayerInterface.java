@@ -1,23 +1,42 @@
 package iitema.gypsypokemon.elements.blocks;
 
+import iitema.gypsypokemon.elements.Color;
 import iitema.gypsypokemon.elements.Direction;
 
 /**
  * A player in the game
  */
-public interface PlayerInterface extends BlockInterface{
+public interface PlayerInterface{
 
     /**
-     * Move player in a direction
+     * Move player to a field
      *
-     * @param direction direction to move player
+     * @param field direction to move player
      */
-    void move(Direction direction);
+    void move(FieldInterface field);
 
     /**
-     * Change position of the player to a field specified
-     *
-     * @param field field to place player on
+     * Turn or move in a direction
+     * If the player is facing in a different direction, this will turn him around
+     * If the player is facing in the same direction, the player will move one block
+     * @param dir direction
      */
-    void changePostition(FieldInterface field);
+    void step(Direction dir);
+
+    /**
+     * Try to pickup an item from the field in front of the player if hands are empty, or
+     * Try to put down an item on the field in front of the player if hands are full.
+     */
+    void action();
+
+    /**
+     * Shoots in the direction the player is facing
+     * @param color color of the projectile
+     */
+    void shoot(Color color);
+
+    /**
+     * Kills the player
+     */
+    void kill();
 }
