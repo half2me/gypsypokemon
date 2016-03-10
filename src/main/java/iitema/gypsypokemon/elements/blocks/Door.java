@@ -1,61 +1,32 @@
 package iitema.gypsypokemon.elements.blocks;
 
+import iitema.gypsypokemon.elements.Color;
 import iitema.gypsypokemon.elements.Direction;
 import iitema.gypsypokemon.elements.ProjectileInterface;
 
-public class Door implements FieldInterface{
+public class Door implements ItemInterface{
 
     /**
-     * Place a movable block on this field
+     * Returns solidity for item
+     * If an item is solid, projectiles and players cannot walk over or step on.
+     * If an item is not solid, projectiles can be shot through and players can walk over or step on.
      *
-     * @param movable movable block to place
+     * @param side side of the item to check
+     * @return solidity
      */
-    @Override
-    public void placeOn(MovableInterface movable) {
-
+    @java.lang.Override
+    public boolean solid(Direction side) {
+        return false;
     }
 
     /**
-     * Pickup a movable block from this field
+     * Shoot at the item
      *
-     * @return a movable block which is on this field
+     * @param color color of the projectile
+     * @param side  side to shoot at
      */
-    @Override
-    public MovableInterface pickUp() {
-        return null;
-    }
-
-    /**
-     * Get a neighbor of this field
-     *
-     * @param direction direction to look for the neighbor
-     * @return neighbor in the direction specified
-     */
-    @Override
-    public FieldInterface getNeighbor(Direction direction) {
-        return null;
-    }
-
-    /**
-     * Step on a a field
-     * <p>
-     * When a player wants to step on this field
-     *
-     * @param player    player
-     * @param direction direction player is moving
-     */
-    @Override
-    public void stepOn(PlayerInterface player, Direction direction) {
-
-    }
-
-    /**
-     * Shoot a projectile at this block
-     *
-     * @param projectile projectile
-     */
-    @Override
-    public void shootAt(ProjectileInterface projectile) {
+    @java.lang.Override
+    public void shootAt(Color color, Direction side) {
 
     }
 }

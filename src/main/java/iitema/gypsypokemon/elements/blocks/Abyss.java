@@ -1,60 +1,57 @@
 package iitema.gypsypokemon.elements.blocks;
 
 import iitema.gypsypokemon.elements.Direction;
-import iitema.gypsypokemon.elements.ProjectileInterface;
 
 public class Abyss implements FieldInterface{
     /**
-     * Place a movable block on this field
+     * Try to step on a field
      *
-     * @param movable movable block to place
+     * @param side   the side of the field the player is coming from
+     * @param player the player that is stepping on the field
      */
-    @Override
-    public void placeOn(MovableInterface movable) {
+    @java.lang.Override
+    public void stepOn(Direction side, PlayerInterface player) {
 
     }
 
     /**
-     * Pickup a movable block from this field
+     * If an item is on this field, return reference to it
      *
-     * @return a movable block which is on this field
+     * @return an item on the field or null if none
      */
-    @Override
-    public MovableInterface pickUp() {
+    @java.lang.Override
+    public ItemInterface getItem() {
         return null;
     }
 
     /**
      * Get a neighbor of this field
      *
-     * @param direction direction to look for the neighbor
-     * @return neighbor in the direction specified
+     * @param dir@return neighbor in the direction specified
      */
-    @Override
-    public FieldInterface getNeighbor(Direction direction) {
+    @java.lang.Override
+    public FieldInterface getNeighbor(Direction dir) {
         return null;
     }
 
     /**
-     * Step on a a field
-     * <p>
-     * When a player wants to step on this field
+     * Place an item on this field if there is space
      *
-     * @param player    player
-     * @param direction direction player is moving
+     * @param item item to place
+     * @return true if item could be placed, false if there is no space
      */
-    @Override
-    public void stepOn(PlayerInterface player, Direction direction) {
-
+    @java.lang.Override
+    public boolean placeOn(ItemInterface item) {
+        return false;
     }
 
     /**
-     * Shoot a projectile at this block
+     * Remove the item on the field (if any)
      *
-     * @param projectile projectile
+     * @return true on removed item, false if there is no item to remove
      */
-    @Override
-    public void shootAt(ProjectileInterface projectile) {
-
+    @java.lang.Override
+    public boolean removeItem() {
+        return false;
     }
 }

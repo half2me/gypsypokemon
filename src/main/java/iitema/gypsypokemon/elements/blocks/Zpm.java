@@ -1,30 +1,30 @@
 package iitema.gypsypokemon.elements.blocks;
 
+import iitema.gypsypokemon.elements.Color;
 import iitema.gypsypokemon.elements.Direction;
-import iitema.gypsypokemon.elements.ProjectileInterface;
 
-public class Zpm implements BlockInterface{
-
+public class Zpm implements ItemInterface{
     /**
-     * Step on a a field
-     * <p>
-     * When a player wants to step on this field
+     * Returns solidity for item
+     * If an item is solid, projectiles and players cannot walk over or step on.
+     * If an item is not solid, projectiles can be shot through and players can walk over or step on.
      *
-     * @param player    player
-     * @param direction direction player is moving
+     * @param side side of the item to check
+     * @return solidity
      */
-    @Override
-    public void stepOn(PlayerInterface player, Direction direction) {
-
+    @java.lang.Override
+    public boolean solid(Direction side) {
+        return false;
     }
 
     /**
-     * Shoot a projectile at this block
+     * Shoot at the item
      *
-     * @param projectile projectile
+     * @param color color of the projectile
+     * @param side  side to shoot at
      */
-    @Override
-    public void shootAt(ProjectileInterface projectile) {
+    @java.lang.Override
+    public void shootAt(Color color, Direction side) {
 
     }
 }
