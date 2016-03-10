@@ -12,30 +12,43 @@ public interface FieldInterface{
 
     /**
      * Try to step on a field
-     * @param side the side of the field the player is coming from
+     * @param dir direction the player is facing
      * @param player the player that is stepping on the field
      */
-    void stepOn(Direction side, PlayerInterface player);
+    void stepOn(Direction dir, PlayerInterface player);
 
     /**
-     * If an item is on this field, return reference to it
-     * @return an item on the field or null if none
+     * Leave a field
      */
-    ItemInterface getItem();
+    void stepOff();
 
     /**
      * Get a neighbor of this field
-     * @param direction direction to look for the neighbor
+     * @param dir direction the player is facing
      * @return neighbor in the direction specified
      */
     FieldInterface getNeighbor(Direction dir);
 
     /**
+     * Set neighbor of this field
+     * @param dir direction what side the neighbor is on
+     * @param field field to set as neighbor
+     */
+    void setNeighbor(Direction dir, FieldInterface field);
+
+    /**
+     * If an item is on this field, return reference to it
+     * @return an item on the field or null if none
+     */
+    ItemInterface getItem(Direction dir);
+
+    /**
      * Place an item on this field if there is space
+     * @param dir direction player is facing
      * @param item item to place
      * @return true if item could be placed, false if there is no space
      */
-    boolean placeOn(ItemInterface item);
+    boolean placeOn(Direction dir, ItemInterface item);
 
     /**
      * Remove the item on the field (if any)

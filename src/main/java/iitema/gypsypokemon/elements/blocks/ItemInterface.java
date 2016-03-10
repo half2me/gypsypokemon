@@ -19,4 +19,11 @@ public interface ItemInterface {
      * @param side side to shoot at
      */
     void shootAt(Color color, Direction side);
+
+    /**
+     * Executes operation when the Item is picked up
+     *
+     * @return if the Item can be picked up
+     */
+    boolean pickUp();
 }

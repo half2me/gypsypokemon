@@ -1,8 +1,8 @@
 package iitema.gypsypokemon.elements.blocks;
 
+
 import iitema.gypsypokemon.elements.Color;
 import iitema.gypsypokemon.elements.Direction;
-import iitema.gypsypokemon.elements.ProjectileInterface;
 
 public class Door implements ItemInterface{
 
@@ -28,5 +28,15 @@ public class Door implements ItemInterface{
     @java.lang.Override
     public void shootAt(Color color, Direction side) {
 
+    }
+
+    /**
+     * Executes operation when the Item is picked up
+     *
+     * @return if the Item can be picked up
+     */
+    @java.lang.Override
+    public boolean pickUp() {
+        return false;
     }
 }
