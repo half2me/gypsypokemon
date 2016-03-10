@@ -1,5 +1,6 @@
 package iitema.gypsypokemon.elements.blocks;
 
+import iitema.gypsypokemon.Game;
 import iitema.gypsypokemon.elements.Direction;
 
 public class Zpm implements ItemInterface{
@@ -7,9 +8,11 @@ public class Zpm implements ItemInterface{
     public static int total = 30;
     public static int collected = 0;
     private FieldInterface field;
+    private Game game;
 
-    public Zpm(FieldInterface field){
+    public Zpm(FieldInterface field, Game game){
         this.field = field;
+        this.game = game;
     }
 
     /**
@@ -35,6 +38,9 @@ public class Zpm implements ItemInterface{
         Zpm.collected++;
         this.field.removeItem(Direction.DOWN); // in case ZPM is in the door
         this.field.removeItem(Direction.LEFT); // in case ZPM is in the door
+        if(Zpm.collected == Zpm.total) {
+            game.endGame();
+        }
         return false; // ZPM should no be picked up
     }
 }
