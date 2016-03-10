@@ -39,7 +39,7 @@ public abstract class SimpleField implements FieldInterface{
 
     @Override
     public boolean placeOn(Direction dir, ItemInterface item) {
-        if(this.item == null) {
+        if (this.item == null) {
             this.item = item;
             return true;
         }
@@ -48,11 +48,12 @@ public abstract class SimpleField implements FieldInterface{
 
     /**
      * Remove the item on the field (if any)
+     *
      * @return true on removed item, false if there is no item to remove
      */
     @Override
-    public boolean removeItem(Direction dir){
-        if(this.item == null) {
+    public boolean removeItem(Direction dir) {
+        if (this.item == null) {
             return false;
         }
         this.item = null;
