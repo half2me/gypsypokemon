@@ -25,7 +25,7 @@ public class Wall extends SimpleField{
      * @param player the player that is stepping on the field
      * @return if player moved to the field or not
      */
-    boolean stepOn(Direction dir, PlayerInterface player) {
+    public boolean stepOn(Direction dir, PlayerInterface player) {
         return false;
     }
 }

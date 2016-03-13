@@ -75,7 +75,7 @@ public class Door extends SimpleField {
     @Override
     public boolean removeItem(Direction dir) {
         if (this.openSides.get(dir)) {
-            return super.removeItem;
+            return super.removeItem(dir);
         }
         return false;
     }

@@ -20,7 +20,7 @@ public class Scale extends SimpleField{
      */
     @Override
     public boolean stepOn(Direction dir, PlayerInterface player) {
-        if (super.stepOn(Direction dir, PlayerInterface player)) {
+        if (super.stepOn(dir, player)) {
             this.door.open();
             return true;
         }
@@ -37,7 +37,7 @@ public class Scale extends SimpleField{
 
     @Override
     public boolean placeOn(Direction dir, ItemInterface item) {
-        if (super.placeOn(Direction dir, ItemInterface item)) {
+        if (super.placeOn(dir, item)) {
             this.door.open();
             return true;
         }
@@ -50,7 +50,7 @@ public class Scale extends SimpleField{
      */
     @Override
     public boolean removeItem(Direction dir) {
-        if (super.removeItem(Direction dir)) {
+        if (super.removeItem(dir)) {
             this.door.close();
             return true;
         }

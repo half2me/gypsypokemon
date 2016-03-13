@@ -18,9 +18,10 @@ public class SpecialWall extends Wall {
      * @param dir   direction projectile is travelling
      */
     @Override
-    public void shootAt(Color color, Direction dir) {
+    public boolean shootAt(Color color, Direction dir) {
         SpecialWall.portalsField.put(color, this);
         SpecialWall.portalsSide.put(color, dir.getOpposite());
+        return true;
     }
 
     @Override
@@ -36,7 +37,7 @@ public class SpecialWall extends Wall {
             return SpecialWall.portalsField.get(c.getOpposite()).placeOn(SpecialWall.portalsSide.get(c), item);
         }
         // No portal, we can act as a normal wall
-        return super.placeOn(Direction dir, ItemInterface item);
+        return super.placeOn(dir, item);
     }
 
     /**
@@ -57,7 +58,7 @@ public class SpecialWall extends Wall {
             return SpecialWall.portalsField.get(c.getOpposite()).removeItem(SpecialWall.portalsSide.get(c));
         }
         // No portal, we can act as a normal wall
-        super.removeItem(Direction dir);
+        return super.removeItem(dir);
     }
 
     /**
@@ -67,7 +68,7 @@ public class SpecialWall extends Wall {
      * @param player the player that is stepping on the field
      */
     @Override
-    public void stepOn(Direction dir, PlayerInterface player) {
+    public boolean stepOn(Direction dir, PlayerInterface player) {
         if (this.checkPortal(dir.getOpposite())) {
             // Needs to re-route through portal
             Color c = null;
@@ -76,10 +77,10 @@ public class SpecialWall extends Wall {
                     c = e.getKey();
                 }
             }
-            SpecialWall.portalsField.get(c.getOpposite()).stepOn(SpecialWall.portalsSide.get(c), player);
+            return SpecialWall.portalsField.get(c.getOpposite()).stepOn(SpecialWall.portalsSide.get(c), player);
         }
         // No portal, we can act as a normal wall
-        super.stepOn(Direction dir, PlayerInterface player);
+        return super.stepOn(dir, player);
     }
 
     /**
