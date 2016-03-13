@@ -12,27 +12,19 @@ public class Scale extends SimpleField{
     }
 
     /**
-     * Returns solidity for item
-     * If an item is solid, projectiles and players cannot walk over or step on.
-     * If an item is not solid, projectiles can be shot through and players can walk over or step on.
-     *
-     * @param dir direction projectile is going
-     * @return solidity
-     */
-    @Override
-    public boolean solid(Direction dir) {
-        return false;
-    }
-
-    /**
      * Try to step on a field
-     *
-     * @param dir    direction the player is facing
+
+     * @param dir direction the player is facing
      * @param player the player that is stepping on the field
+     * @return if player moved to the field or not
      */
     @Override
-    public void stepOn(Direction dir, PlayerInterface player) {
-        this.door.open();
+    public boolean stepOn(Direction dir, PlayerInterface player) {
+        if (super.stepOn(dir, player)) {
+            this.door.open();
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -45,8 +37,7 @@ public class Scale extends SimpleField{
 
     @Override
     public boolean placeOn(Direction dir, ItemInterface item) {
-        if(this.item == null) {
-            this.item = item;
+        if (super.placeOn(dir, item)) {
             this.door.open();
             return true;
         }
@@ -58,12 +49,11 @@ public class Scale extends SimpleField{
      * @return true on removed item, false if there is no item to remove
      */
     @Override
-    public boolean removeItem(Direction dir){
-        if(this.item == null) {
-            return false;
+    public boolean removeItem(Direction dir) {
+        if (super.removeItem(dir)) {
+            this.door.close();
+            return true;
         }
-        this.item = null;
-        this.door.close();
-        return true;
+        return false;
     }
 }

@@ -11,6 +11,20 @@ public abstract class SimpleField implements FieldInterface{
     protected ItemInterface item;
 
     /**
+     * Returns solidity for item
+     * If an item is solid, projectiles and players cannot walk over or step on.
+     * If an item is not solid, projectiles can be shot through and players can walk over or step on.
+     * @param dir direction projectile is going
+     * @return solidity
+     */
+    protected boolean solid(Direction dir) {
+        if(this.item != null) {
+            return this.item.solid(dir);
+        }
+        return false;
+    }
+
+    /**
      * Get a neighbor of this field
      *
      * @param dir direction the player is facing
@@ -62,12 +76,39 @@ public abstract class SimpleField implements FieldInterface{
 
     /**
      * Shoot at a field
-     *
+
      * @param color color of projectile
-     * @param dir   direction projectile is travelling
+     * @param dir direction projectile is travelling
+     * @return true on shot absorbed, false on shot through
      */
     @Override
-    public void shootAt(Color color, Direction dir) {
+    public boolean shootAt(Color color, Direction dir) {
+        if (this.solid(dir)) {
+            return true;
+        } else return false;
+    }
+
+    /**
+     * Try to step on a field
+
+     * @param dir direction the player is facing
+     * @param player the player that is stepping on the field
+     * @return if player moved to the field or not
+     */
+    @Override
+    public boolean stepOn(Direction dir, PlayerInterface player) {
+        if(!this.solid(dir)) {
+            player.move(this);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Leave a field
+     */
+    @Override
+    public void stepOff() {
 
     }
 }

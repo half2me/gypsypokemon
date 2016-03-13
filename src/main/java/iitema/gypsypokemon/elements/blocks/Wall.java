@@ -19,21 +19,13 @@ public class Wall extends SimpleField{
     }
 
     /**
-     * Try to step on a field
+     * Try to step on a wall, but always fail.
      *
-     * @param dir    direction the player is facing
+     * @param dir direction the player is facing
      * @param player the player that is stepping on the field
+     * @return if player moved to the field or not
      */
-    @Override
-    public void stepOn(Direction dir, PlayerInterface player) {
-
-    }
-
-    /**
-     * Leave a field
-     */
-    @Override
-    public void stepOff() {
-
+    public boolean stepOn(Direction dir, PlayerInterface player) {
+        return false;
     }
 }

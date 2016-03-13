@@ -69,8 +69,7 @@ public class Player implements PlayerInterface{
     public void shoot(Color color) {
         do {
             field = this.field.getNeighbor(this.dir);
-        } while (!field.solid(this.dir));
-        field.shootAt(color, this.dir);
+        } while (!field.shootAt(color, this.dir));
     }
 
     /**

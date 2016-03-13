@@ -13,20 +13,22 @@ public class SpecialWall extends Wall {
 
     /**
      * Shoot at a field
-     *
+     * 
      * @param color color of projectile
-     * @param dir   direction projectile is travelling
+     * @param dir direction projectile is travelling
+     * @return true on shot absorbed, false on shot through
      */
     @Override
-    public void shootAt(Color color, Direction dir) {
+    public boolean shootAt(Color color, Direction dir) {
         SpecialWall.portalsField.put(color, this);
         SpecialWall.portalsSide.put(color, dir.getOpposite());
+        return true;
     }
 
     @Override
     public boolean placeOn(Direction dir, ItemInterface item) {
         if (this.checkPortal(dir.getOpposite())) {
-            // Needs re-routing
+            // Needs to re-route through portal
             Color c = null;
             for (Map.Entry<Color, FieldInterface> e : SpecialWall.portalsField.entrySet()) {
                 if (e.getValue() == this) {
@@ -35,7 +37,8 @@ public class SpecialWall extends Wall {
             }
             return SpecialWall.portalsField.get(c.getOpposite()).placeOn(SpecialWall.portalsSide.get(c), item);
         }
-        return false;
+        // No portal, we can act as a normal wall
+        return super.placeOn(dir, item);
     }
 
     /**
@@ -46,7 +49,7 @@ public class SpecialWall extends Wall {
     @Override
     public boolean removeItem(Direction dir) {
         if (this.checkPortal(dir.getOpposite())) {
-            // Needs re-routing
+            // Needs to re-route through portal
             Color c = null;
             for (Map.Entry<Color, FieldInterface> e : SpecialWall.portalsField.entrySet()) {
                 if (e.getValue() == this) {
@@ -55,7 +58,8 @@ public class SpecialWall extends Wall {
             }
             return SpecialWall.portalsField.get(c.getOpposite()).removeItem(SpecialWall.portalsSide.get(c));
         }
-        return false;
+        // No portal, we can act as a normal wall
+        return super.removeItem(dir);
     }
 
     /**
@@ -65,17 +69,19 @@ public class SpecialWall extends Wall {
      * @param player the player that is stepping on the field
      */
     @Override
-    public void stepOn(Direction dir, PlayerInterface player) {
+    public boolean stepOn(Direction dir, PlayerInterface player) {
         if (this.checkPortal(dir.getOpposite())) {
-            // Needs re-routing
+            // Needs to re-route through portal
             Color c = null;
             for (Map.Entry<Color, FieldInterface> e : SpecialWall.portalsField.entrySet()) {
                 if (e.getValue() == this) {
                     c = e.getKey();
                 }
             }
-            SpecialWall.portalsField.get(c.getOpposite()).stepOn(SpecialWall.portalsSide.get(c), player);
+            return SpecialWall.portalsField.get(c.getOpposite()).stepOn(SpecialWall.portalsSide.get(c), player);
         }
+        // No portal, we can act as a normal wall
+        return super.stepOn(dir, player);
     }
 
     /**
