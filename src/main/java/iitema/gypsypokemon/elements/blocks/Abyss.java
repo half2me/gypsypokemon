@@ -32,17 +32,6 @@ public class Abyss extends SimpleField{
     }
 
     /**
-     * If an item is on this field, return reference to it
-     *
-     * @param dir the direction the player is facing
-     * @return an item on the field or null if none
-     */
-    @Override
-    public ItemInterface getItem(Direction dir) {
-        return null;
-    }
-
-    /**
      * Place an item on this field if there is space
      *
      * @param dir  direction player is facing
@@ -52,15 +41,5 @@ public class Abyss extends SimpleField{
     @Override
     public boolean placeOn(Direction dir, ItemInterface item) {
         return true;
-    }
-
-    /**
-     * Remove the item on the field (if any)
-     *
-     * @return true on removed item, false if there is no item to remove
-     */
-    @Override
-    public boolean removeItem(Direction dir) {
-        return false;
     }
 }
