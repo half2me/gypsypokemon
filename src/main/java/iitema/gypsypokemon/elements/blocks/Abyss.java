@@ -51,7 +51,7 @@ public class Abyss extends SimpleField{
      */
     @Override
     public boolean placeOn(Direction dir, ItemInterface item) {
-        return false;
+        return true;
     }
 
     /**
