@@ -29,55 +29,7 @@ public class Door extends SimpleField {
      */
     @Override
     protected boolean solid(Direction dir) {
-        if (this.openSides.get(dir)) {
-            if (this.item == null) {
-                return true;
-            }
-            return this.item.solid(dir);
-        }
-        return false;
-    }
-
-    /**
-     * If an item is on this field, return reference to it
-     *
-     * @param dir the direction the player is facing
-     * @return an item on the field or null if none
-     */
-    @Override
-    public ItemInterface getItem(Direction dir) {
-        if (this.openSides.get(dir)) {
-            return this.item;
-        }
-        return null;
-    }
-
-    /**
-     * Place an item on this field if there is space
-     *
-     * @param dir  direction player is facing
-     * @param item item to place
-     * @return true if item could be placed, false if there is no space
-     */
-    @Override
-    public boolean placeOn(Direction dir, ItemInterface item) {
-        if (this.openSides.get(dir)) {
-            return super.placeOn(dir, item);
-        }
-        return false;
-    }
-
-    /**
-     * Remove the item on the field (if any)
-     *
-     * @return true on removed item, false if there is no item to remove
-     */
-    @Override
-    public boolean removeItem(Direction dir) {
-        if (this.openSides.get(dir)) {
-            return super.removeItem(dir);
-        }
-        return false;
+        return this.openSides.get(dir);
     }
 
     /**

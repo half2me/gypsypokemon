@@ -26,41 +26,7 @@ public class Abyss extends SimpleField{
      */
     @Override
     public boolean stepOn(Direction dir, PlayerInterface player) {
-        player.move(this);
         player.kill();
-        return true;
-    }
-
-    /**
-     * If an item is on this field, return reference to it
-     *
-     * @param dir the direction the player is facing
-     * @return an item on the field or null if none
-     */
-    @Override
-    public ItemInterface getItem(Direction dir) {
-        return null;
-    }
-
-    /**
-     * Place an item on this field if there is space
-     *
-     * @param dir  direction player is facing
-     * @param item item to place
-     * @return true if item could be placed, false if there is no space
-     */
-    @Override
-    public boolean placeOn(Direction dir, ItemInterface item) {
-        return false;
-    }
-
-    /**
-     * Remove the item on the field (if any)
-     *
-     * @return true on removed item, false if there is no item to remove
-     */
-    @Override
-    public boolean removeItem(Direction dir) {
-        return false;
+        return super.stepOn(dir, player);
     }
 }
