@@ -18,9 +18,6 @@ public abstract class SimpleField implements FieldInterface{
      * @return solidity
      */
     protected boolean solid(Direction dir) {
-        if(this.item != null) {
-            return this.item.solid(dir);
-        }
         return false;
     }
 
@@ -48,12 +45,15 @@ public abstract class SimpleField implements FieldInterface{
 
     @Override
     public ItemInterface getItem(Direction dir){
-        return this.item;
+        if(!this.solid(dir)) {
+            return this.item;
+        }
+        return null;
     }
 
     @Override
     public boolean placeOn(Direction dir, ItemInterface item) {
-        if (this.item == null) {
+        if(this.solid(dir) && this.item == null){
             this.item = item;
             return true;
         }
@@ -67,11 +67,11 @@ public abstract class SimpleField implements FieldInterface{
      */
     @Override
     public boolean removeItem(Direction dir) {
-        if (this.item == null) {
-            return false;
+        if(!this.solid(dir) && this.item != null){
+            this.item = null;
+            return true;
         }
-        this.item = null;
-        return true;
+        return false;
     }
 
     /**
@@ -83,9 +83,10 @@ public abstract class SimpleField implements FieldInterface{
      */
     @Override
     public boolean shootAt(Color color, Direction dir) {
-        if (this.solid(dir)) {
+        if(this.solid(dir) || this.item.solid(dir)){
             return true;
-        } else return false;
+        }
+        return false;
     }
 
     /**
@@ -97,7 +98,7 @@ public abstract class SimpleField implements FieldInterface{
      */
     @Override
     public boolean stepOn(Direction dir, PlayerInterface player) {
-        if(!this.solid(dir)) {
+        if(!this.solid(dir) && this.item == null){
             player.move(this);
             return true;
         }
