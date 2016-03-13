@@ -26,7 +26,13 @@ public class Abyss extends SimpleField{
      */
     @Override
     public boolean stepOn(Direction dir, PlayerInterface player) {
+        super.stepOn(dir, player);
         player.kill();
-        return super.stepOn(dir, player);
+        return true;
+    }
+
+    @Override
+    public boolean placeOn(Direction dir, ItemInterface item) {
+        return true;
     }
 }
