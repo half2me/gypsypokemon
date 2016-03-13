@@ -13,9 +13,10 @@ public class SpecialWall extends Wall {
 
     /**
      * Shoot at a field
-     *
+     * 
      * @param color color of projectile
-     * @param dir   direction projectile is travelling
+     * @param dir direction projectile is travelling
+     * @return true on shot absorbed, false on shot through
      */
     @Override
     public boolean shootAt(Color color, Direction dir) {
