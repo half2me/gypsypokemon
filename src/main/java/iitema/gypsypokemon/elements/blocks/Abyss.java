@@ -13,27 +13,22 @@ public class Abyss extends SimpleField{
      * @return solidity
      */
     @Override
-    public boolean solid(Direction dir) {
+    protected boolean solid(Direction dir) {
         return false;
     }
 
     /**
      * Try to step on a field
-     *
-     * @param dir    direction the player is facing
+
+     * @param dir direction the player is facing
      * @param player the player that is stepping on the field
+     * @return if player moved to the field or not
      */
     @Override
-    public void stepOn(Direction dir, PlayerInterface player) {
+    public boolean stepOn(Direction dir, PlayerInterface player) {
+        player.move(this);
         player.kill();
-    }
-
-    /**
-     * Leave a field
-     */
-    @Override
-    public void stepOff() {
-
+        return true;
     }
 
     /**

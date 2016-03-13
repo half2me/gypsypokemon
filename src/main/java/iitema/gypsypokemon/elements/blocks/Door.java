@@ -28,29 +28,14 @@ public class Door extends SimpleField {
      * @return solidity
      */
     @Override
-    public boolean solid(Direction dir) {
-        return this.openSides.get(dir);
-    }
-
-    /**
-     * Try to step on a field
-     *
-     * @param dir    direction the player is facing
-     * @param player the player that is stepping on the field
-     */
-    @Override
-    public void stepOn(Direction dir, PlayerInterface player) {
+    protected boolean solid(Direction dir) {
         if (this.openSides.get(dir)) {
-            player.move(this);
+            if (this.item == null) {
+                return true;
+            }
+            return this.item.solid(dir);
         }
-    }
-
-    /**
-     * Leave a field
-     */
-    @Override
-    public void stepOff() {
-
+        return false;
     }
 
     /**
@@ -77,8 +62,7 @@ public class Door extends SimpleField {
     @Override
     public boolean placeOn(Direction dir, ItemInterface item) {
         if (this.openSides.get(dir)) {
-            this.item = item;
-            return true;
+            return super.placeOn(dir, item);
         }
         return false;
     }
@@ -91,22 +75,22 @@ public class Door extends SimpleField {
     @Override
     public boolean removeItem(Direction dir) {
         if (this.openSides.get(dir)) {
-            if (this.item != null) {
-                this.item = null;
-                return true;
-            }
+            return super.removeItem;
         }
         return false;
     }
 
     /**
-     * Opens a door from both sides
+     * Opens a door
      */
     public void open() {
         openSides.put(this.orientation, true);
         openSides.put(this.orientation.getOpposite(), true);
     }
 
+    /**
+     * Closes a Door
+     */
     public void close() {
         openSides.put(this.orientation, false);
         openSides.put(this.orientation.getOpposite(), false);

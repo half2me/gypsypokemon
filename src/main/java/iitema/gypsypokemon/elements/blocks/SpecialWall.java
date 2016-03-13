@@ -26,7 +26,7 @@ public class SpecialWall extends Wall {
     @Override
     public boolean placeOn(Direction dir, ItemInterface item) {
         if (this.checkPortal(dir.getOpposite())) {
-            // Needs re-routing
+            // Needs to re-route through portal
             Color c = null;
             for (Map.Entry<Color, FieldInterface> e : SpecialWall.portalsField.entrySet()) {
                 if (e.getValue() == this) {
@@ -35,7 +35,8 @@ public class SpecialWall extends Wall {
             }
             return SpecialWall.portalsField.get(c.getOpposite()).placeOn(SpecialWall.portalsSide.get(c), item);
         }
-        return false;
+        // No portal, we can act as a normal wall
+        return super.placeOn(Direction dir, ItemInterface item);
     }
 
     /**
@@ -46,7 +47,7 @@ public class SpecialWall extends Wall {
     @Override
     public boolean removeItem(Direction dir) {
         if (this.checkPortal(dir.getOpposite())) {
-            // Needs re-routing
+            // Needs to re-route through portal
             Color c = null;
             for (Map.Entry<Color, FieldInterface> e : SpecialWall.portalsField.entrySet()) {
                 if (e.getValue() == this) {
@@ -55,7 +56,8 @@ public class SpecialWall extends Wall {
             }
             return SpecialWall.portalsField.get(c.getOpposite()).removeItem(SpecialWall.portalsSide.get(c));
         }
-        return false;
+        // No portal, we can act as a normal wall
+        super.removeItem(Direction dir);
     }
 
     /**
@@ -67,7 +69,7 @@ public class SpecialWall extends Wall {
     @Override
     public void stepOn(Direction dir, PlayerInterface player) {
         if (this.checkPortal(dir.getOpposite())) {
-            // Needs re-routing
+            // Needs to re-route through portal
             Color c = null;
             for (Map.Entry<Color, FieldInterface> e : SpecialWall.portalsField.entrySet()) {
                 if (e.getValue() == this) {
@@ -76,6 +78,8 @@ public class SpecialWall extends Wall {
             }
             SpecialWall.portalsField.get(c.getOpposite()).stepOn(SpecialWall.portalsSide.get(c), player);
         }
+        // No portal, we can act as a normal wall
+        super.stepOn(Direction dir, PlayerInterface player);
     }
 
     /**
