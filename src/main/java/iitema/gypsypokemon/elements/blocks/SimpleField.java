@@ -98,7 +98,7 @@ public abstract class SimpleField implements FieldInterface{
      */
     @Override
     public boolean stepOn(Direction dir, PlayerInterface player) {
-        if(!this.solid(dir) && (this.item == null || this.item.solid(dir))){
+        if(!this.solid(dir) && (this.item == null || !this.item.solid(dir))){
             player.move(this);
             return true;
         }
