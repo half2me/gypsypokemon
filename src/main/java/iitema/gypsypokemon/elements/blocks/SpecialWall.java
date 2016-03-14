@@ -13,9 +13,9 @@ public class SpecialWall extends Wall {
 
     /**
      * Shoot at a field
-     * 
+     *
      * @param color color of projectile
-     * @param dir direction projectile is travelling
+     * @param dir   direction projectile is travelling
      * @return true on shot absorbed, false on shot through
      */
     @Override
@@ -78,7 +78,15 @@ public class SpecialWall extends Wall {
                     c = e.getKey();
                 }
             }
-            return SpecialWall.portalsField.get(c.getOpposite()).stepOn(SpecialWall.portalsSide.get(c), player);
+            FieldInterface otherField = SpecialWall.portalsField.get(c.getOpposite());
+            Direction newDir = SpecialWall.portalsSide.get(c.getOpposite());
+            // Portal may need to change the direction in which the player is facing
+            if (otherField != null) {
+                if (dir != newDir) {
+                    player.step(newDir);
+                }
+                return otherField.stepOn(newDir, player);
+            }
         }
         // No portal, we can act as a normal wall
         return super.stepOn(dir, player);
