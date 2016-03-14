@@ -35,7 +35,12 @@ public class SpecialWall extends Wall {
                     c = e.getKey();
                 }
             }
-            return SpecialWall.portalsField.get(c.getOpposite()).placeOn(SpecialWall.portalsSide.get(c), item);
+            FieldInterface otherField = SpecialWall.portalsField.get(c.getOpposite());
+            Direction newDir = SpecialWall.portalsSide.get(c.getOpposite());
+            // Portal may need to change the direction
+            if (otherField != null) {
+                return otherField.placeOn(newDir, item);
+            }
         }
         // No portal, we can act as a normal wall
         return super.placeOn(dir, item);
@@ -56,7 +61,12 @@ public class SpecialWall extends Wall {
                     c = e.getKey();
                 }
             }
-            return SpecialWall.portalsField.get(c.getOpposite()).removeItem(SpecialWall.portalsSide.get(c));
+            FieldInterface otherField = SpecialWall.portalsField.get(c.getOpposite());
+            Direction newDir = SpecialWall.portalsSide.get(c.getOpposite());
+            // Portal may need to change the direction
+            if (otherField != null) {
+                return otherField.removeItem(newDir);
+            }
         }
         // No portal, we can act as a normal wall
         return super.removeItem(dir);
