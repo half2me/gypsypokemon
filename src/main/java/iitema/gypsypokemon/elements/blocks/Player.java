@@ -52,6 +52,9 @@ public class Player implements PlayerInterface{
     public void action() {
         if(this.item == null) {
             this.item = this.field.getNeighbor(this.dir).getItem(this.dir);
+            if(this.item != null) {
+                this.field.getNeighbor(this.dir).removeItem(this.dir);
+            }
         } else {
             boolean result = this.field.getNeighbor(this.dir).placeOn(this.dir, this.item);
             if(result) {
