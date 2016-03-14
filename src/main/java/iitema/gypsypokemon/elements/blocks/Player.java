@@ -51,9 +51,12 @@ public class Player implements PlayerInterface{
     @java.lang.Override
     public void action() {
         if(this.item == null) {
-            this.item = this.field.getNeighbor(this.dir).getItem(this.dir);
-            if(this.item != null) {
-                this.field.getNeighbor(this.dir).removeItem(this.dir);
+            ItemInterface item = this.field.getNeighbor(this.dir).getItem(this.dir);
+            if(item != null) {
+                if(item.pickUp()) {
+                    this.item = item;
+                    this.field.getNeighbor(this.dir).removeItem(this.dir);
+                }
             }
         } else {
             boolean result = this.field.getNeighbor(this.dir).placeOn(this.dir, this.item);
