@@ -2,15 +2,9 @@ package iitema.gypsypokemon.elements.blocks;
 
 import iitema.gypsypokemon.elements.Color;
 import iitema.gypsypokemon.elements.Direction;
-
-import java.util.HashMap;
-import java.util.Map;
+import iitema.gypsypokemon.elements.Portal;
 
 public class SpecialWall extends Wall {
-
-    private static HashMap<Color, FieldInterface> portalsField = new HashMap<Color, FieldInterface>();
-    private static HashMap<Color, Direction> portalsSide = new HashMap<Color, Direction>();
-
     /**
      * Shoot at a field
      *
@@ -20,31 +14,38 @@ public class SpecialWall extends Wall {
      */
     @Override
     public boolean shootAt(Color color, Direction dir) {
-        SpecialWall.portalsField.put(color, this);
-        SpecialWall.portalsSide.put(color, dir.getOpposite());
+        Portal.set(color, this, dir.getOpposite());
         return true;
     }
 
     @Override
     public boolean placeOn(Direction dir, ItemInterface item) {
-        if (this.checkPortal(dir.getOpposite())) {
+        Portal portal = Portal.get(this, dir.getOpposite());
+        if (portal != null) {
             // Needs to re-route through portal
-            Color c = null;
-            for (Map.Entry<Color, FieldInterface> e : SpecialWall.portalsField.entrySet()) {
-                if (e.getValue() == this) {
-                    c = e.getKey();
-                }
-            }
-            FieldInterface otherField = SpecialWall.portalsField.get(c.getOpposite());
-            Direction newDir = SpecialWall.portalsSide.get(c.getOpposite());
-            // Portal may need to change the direction
-            if (otherField != null) {
-                return otherField.placeOn(newDir, item);
+            FieldInterface linkedField = portal.link();
+            if (linkedField != null) {
+                return linkedField.placeOn(portal.opposite().side, item);
             }
         }
         // No portal, we can act as a normal wall
         return super.placeOn(dir, item);
     }
+
+    @Override
+    public ItemInterface getItem(Direction dir){
+        Portal portal = Portal.get(this, dir.getOpposite());
+        if (portal != null) {
+            // Needs to re-route through portal
+            FieldInterface linkedField = portal.link();
+            if (linkedField != null) {
+                return linkedField.getItem(portal.opposite().side);
+            }
+        }
+        // No portal, we can act as a normal wall
+        return super.getItem(dir);
+    }
+
 
     /**
      * Remove the item on the field (if any)
@@ -53,19 +54,12 @@ public class SpecialWall extends Wall {
      */
     @Override
     public boolean removeItem(Direction dir) {
-        if (this.checkPortal(dir.getOpposite())) {
+        Portal portal = Portal.get(this, dir.getOpposite());
+        if (portal != null) {
             // Needs to re-route through portal
-            Color c = null;
-            for (Map.Entry<Color, FieldInterface> e : SpecialWall.portalsField.entrySet()) {
-                if (e.getValue() == this) {
-                    c = e.getKey();
-                }
-            }
-            FieldInterface otherField = SpecialWall.portalsField.get(c.getOpposite());
-            Direction newDir = SpecialWall.portalsSide.get(c.getOpposite());
-            // Portal may need to change the direction
-            if (otherField != null) {
-                return otherField.removeItem(newDir);
+            FieldInterface linkedField = portal.link();
+            if (linkedField != null) {
+                return linkedField.removeItem(portal.opposite().side);
             }
         }
         // No portal, we can act as a normal wall
@@ -80,40 +74,18 @@ public class SpecialWall extends Wall {
      */
     @Override
     public boolean stepOn(Direction dir, PlayerInterface player) {
-        if (this.checkPortal(dir.getOpposite())) {
+        Portal portal = Portal.get(this, dir.getOpposite());
+        if (portal != null) {
             // Needs to re-route through portal
-            Color c = null;
-            for (Map.Entry<Color, FieldInterface> e : SpecialWall.portalsField.entrySet()) {
-                if (e.getValue() == this) {
-                    c = e.getKey();
+            FieldInterface linkedField = portal.link();
+            if (linkedField != null) {
+                if(dir != portal.opposite().side) {
+                    player.step(portal.opposite().side);
                 }
-            }
-            FieldInterface otherField = SpecialWall.portalsField.get(c.getOpposite());
-            Direction newDir = SpecialWall.portalsSide.get(c.getOpposite());
-            // Portal may need to change the direction in which the player is facing
-            if (otherField != null) {
-                if (dir != newDir) {
-                    player.step(newDir);
-                }
-                return otherField.stepOn(newDir, player);
+                return linkedField.stepOn(portal.opposite().side, player);
             }
         }
         // No portal, we can act as a normal wall
         return super.stepOn(dir, player);
-    }
-
-    /**
-     * Check if there is an active portal on a side of the wall
-     *
-     * @param side side
-     * @return if there is an active portal or not
-     */
-    private boolean checkPortal(Direction side) {
-        if (SpecialWall.portalsField.containsValue(this)) {
-            if (SpecialWall.portalsSide.containsValue(side)) {
-                return true;
-            }
-        }
-        return false;
     }
 }
