@@ -14,7 +14,7 @@ public class Wall extends SimpleField{
      * @return solidity
      */
     @java.lang.Override
-    public boolean solid(Direction side) {
+    protected boolean solid(Direction side) {
         return true;
     }
 }
