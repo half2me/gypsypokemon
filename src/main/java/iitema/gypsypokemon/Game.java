@@ -19,6 +19,7 @@ public class Game {
     }
 
     public void startGame() {
+        System.out.print("startGame() meghivodott");
         this.player.step(Direction.RIGHT);
         this.player.step(Direction.RIGHT);
         this.player.step(Direction.RIGHT);
