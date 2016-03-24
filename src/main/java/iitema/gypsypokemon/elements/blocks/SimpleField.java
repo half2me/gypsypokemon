@@ -89,9 +89,7 @@ public abstract class SimpleField implements FieldInterface{
      */
     @Override
     public boolean shootAt(Color color, Direction dir) {
-        if (this.solid(dir)) {
-            return true;
-        } else return false;
+        return this.solid(dir);
     }
 
     /**
