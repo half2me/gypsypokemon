@@ -19,7 +19,6 @@ public class Game {
     }
 
     public void startGame() {
-        System.out.print("startGame() meghivodott");
         this.player.step(Direction.RIGHT);
         this.player.step(Direction.RIGHT);
         this.player.step(Direction.RIGHT);
@@ -39,8 +38,6 @@ public class Game {
     }
 
     public static void main(String[] args) {
-        System.out.println("Gypsy Pokemon!");
-
         Game game = new Game();
 
         game.startGame();

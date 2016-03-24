@@ -1,5 +1,6 @@
 package iitema.gypsypokemon.elements.blocks;
 
+import iitema.gypsypokemon.Reflector;
 import iitema.gypsypokemon.elements.Color;
 import iitema.gypsypokemon.elements.Direction;
 
@@ -18,9 +19,12 @@ public abstract class SimpleField implements FieldInterface{
      * @return solidity
      */
     protected boolean solid(Direction dir) {
+        Reflector.start();
         if(this.item != null) {
+            Reflector.end();
             return this.item.solid(dir);
         }
+        Reflector.end();
         return false;
     }
 
@@ -32,6 +36,8 @@ public abstract class SimpleField implements FieldInterface{
      */
     @Override
     public FieldInterface getNeighbor(Direction dir) {
+        Reflector.start();
+        Reflector.end();
         return this.neighbors.get(dir);
     }
 
