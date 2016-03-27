@@ -1,11 +1,15 @@
 package iitema.gypsypokemon;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Reflector {
     private static int levels = 0;
     private static boolean enabled = false;
     private static Scanner reader = new Scanner(System.in);
+    private static Map<Integer, Integer> ids = new HashMap<Integer, Integer>();
+    private static Map<String, Integer> objectCount = new HashMap<String, Integer>();
 
     private static String indent() {
         StringBuilder sb = new StringBuilder();
@@ -13,6 +17,23 @@ public class Reflector {
             sb.append("  ");
         }
         return sb.toString();
+    }
+
+    // not working, StackTraceElement.hashCode() does not return the callers hashCode
+    private static int getId(String className, int hashCode) {
+        if (!ids.containsKey(hashCode)) {
+            if (objectCount.containsKey(className)) {
+                int count = objectCount.get(className);
+                count++;
+                ids.put(hashCode, count);
+                objectCount.replace(className, count);
+                return count;
+            }
+                objectCount.put(className, 1);
+                ids.put(hashCode, 1);
+                return 1;
+        }
+        return ids.get(hashCode);
     }
 
     public static void on() {
@@ -28,7 +49,9 @@ public class Reflector {
             StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
             StackTraceElement caller = stackTraceElements[2];
 
-            System.out.println(indent() + "->" + caller.getClassName() + "." + caller.getMethodName() + "()");
+            String[] fullName = caller.getClassName().split("\\.");
+
+            System.out.println(indent() + "->" + fullName[fullName.length - 1] + "." + caller.getMethodName() + "()");
             levels++;
         }
     }
@@ -39,7 +62,9 @@ public class Reflector {
             StackTraceElement caller = stackTraceElements[2];
             levels--;
 
-            System.out.println(indent() + "<-" + caller.getClassName() + "." + caller.getMethodName() + "()");
+            String[] fullName = caller.getClassName().split("\\.");
+
+            System.out.println(indent() + "<-" + fullName[fullName.length - 1] + "." + caller.getMethodName() + "()");
         }
     }
 
