@@ -1,8 +1,10 @@
 package iitema.gypsypokemon.elements.blocks;
 
+import iitema.gypsypokemon.Reflector;
 import iitema.gypsypokemon.elements.Color;
 import iitema.gypsypokemon.elements.Direction;
 
+import java.sql.Ref;
 import java.util.ArrayList;
 import java.util.EnumMap;
 
@@ -12,11 +14,15 @@ public class Door extends SimpleField {
     private Direction orientation;
 
     public Door(Direction dir) {
+        Reflector.start();
+
         this.orientation = dir;
         openSides.put(Direction.LEFT, false);
         openSides.put(Direction.RIGHT, false);
         openSides.put(Direction.DOWN, false);
         openSides.put(Direction.UP, false);
+
+        Reflector.end();
     }
 
     /**
@@ -29,13 +35,23 @@ public class Door extends SimpleField {
      */
     @Override
     protected boolean solid(Direction dir) {
-        if (this.openSides.get(dir)) {
-            if (this.item == null) {
-                return true;
+        Reflector.start();
+
+        boolean ret;
+
+        if (Reflector.ask(dir.getOpposite().toString() + " irányból be lehet lépni az ajtóba?")) {
+            if (!Reflector.ask("Van tárgy az ajtóban?")) {
+                ret =  true;
+            } else {
+                ret =  Reflector.ask("Át lehet menni a tárgyon?");
             }
-            return this.item.solid(dir);
+
+        } else {
+            ret = false;
         }
-        return false;
+
+        Reflector.end();
+        return ret;
     }
 
     /**
@@ -46,10 +62,18 @@ public class Door extends SimpleField {
      */
     @Override
     public ItemInterface getItem(Direction dir) {
-        if (this.openSides.get(dir)) {
-            return this.item;
+        Reflector.start();
+
+        ItemInterface ret;
+
+        if (Reflector.ask(dir.getOpposite().toString() + " irányból hozzáférhető az ajtóban lévő tárgy?")) {
+            ret =  this.item;
+        } else {
+            ret = null;
         }
-        return null;
+
+        Reflector.end();
+        return ret;
     }
 
     /**
@@ -61,10 +85,18 @@ public class Door extends SimpleField {
      */
     @Override
     public boolean placeOn(Direction dir, ItemInterface item) {
-        if (this.openSides.get(dir)) {
-            return super.placeOn(dir, item);
+        Reflector.start();
+
+        boolean ret;
+
+        if (Reflector.ask(dir.getOpposite().toString() + " irányból hozzáférhető az ajtóban lévő tárgy?")) {
+            ret =  super.placeOn(dir, item);
+        } else {
+            ret = false;
         }
-        return false;
+
+        Reflector.end();
+        return ret;
     }
 
     /**
@@ -74,25 +106,41 @@ public class Door extends SimpleField {
      */
     @Override
     public boolean removeItem(Direction dir) {
-        if (this.openSides.get(dir)) {
-            return super.removeItem(dir);
+        Reflector.start();
+
+        boolean ret;
+
+        if (Reflector.ask(dir.getOpposite().toString() + " irányból hozzáférhető az ajtóban lévő tárgy?")) {
+            ret = super.removeItem(dir);
+        } else {
+            ret = false;
         }
-        return false;
+
+        Reflector.end();
+        return ret;
     }
 
     /**
      * Opens a door
      */
     public void open() {
+        Reflector.start();
+
         openSides.put(this.orientation, true);
         openSides.put(this.orientation.getOpposite(), true);
+
+        Reflector.end();
     }
 
     /**
      * Closes a Door
      */
     public void close() {
+        Reflector.start();
+
         openSides.put(this.orientation, false);
         openSides.put(this.orientation.getOpposite(), false);
+
+        Reflector.end();
     }
 }

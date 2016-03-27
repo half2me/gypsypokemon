@@ -1,5 +1,6 @@
 package iitema.gypsypokemon.elements.blocks;
 
+import iitema.gypsypokemon.Reflector;
 import iitema.gypsypokemon.elements.Color;
 import iitema.gypsypokemon.elements.Direction;
 
@@ -26,8 +27,13 @@ public class Abyss extends SimpleField{
      */
     @Override
     public boolean stepOn(Direction dir, PlayerInterface player) {
+        Reflector.start();
+
         player.move(this);
         player.kill();
+
+        Reflector.end();
+
         return true;
     }
 
@@ -40,6 +46,9 @@ public class Abyss extends SimpleField{
      */
     @Override
     public boolean placeOn(Direction dir, ItemInterface item) {
+        Reflector.start();
+        Reflector.end();
+
         return true;
     }
 }

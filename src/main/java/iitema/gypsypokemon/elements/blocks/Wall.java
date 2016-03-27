@@ -1,5 +1,6 @@
 package iitema.gypsypokemon.elements.blocks;
 
+import iitema.gypsypokemon.Reflector;
 import iitema.gypsypokemon.elements.Color;
 import iitema.gypsypokemon.elements.Direction;
 
@@ -15,6 +16,8 @@ public class Wall extends SimpleField{
      */
     @java.lang.Override
     public boolean solid(Direction side) {
+        Reflector.start();
+        Reflector.end();
         return true;
     }
 }

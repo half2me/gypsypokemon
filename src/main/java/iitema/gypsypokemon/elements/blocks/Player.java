@@ -1,8 +1,11 @@
 package iitema.gypsypokemon.elements.blocks;
 
 import iitema.gypsypokemon.Game;
+import iitema.gypsypokemon.Reflector;
 import iitema.gypsypokemon.elements.Color;
 import iitema.gypsypokemon.elements.Direction;
+
+import java.sql.Ref;
 
 public class Player implements PlayerInterface{
 
@@ -12,9 +15,13 @@ public class Player implements PlayerInterface{
     private Game game;
 
     public Player(Game game, FieldInterface field){
+        Reflector.start();
+
         this.field = field;
         this.dir = Direction.RIGHT;
         this.game = game;
+
+        Reflector.end();
     }
 
     /**
@@ -24,8 +31,12 @@ public class Player implements PlayerInterface{
      */
     @java.lang.Override
     public void move(FieldInterface field) {
+        Reflector.start();
+
         this.field.stepOff();
         this.field = field;
+
+        Reflector.end();
     }
 
     /**
@@ -37,11 +48,15 @@ public class Player implements PlayerInterface{
      */
     @java.lang.Override
     public void step(Direction dir) {
-        if(this.dir == dir) {
+        Reflector.start();
+
+        if(Reflector.ask("Irányban néz az Ezredes?")) {
             this.field.getNeighbor(dir).stepOn(dir, this);
         } else {
             this.dir = dir;
         }
+
+        Reflector.end();
     }
 
     /**
@@ -50,7 +65,9 @@ public class Player implements PlayerInterface{
      */
     @java.lang.Override
     public void action() {
-        if(this.item == null) {
+        Reflector.start();
+
+        if(Reflector.ask("Van a játékosnál tárgy?")) {
             this.item = this.field.getNeighbor(this.dir).getItem(this.dir);
         } else {
             boolean result = this.field.getNeighbor(this.dir).placeOn(this.dir, this.item);
@@ -58,6 +75,8 @@ public class Player implements PlayerInterface{
                 this.item = null;
             }
         }
+
+        Reflector.end();
     }
 
     /**
@@ -67,9 +86,13 @@ public class Player implements PlayerInterface{
      */
     @java.lang.Override
     public void shoot(Color color) {
+        Reflector.start();
+
         do {
             field = this.field.getNeighbor(this.dir);
         } while (!field.shootAt(color, this.dir));
+
+        Reflector.end();
     }
 
     /**
@@ -77,6 +100,10 @@ public class Player implements PlayerInterface{
      */
     @java.lang.Override
     public void kill() {
+        Reflector.start();
+
         this.game.endGame();
+
+        Reflector.end();
     }
 }

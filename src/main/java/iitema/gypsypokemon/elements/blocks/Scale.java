@@ -1,5 +1,6 @@
 package iitema.gypsypokemon.elements.blocks;
 
+import iitema.gypsypokemon.Reflector;
 import iitema.gypsypokemon.elements.Color;
 import iitema.gypsypokemon.elements.Direction;
 
@@ -20,11 +21,19 @@ public class Scale extends SimpleField{
      */
     @Override
     public boolean stepOn(Direction dir, PlayerInterface player) {
+        Reflector.start();
+
+        boolean ret;
+
         if (super.stepOn(dir, player)) {
             this.door.open();
-            return true;
+            ret =  true;
+        } else {
+            ret = false;
         }
-        return false;
+
+        Reflector.end();
+        return ret;
     }
 
     /**
@@ -32,16 +41,28 @@ public class Scale extends SimpleField{
      */
     @Override
     public void stepOff() {
+        Reflector.start();
+
         this.door.close();
+
+        Reflector.end();
     }
 
     @Override
     public boolean placeOn(Direction dir, ItemInterface item) {
+        Reflector.start();
+
+        boolean ret;
+
         if (super.placeOn(dir, item)) {
             this.door.open();
-            return true;
+            ret =  true;
+        } else {
+            ret = false;
         }
-        return false;
+
+        Reflector.end();
+        return ret;
     }
 
     /**
@@ -50,10 +71,18 @@ public class Scale extends SimpleField{
      */
     @Override
     public boolean removeItem(Direction dir) {
+        Reflector.start();
+
+        boolean ret;
+
         if (super.removeItem(dir)) {
             this.door.close();
-            return true;
+            ret =  true;
+        } else {
+            ret = false;
         }
-        return false;
+
+        Reflector.end();
+        return ret;
     }
 }

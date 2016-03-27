@@ -1,5 +1,6 @@
 package iitema.gypsypokemon.elements.blocks;
 
+import iitema.gypsypokemon.Reflector;
 import iitema.gypsypokemon.elements.Direction;
 
 public class Box implements ItemInterface{
@@ -13,6 +14,9 @@ public class Box implements ItemInterface{
      */
     @java.lang.Override
     public boolean solid(Direction side) {
+        Reflector.start();
+        Reflector.end();
+
         return true;
     }
 
@@ -23,6 +27,9 @@ public class Box implements ItemInterface{
      */
     @Override
     public boolean pickUp() {
+        Reflector.start();
+        Reflector.end();
+
         return true;
     }
 }

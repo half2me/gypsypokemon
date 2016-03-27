@@ -38,6 +38,8 @@ public class Game {
     }
 
     public static void main(String[] args) {
+        Reflector.on();
+
         Game game = new Game();
 
         game.startGame();

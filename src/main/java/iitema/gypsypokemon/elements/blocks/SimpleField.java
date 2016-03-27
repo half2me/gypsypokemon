@@ -20,12 +20,17 @@ public abstract class SimpleField implements FieldInterface{
      */
     protected boolean solid(Direction dir) {
         Reflector.start();
-        if(this.item != null) {
-            Reflector.end();
-            return this.item.solid(dir);
+
+        boolean ret;
+
+        if(Reflector.ask("Van a mezőn tárgy?")) {
+            ret =  this.item.solid(dir);
+        } else {
+            ret = false;
         }
+
         Reflector.end();
-        return false;
+        return ret;
     }
 
     /**
@@ -49,21 +54,33 @@ public abstract class SimpleField implements FieldInterface{
      */
     @Override
     public void setNeighbor(Direction dir, FieldInterface field) {
+        Reflector.start();
+        Reflector.end();
         this.neighbors.put(dir, field);
     }
 
     @Override
     public ItemInterface getItem(Direction dir){
+        Reflector.start();
+        Reflector.end();
         return this.item;
     }
 
     @Override
     public boolean placeOn(Direction dir, ItemInterface item) {
-        if (this.item == null) {
+        Reflector.start();
+
+        boolean ret;
+
+        if (!Reflector.ask("Van a mezőn tárgy?")) {
             this.item = item;
-            return true;
+            ret =  true;
+        } else {
+            ret = false;
         }
-        return false;
+
+        Reflector.end();
+        return  ret;
     }
 
     /**
@@ -73,11 +90,19 @@ public abstract class SimpleField implements FieldInterface{
      */
     @Override
     public boolean removeItem(Direction dir) {
-        if (this.item == null) {
-            return false;
+        Reflector.start();
+
+        boolean ret;
+
+        if (!Reflector.ask("Van a mezőn tárgy?")) {
+            ret =  false;
+        } else {
+            this.item = null;
+            ret =  true;
         }
-        this.item = null;
-        return true;
+
+        Reflector.end();
+        return ret;
     }
 
     /**
@@ -89,6 +114,8 @@ public abstract class SimpleField implements FieldInterface{
      */
     @Override
     public boolean shootAt(Color color, Direction dir) {
+        Reflector.start();
+        Reflector.end();
         return this.solid(dir);
     }
 
@@ -101,11 +128,19 @@ public abstract class SimpleField implements FieldInterface{
      */
     @Override
     public boolean stepOn(Direction dir, PlayerInterface player) {
-        if(!this.solid(dir)) {
+        Reflector.start();
+
+        boolean ret;
+
+        if(Reflector.ask(dir.getOpposite().toString() + " irányból rá lehet lépni a mezőre?")) {
             player.move(this);
-            return true;
+            ret =  true;
+        } else {
+            ret = false;
         }
-        return false;
+
+        Reflector.end();
+        return ret;
     }
 
     /**
@@ -113,6 +148,7 @@ public abstract class SimpleField implements FieldInterface{
      */
     @Override
     public void stepOff() {
-
+        Reflector.start();
+        Reflector.end();
     }
 }
