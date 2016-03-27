@@ -1,21 +1,34 @@
-package iitema.gypsypokemon.elements.blocks;
+package iitema.gypsypokemon.model;
 
-import iitema.gypsypokemon.elements.Direction;
+import iitema.gypsypokemon.Reflector;
 
-public interface ItemInterface {
+public class Box implements ItemInterface{
     /**
      * Returns solidity for item
      * If an item is solid, projectiles and players cannot walk over or step on.
      * If an item is not solid, projectiles can be shot through and players can walk over or step on.
+     *
      * @param side side of the item to check
      * @return solidity
      */
-    boolean solid(Direction side);
+    @java.lang.Override
+    public boolean solid(Direction side) {
+        Reflector.start();
+        Reflector.end();
+
+        return true;
+    }
 
     /**
      * Executes operation when the Item is picked up
      *
      * @return if the Item can be picked up
      */
-    boolean pickUp();
+    @Override
+    public boolean pickUp() {
+        Reflector.start();
+        Reflector.end();
+
+        return true;
+    }
 }

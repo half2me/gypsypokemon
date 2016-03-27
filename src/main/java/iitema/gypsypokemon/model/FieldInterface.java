@@ -1,7 +1,4 @@
-package iitema.gypsypokemon.elements.blocks;
-
-import iitema.gypsypokemon.elements.Color;
-import iitema.gypsypokemon.elements.Direction;
+package iitema.gypsypokemon.model;
 
 /**
  * A block which is a field on the map

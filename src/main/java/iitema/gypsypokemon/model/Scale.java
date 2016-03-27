@@ -1,8 +1,6 @@
-package iitema.gypsypokemon.elements.blocks;
+package iitema.gypsypokemon.model;
 
 import iitema.gypsypokemon.Reflector;
-import iitema.gypsypokemon.elements.Color;
-import iitema.gypsypokemon.elements.Direction;
 
 public class Scale extends SimpleField{
 

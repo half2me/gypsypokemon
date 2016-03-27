@@ -1,7 +1,4 @@
-package iitema.gypsypokemon.elements.blocks;
-
-import iitema.gypsypokemon.elements.Color;
-import iitema.gypsypokemon.elements.Direction;
+package iitema.gypsypokemon.model;
 
 import java.util.HashMap;
 import java.util.Map;
