@@ -81,4 +81,8 @@ public class Reflector {
             }
         }
     }
+
+    public static void out(String message) {
+        System.out.println(indent() + message);
+    }
 }
