@@ -1,9 +1,6 @@
 package iitema.gypsypokemon;
 
-import iitema.gypsypokemon.model.Direction;
-import iitema.gypsypokemon.model.FieldInterface;
-import iitema.gypsypokemon.model.Ground;
-import iitema.gypsypokemon.model.Player;
+import iitema.gypsypokemon.model.*;
 
 public class Game {
 
@@ -13,7 +10,7 @@ public class Game {
     public Game() {
         FieldInterface f = this.field;
         for (int i = 0; i < 10; i++) {
-            f.setNeighbor(Direction.RIGHT, new Ground());
+            f.setNeighbor(Direction.RIGHT, new Abyss());
             f = f.getNeighbor(Direction.RIGHT);
         }
     }
@@ -30,7 +27,9 @@ public class Game {
     }
 
     public void endGame() {
-
+        Reflector.start();
+        Reflector.out("Meghaltál!");
+        Reflector.end();
     }
 
     public void pauseGame() {
