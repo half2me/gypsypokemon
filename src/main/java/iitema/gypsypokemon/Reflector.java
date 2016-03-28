@@ -1,5 +1,7 @@
 package iitema.gypsypokemon;
 
+import iitema.gypsypokemon.model.*;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -78,6 +80,19 @@ public class Reflector {
                 return false;
             } else {
                 System.out.print(indent() + "Csak 'I' vagy 'N' karakterrel válaszolhat: ");
+            }
+        }
+    }
+
+    public static ItemInterface askType() {
+        out("Milyen tárgy van itt? Doboz (1-es kód) vagy Zpm (2-es kód)?");
+        while (true) {
+            int number = reader.nextInt();
+            if (number == 1) {
+                return new Zpm(new Ground(), new Game());
+            }
+            if (number == 2) {
+                return new Box();
             }
         }
     }
