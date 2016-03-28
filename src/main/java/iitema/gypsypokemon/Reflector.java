@@ -87,6 +87,7 @@ public class Reflector {
     public static ItemInterface askType() {
         out("Milyen tárgy van itt? Doboz (1-es kód) vagy Zpm (2-es kód)?");
 
+
         while (true) {
             int number = reader.nextInt();
             if (number == 1) {
