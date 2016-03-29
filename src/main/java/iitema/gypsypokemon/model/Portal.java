@@ -127,6 +127,6 @@ public class Portal {
         Portal ret = Portal.portals.get(this.color.getOpposite());
 
         Reflector.end();
-        return ret;0
+        return ret;
     }
 }
