@@ -1,5 +1,7 @@
 package iitema.gypsypokemon.model;
 
+import com.sun.org.apache.regexp.internal.RE;
+import com.sun.webkit.graphics.Ref;
 import iitema.gypsypokemon.Game;
 import iitema.gypsypokemon.Reflector;
 
@@ -46,7 +48,7 @@ public class Player implements PlayerInterface{
     public void step(Direction dir) {
         Reflector.start();
 
-        if(Reflector.ask("Irányban néz az Ezredes?")) {
+        if(Reflector.ask("Irányba néz az Ezredes?")) {
             this.field.getNeighbor(dir).stepOn(dir, this);
         } else {
             this.dir = dir;
@@ -65,8 +67,14 @@ public class Player implements PlayerInterface{
 
         if(!Reflector.ask("Van a játékosnál tárgy?")) {
             ItemInterface candidateItem = this.field.getNeighbor(this.dir).getItem(this.dir);
-            if(candidateItem != null && candidateItem.pickUp()) {
-                this.item = candidateItem;
+
+            if(Reflector.ask("Volt tárgy a mezőn?")) {
+            //if(candidateItem != null && candidateItem.pickUp()) {
+                candidateItem = Reflector.askType();
+                if (candidateItem.pickUp()) {
+                    this.field.getNeighbor(this.dir).removeItem(this.dir);
+                    this.item = candidateItem;
+                }
             }
         } else {
             boolean result = this.field.getNeighbor(this.dir).placeOn(this.dir, this.item);
