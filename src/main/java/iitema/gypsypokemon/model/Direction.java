@@ -28,6 +28,7 @@ public enum Direction {
     public Direction getOpposite() {
         Reflector.start();
         Reflector.end();
+
         return opposite;
     }
 
