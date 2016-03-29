@@ -104,7 +104,7 @@ public class Reflector {
 
         ItemInterface item = null;
 
-        System.out.print("[D]oboz vagy [Z]pm? ");
+        System.out.print(indent() + "[D]oboz vagy [Z]pm? ");
         while (item == null) {
             String answer = reader.nextLine().toUpperCase();
             if (answer.equals("Z")) {
