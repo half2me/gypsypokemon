@@ -87,7 +87,7 @@ public class Reflector {
             if (Thread.currentThread().getStackTrace()[2].getMethodName().equals("placeOn")){
                 return false;
             }
-            out("Mi legyen a válasz " + Thread.currentThread().getStackTrace()[2].getMethodName() + "fv által feltett kérdésre? (Reflector.ask())");
+            out("Mi legyen a válasz " + Thread.currentThread().getStackTrace()[2].getMethodName() + " fv által feltett kérdésre? (Reflector.ask())");
             return false;
         }
     }

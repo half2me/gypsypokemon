@@ -1,5 +1,7 @@
 package iitema.gypsypokemon.model;
 
+import iitema.gypsypokemon.Reflector;
+
 public class SpecialWall extends Wall {
     /**
      * Shoot at a field
@@ -10,36 +12,66 @@ public class SpecialWall extends Wall {
      */
     @Override
     public boolean shootAt(Color color, Direction dir) {
+        Reflector.start();
+
         Portal.set(color, this, dir.getOpposite());
+
+        Reflector.end();
         return true;
     }
 
     @Override
     public boolean placeOn(Direction dir, ItemInterface item) {
+        Reflector.start();
+
         Portal portal = Portal.get(this, dir.getOpposite());
-        if (portal != null) {
+
+        boolean ret;
+
+        if (Reflector.ask("Van portál a falon?")) {
+            // if (portal != null) {
             // Needs to re-route through portal
             FieldInterface linkedField = portal.link();
-            if (linkedField != null) {
-                return linkedField.placeOn(portal.opposite().side, item);
+            if (Reflector.ask("Létezik másik portál?")) {
+                //if (linkedField != null) {
+                ret = linkedField.placeOn(portal.opposite().side, item);
+                Reflector.end();
+                return ret;
             }
         }
         // No portal, we can act as a normal wall
-        return super.placeOn(dir, item);
+        ret = super.placeOn(dir, item);
+
+        Reflector.end();
+        return ret;
     }
 
     @Override
     public ItemInterface getItem(Direction dir){
+        Reflector.start();
+
         Portal portal = Portal.get(this, dir.getOpposite());
-        if (portal != null) {
+
+        ItemInterface ret;
+
+        if (Reflector.ask("Van portál a falon?")) {
+        //if (portal != null) {
             // Needs to re-route through portal
             FieldInterface linkedField = portal.link();
-            if (linkedField != null) {
-                return linkedField.getItem(portal.opposite().side);
+
+            if (Reflector.ask("Létezik másik portál?")) {
+            //if (linkedField != null) {
+                ret =  linkedField.getItem(portal.opposite().side);
+                Reflector.end();
+                return ret;
             }
         }
+
         // No portal, we can act as a normal wall
-        return super.getItem(dir);
+        ret =  super.getItem(dir);
+
+        Reflector.end();
+        return ret;
     }
 
 
@@ -50,16 +82,28 @@ public class SpecialWall extends Wall {
      */
     @Override
     public boolean removeItem(Direction dir) {
+        Reflector.start();
+        boolean ret;
+
         Portal portal = Portal.get(this, dir.getOpposite());
-        if (portal != null) {
+
+        if (Reflector.ask("Van portál a falon?")) {
+        //if (portal != null) {
             // Needs to re-route through portal
             FieldInterface linkedField = portal.link();
-            if (linkedField != null) {
-                return linkedField.removeItem(portal.opposite().side);
+
+            if (Reflector.ask("Létezik másik portál?")) {
+            //if (linkedField != null) {
+                ret =  linkedField.removeItem(portal.opposite().side);
+                Reflector.end();
+                return ret;
             }
         }
         // No portal, we can act as a normal wall
-        return super.removeItem(dir);
+        ret =  super.removeItem(dir);
+
+        Reflector.end();
+        return ret;
     }
 
     /**
@@ -70,18 +114,34 @@ public class SpecialWall extends Wall {
      */
     @Override
     public boolean stepOn(Direction dir, PlayerInterface player) {
+        Reflector.start();
+
+        boolean ret;
+
         Portal portal = Portal.get(this, dir.getOpposite());
-        if (portal != null) {
+
+        if (Reflector.ask("Van portál a falon?")) {
+        //if (portal != null) {
             // Needs to re-route through portal
             FieldInterface linkedField = portal.link();
-            if (linkedField != null) {
-                if(dir != portal.opposite().side) {
+
+            if (Reflector.ask("Létezik másik portál?")) {
+            //if (linkedField != null) {
+
+                if(!Reflector.ask("Ugyanabba az irányba néz a játékos, mintha most jött volna ki a csillagkapuból?")) {
+                // /if(dir != portal.opposite().side) {
                     player.step(portal.opposite().side);
                 }
-                return linkedField.stepOn(portal.opposite().side, player);
+
+                ret =  linkedField.stepOn(portal.opposite().side, player);
+                Reflector.end();
+                return ret;
             }
         }
         // No portal, we can act as a normal wall
-        return super.stepOn(dir, player);
+        ret =  super.stepOn(dir, player);
+
+        Reflector.end();
+        return ret;
     }
 }
