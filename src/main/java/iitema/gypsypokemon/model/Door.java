@@ -34,7 +34,7 @@ public class Door extends SimpleField {
         Reflector.start();
 
         boolean ret;
-        if (Reflector.ask(dir.getOpposite().toString() + " irányból be lehet lépni az ajtóba?")) {
+        if (Reflector.ask(dir.getOpposite().toString() + " irányból hozzá lehet férni az ajtóhoz?")) {
             if (!Reflector.ask("Van tárgy az ajtóban?")) {
                 ret =  false;
             } else {
@@ -119,10 +119,10 @@ public class Door extends SimpleField {
      */
     public void open() {
         Reflector.start();
-        Reflector.off();
+        
         openSides.put(this.orientation, true);
         openSides.put(this.orientation.getOpposite(), true);
-        Reflector.on();
+        
         Reflector.end();
     }
 
