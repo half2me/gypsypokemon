@@ -100,19 +100,22 @@ public class Reflector {
     }
 
     public static ItemInterface askType() {
-        out("Milyen tárgy van itt? Doboz (1-es kód) vagy Zpm (2-es kód)?");
-        while (true) {
-            int number = reader.nextInt();
-            if (number == 1) {
-                return new Zpm(new Ground(), new Game());
-            }
-            if (number == 2) {
-                return new Box();
+        off();
 
+        ItemInterface item = null;
 
+        System.out.print("[D]oboz vagy [Z]pm? ");
+        while (item == null) {
+            String answer = reader.nextLine().toUpperCase();
+            if (answer.equals("Z")) {
+                item = new Zpm(new Ground(), new Game());
+            } else if (answer.equals("D")) {
+                item =  new Box();
             }
         }
 
+        on();
+        return item;
     }
 
     public static void out(String message) {

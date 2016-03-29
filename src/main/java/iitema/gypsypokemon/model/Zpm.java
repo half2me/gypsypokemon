@@ -40,8 +40,8 @@ public class Zpm implements ItemInterface{
         Reflector.start();
 
         Zpm.collected++;
-        this.field.removeItem(Direction.DOWN); // in case ZPM is in the door
-        this.field.removeItem(Direction.LEFT); // in case ZPM is in the door
+        if (!this.field.removeItem(Direction.DOWN))  // in case ZPM is in the door
+            this.field.removeItem(Direction.LEFT); // in case ZPM is in the door
         if(Reflector.ask("Összegyűjöttük az összes Zpm-et?")) {
             game.endGame();
         }

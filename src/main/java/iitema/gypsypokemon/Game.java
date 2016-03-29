@@ -23,7 +23,7 @@ public class Game {
         // inicializálások ide kellenek
 
         while(true){
-            Reflector.out("Válassz a teszt esetek közül:\n" +
+            Reflector.out("\nVálassz a teszt esetek közül:\n" +
                     "1: két lépés felfelé\n" +
                     "2: falra lövés\n" +
                     "3: szakadékba lépés\n" +
@@ -35,6 +35,8 @@ public class Game {
 
             Scanner reader = new Scanner(System.in);
             String answer = reader.nextLine();
+            System.out.println();
+
             try{
                 // String-et nem fogad el a switch
                 int choice = Integer.parseInt(answer);
@@ -66,6 +68,7 @@ public class Game {
                     case 2: {
                         FieldInterface a56 = new Wall();
                         a55.setNeighbor(Direction.RIGHT, a56);
+
                         Reflector.on();
                         player.shoot(Color.BLUE);
                         Reflector.off();
@@ -75,6 +78,7 @@ public class Game {
                     case 3: {
                         FieldInterface a56 = new Abyss();
                         a55.setNeighbor(Direction.RIGHT, a56);
+
                         Reflector.on();
                         player.step(Direction.RIGHT);
                         Reflector.off();
@@ -104,9 +108,10 @@ public class Game {
                         FieldInterface a57 = new Ground();
                         a55.setNeighbor(Direction.RIGHT, a56);
                         a56.setNeighbor(Direction.RIGHT, a57);
+
                         Reflector.on();
-                        a56.stepOn(Direction.RIGHT, player);
-                        a57.stepOn(Direction.RIGHT, player);
+                        player.step(Direction.RIGHT);
+                        player.step(Direction.RIGHT);
                         Reflector.off();
                     } continue;
 
