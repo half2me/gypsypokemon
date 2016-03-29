@@ -30,6 +30,7 @@ public class Game {
                     "4: doboz lerakás/felvétel\n" +
                     "5: ajtó kinyitása mérlegre lépéssel\n" +
                     "6: speciális falra lövés talajon, szakadékon keresztül \n" +
+                    "7: Zpm felvétele és győzelem\n" +
                     "0: kilépés\n");
 
             Scanner reader = new Scanner(System.in);
@@ -96,12 +97,17 @@ public class Game {
                         Reflector.off();
                     } continue;
 
-                    //mérlegre lépés
+                    //mérlegre lépés, majd mérlegről ellépés
                     case 5: {
                         Door d1 = new Door(Direction.RIGHT);
                         FieldInterface a56 = new Scale(d1);
+                        FieldInterface a57 = new Ground();
                         a55.setNeighbor(Direction.RIGHT, a56);
+                        a56.setNeighbor(Direction.RIGHT, a57);
+                        Reflector.on();
                         a56.stepOn(Direction.RIGHT, player);
+                        a57.stepOn(Direction.RIGHT, player);
+                        Reflector.off();
                     } continue;
 
                     //Lövés talajon, szakadékon keresztül speciális falra
@@ -112,9 +118,22 @@ public class Game {
                         a55.setNeighbor(Direction.RIGHT, a56);
                         a56.setNeighbor(Direction.RIGHT, a57);
                         a57.setNeighbor(Direction.RIGHT, a58);
-                        // TODO playerone.shoot(Color.BLUE);
+                        Reflector.on();
+                        player.shoot(Color.BLUE);
+                        Reflector.off();
                     }
                     continue;
+
+                    //zpm felvétele
+                    case 7: {
+                        FieldInterface a56 = new Ground();
+                        a55.setNeighbor(Direction.RIGHT, a56);
+                        a56.placeOn(Direction.RIGHT, new Zpm(a56, this));
+
+                        Reflector.on();
+                        player.action();
+                        Reflector.off();
+                    } continue;
 
                     // Kilépés
                     case 0: break;
@@ -132,7 +151,7 @@ public class Game {
 
     public void endGame() {
         Reflector.start();
-        Reflector.out("Meghaltál!");
+        Reflector.out("A játéknak vége!");
         Reflector.end();
     }
 
