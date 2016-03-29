@@ -22,6 +22,7 @@ public abstract class SimpleField implements FieldInterface{
         boolean ret;
 
         if(Reflector.ask("Van a mezőn tárgy?")) {
+            item = new Box();
             ret =  this.item.solid(dir);
         } else {
             ret = false;

@@ -22,36 +22,38 @@ public class Game {
     public void startGame() {
         // inicializálások ide kellenek
 
-        Reflector.out("Üdv a teszt programban!");
         while(true){
-            Reflector.out(
-                    "\nVálassz a teszt esetek közül:\n" +
+            Reflector.out("Válassz a teszt esetek közül:\n" +
                     "1: két lépés felfelé\n" +
-                    "0: kilépés \n");
+                    "2: falra lövés\n" +
+                    "3: szakadékba lépés\n" +
+                    "4: doboz lerakás/felvétel\n" +
+                    "5: ajtó kinyitása mérlegre lépéssel\n" +
+                    "6: speciális falra lövés talajon, szakadékon keresztül \n" +
+                    "0: kilépés\n");
 
             Scanner reader = new Scanner(System.in);
             String answer = reader.nextLine();
             try{
                 // String-et nem fogad el a switch
                 int choice = Integer.parseInt(answer);
+                FieldInterface a55 = new Ground();
+                player = new Player(this, a55);
                 switch(choice) {
                     case 1: {
-                        /*
-                        Két lépés felfelé
+                       /*
+                       a55-ről indulunk mindig, ahol [5-sor,5-oszlop] a koordináta
+                       így néz ki:
+                           a35
+                           a45
+                       a54 a55 a56
+                           a65
+                       */
 
-                        a55-ről indulunk mindig, ahol [5,5] a koordináta
-                        így néz ki:
-                                a53
-                                a54
-                            a45 a55 a65
-                                a56
-                         */
-                        FieldInterface a55 = new Ground();
-                        FieldInterface a54 = new Ground();
-                        FieldInterface a53 = new Ground();
-                        a55.setNeighbor(Direction.UP, a54);
-                        a54.setNeighbor(Direction.UP, a53);
-                        player = new Player(this, a55);
+                        FieldInterface a45 = new Ground();
+                        FieldInterface a35 = new Ground();
+                        a55.setNeighbor(Direction.UP, a45);
+                        a45.setNeighbor(Direction.UP, a35);
 
                         Reflector.on();
                         player.step(Direction.UP);
@@ -59,11 +61,26 @@ public class Game {
                         Reflector.off();
                     } continue;
 
+                    //sima falra lövés
                     case 2: {
-
+                        FieldInterface a56 = new Wall();
+                        a55.setNeighbor(Direction.RIGHT, a56);
+                        Reflector.on();
+                        player.shoot(Color.BLUE);
+                        Reflector.off();
                     } continue;
 
-                    case 10: {
+                    //szakadékba lépés
+                    case 3: {
+                        FieldInterface a56 = new Abyss();
+                        a55.setNeighbor(Direction.RIGHT, a56);
+                        Reflector.on();
+                        player.step(Direction.RIGHT);
+                        Reflector.off();
+                    } continue;
+
+                    //doboz le/fel
+                    case 4: {
                         // Put down/pickup box from ground
 
                         FieldInterface g1 = new Ground();
@@ -77,12 +94,30 @@ public class Game {
                         player.action();
 
                         Reflector.off();
-
                     } continue;
 
+                    //mérlegre lépés
+                    case 5: {
+                        Door d1 = new Door(Direction.RIGHT);
+                        FieldInterface a56 = new Scale(d1);
+                        a55.setNeighbor(Direction.RIGHT, a56);
+                        a56.stepOn(Direction.RIGHT, player);
+                    } continue;
+
+                    //Lövés talajon, szakadékon keresztül speciális falra
+                    case 6: {
+                        FieldInterface a56 = new Ground();
+                        FieldInterface a57 = new Abyss();
+                        FieldInterface a58 = new SpecialWall();
+                        a55.setNeighbor(Direction.RIGHT, a56);
+                        a56.setNeighbor(Direction.RIGHT, a57);
+                        a57.setNeighbor(Direction.RIGHT, a58);
+                        // TODO playerone.shoot(Color.BLUE);
+                    }
+                    continue;
+
                     // Kilépés
-                    case 0:
-                        break;
+                    case 0: break;
                 }
             } catch(Exception e) {
                 Reflector.out("Rossz bemenet");
@@ -90,9 +125,10 @@ public class Game {
             }
             break;
         }
-        Reflector.off();
-
     }
+
+
+
 
     public void endGame() {
         Reflector.start();
