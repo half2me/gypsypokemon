@@ -2,6 +2,7 @@ package iitema.gypsypokemon;
 
 import iitema.gypsypokemon.model.*;
 
+import java.sql.Ref;
 import java.util.Scanner;
 
 public class Game {
@@ -19,19 +20,14 @@ public class Game {
 
     public void startGame() {
         // inicializálások ide kellenek
-        /*this.player.step(Direction.RIGHT);
-        this.player.step(Direction.RIGHT);
-        this.player.step(Direction.RIGHT);
-        this.player.step(Direction.RIGHT);
-        this.player.step(Direction.RIGHT);
-        this.player.step(Direction.RIGHT);
-        this.player.step(Direction.RIGHT);
-        this.player.step(Direction.RIGHT);*/
 
-        Reflector.on();
-        Reflector.out("Üdv a teszt programban! Válassz a teszt esetek közül:");
-        Reflector.out("1: két lépés felfelé");
+        Reflector.out("Üdv a teszt programban!");
         while(true){
+            Reflector.out(
+                    "\nVálassz a teszt esetek közül:\n" +
+                    "1: két lépés felfelé\n" +
+                    "0: kilépés \n");
+
             Scanner reader = new Scanner(System.in);
             String answer = reader.nextLine();
             try{
@@ -40,6 +36,8 @@ public class Game {
                 switch(choice) {
                     case 1: {
                         /*
+                        Két lépés felfelé
+
                         a55-ről indulunk mindig, ahol [5,5] a koordináta
                         így néz ki:
                                 a53
@@ -53,13 +51,18 @@ public class Game {
                         a55.setNeighbor(Direction.UP, a54);
                         a54.setNeighbor(Direction.UP, a53);
                         player = new Player(this, a55);
+
+                        Reflector.on();
                         player.step(Direction.UP);
                         player.step(Direction.UP);
+                        Reflector.off();
                     } continue;
 
                     case 2: {
 
                     } continue;
+
+
 
                     // Kilépés
                     case 0: break;

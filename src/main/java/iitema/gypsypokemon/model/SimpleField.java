@@ -53,8 +53,10 @@ public abstract class SimpleField implements FieldInterface{
     @Override
     public void setNeighbor(Direction dir, FieldInterface field) {
         Reflector.start();
-        Reflector.end();
+
         this.neighbors.put(dir, field);
+
+        Reflector.end();
     }
 
     @Override
@@ -113,8 +115,11 @@ public abstract class SimpleField implements FieldInterface{
     @Override
     public boolean shootAt(Color color, Direction dir) {
         Reflector.start();
+
+        boolean ret = this.solid(dir);
+
         Reflector.end();
-        return this.solid(dir);
+        return ret;
     }
 
     /**
@@ -130,7 +135,7 @@ public abstract class SimpleField implements FieldInterface{
 
         boolean ret;
 
-        if(Reflector.ask(dir.getOpposite().toString() + " irányból rá lehet lépni a mezőre?")) {
+        if(!this.solid(dir)) {
             player.move(this);
             ret =  true;
         } else {

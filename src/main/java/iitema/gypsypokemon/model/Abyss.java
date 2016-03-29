@@ -13,6 +13,8 @@ public class Abyss extends SimpleField{
      */
     @Override
     protected boolean solid(Direction dir) {
+        Reflector.start();
+        Reflector.end();
         return false;
     }
 

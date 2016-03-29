@@ -1,5 +1,7 @@
 package iitema.gypsypokemon.model;
 
+import iitema.gypsypokemon.Reflector;
+
 /**
  * Direction
  *
@@ -24,6 +26,8 @@ public enum Direction {
     }
 
     public Direction getOpposite() {
+        Reflector.on();
+        Reflector.off();
         return opposite;
     }
 

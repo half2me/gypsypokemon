@@ -106,7 +106,7 @@ public class Door extends SimpleField {
 
         boolean ret;
 
-        if (Reflector.ask(dir.getOpposite().toString() + " irányból hozzáférhető az ajtóban lévő tárgy?")) {
+        if (Reflector.ask(Reflector.silentOpposite(dir).toString() + " irányból hozzáférhető az ajtóban lévő tárgy?")) {
             ret = super.removeItem(dir);
         } else {
             ret = false;

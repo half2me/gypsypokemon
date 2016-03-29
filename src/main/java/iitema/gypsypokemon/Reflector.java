@@ -84,6 +84,13 @@ public class Reflector {
         }
     }
 
+    public static Direction silentOpposite(Direction dir) {
+        off();
+        Direction opposite = dir.getOpposite();
+        on();
+        return opposite;
+    }
+
     public static ItemInterface askType() {
         out("Milyen tárgy van itt? Doboz (1-es kód) vagy Zpm (2-es kód)?");
         while (true) {
