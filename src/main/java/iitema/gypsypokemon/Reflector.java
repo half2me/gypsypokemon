@@ -71,16 +71,24 @@ public class Reflector {
     }
 
     public static boolean ask(String question) {
-        System.out.print(indent() + question + " I/N: ");
-        while (true) {
-            String answer = reader.nextLine().toUpperCase();
-            if (answer.equals("I")) {
-                return true;
-            } else if (answer.equals("N")) {
-                return false;
-            } else {
-                System.out.print(indent() + "Csak 'I' vagy 'N' karakterrel válaszolhat: ");
+        if (enabled) {
+            System.out.print(indent() + question + " I/N: ");
+            while (true) {
+                String answer = reader.nextLine().toUpperCase();
+                if (answer.equals("I")) {
+                    return true;
+                } else if (answer.equals("N")) {
+                    return false;
+                } else {
+                    System.out.print(indent() + "Csak 'I' vagy 'N' karakterrel válaszolhat: ");
+                }
             }
+        } else {
+            if (Thread.currentThread().getStackTrace()[2].getMethodName().equals("placeOn")){
+                return false;
+            }
+            out("Mi legyen a válasz " + Thread.currentThread().getStackTrace()[2].getMethodName() + "fv által feltett kérdésre? (Reflector.ask())");
+            return false;
         }
     }
 

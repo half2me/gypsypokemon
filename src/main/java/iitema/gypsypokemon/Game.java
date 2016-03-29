@@ -2,6 +2,7 @@ package iitema.gypsypokemon;
 
 import iitema.gypsypokemon.model.*;
 
+import java.lang.reflect.Field;
 import java.sql.Ref;
 import java.util.Scanner;
 
@@ -62,10 +63,26 @@ public class Game {
 
                     } continue;
 
+                    case 10: {
+                        // Put down/pickup box from ground
 
+                        FieldInterface g1 = new Ground();
+                        FieldInterface g2 = new Ground();
+                        g1.setNeighbor(Direction.RIGHT, g2);
+                        PlayerInterface player = new Player(this, g1);
+                        g2.placeOn(Direction.UP, new Box());
+
+                        Reflector.on();
+
+                        player.action();
+
+                        Reflector.off();
+
+                    } continue;
 
                     // Kilépés
-                    case 0: break;
+                    case 0:
+                        break;
                 }
             } catch(Exception e) {
                 Reflector.out("Rossz bemenet");

@@ -63,8 +63,11 @@ public class Player implements PlayerInterface{
     public void action() {
         Reflector.start();
 
-        if(Reflector.ask("Van a játékosnál tárgy?")) {
-            this.item = this.field.getNeighbor(this.dir).getItem(this.dir);
+        if(!Reflector.ask("Van a játékosnál tárgy?")) {
+            ItemInterface candidateItem = this.field.getNeighbor(this.dir).getItem(this.dir);
+            if(candidateItem != null && candidateItem.pickUp()) {
+                this.item = candidateItem;
+            }
         } else {
             boolean result = this.field.getNeighbor(this.dir).placeOn(this.dir, this.item);
             if(result) {
