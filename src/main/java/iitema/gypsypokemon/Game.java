@@ -129,7 +129,6 @@ public class Game {
                         FieldInterface a56 = new Ground();
                         a55.setNeighbor(Direction.RIGHT, a56);
                         a56.placeOn(Direction.RIGHT, new Zpm(a56, this));
-
                         Reflector.on();
                         player.action();
                         Reflector.off();
