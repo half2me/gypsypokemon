@@ -133,10 +133,10 @@ public class Door extends SimpleField {
         Reflector.start();
         if(Reflector.ask("Van az ajtón tárgy?")) {}
         else{
-            Reflector.off();
+            
             openSides.put(this.orientation, false);
             openSides.put(this.orientation.getOpposite(), false);
-            Reflector.on();
+            
         }
         Reflector.end();
     }
