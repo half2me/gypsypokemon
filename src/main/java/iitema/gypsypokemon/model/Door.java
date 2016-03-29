@@ -34,18 +34,16 @@ public class Door extends SimpleField {
         Reflector.start();
 
         boolean ret;
-
-        if (Reflector.ask(dir.getOpposite().toString() + " irányból be lehet lépni az ajtóba?")) {
+        if (Reflector.ask(dir.getOpposite().toString() + " irányból hozzá lehet férni az ajtóhoz?")) {
             if (!Reflector.ask("Van tárgy az ajtóban?")) {
-                ret =  true;
+                ret =  false;
             } else {
-                ret =  Reflector.ask("Át lehet menni a tárgyon?");
+                ret =  !Reflector.ask("Át lehet menni a tárgyon?");
             }
 
         } else {
             ret = false;
         }
-
         Reflector.end();
         return ret;
     }
@@ -121,10 +119,10 @@ public class Door extends SimpleField {
      */
     public void open() {
         Reflector.start();
-
+        
         openSides.put(this.orientation, true);
         openSides.put(this.orientation.getOpposite(), true);
-
+        
         Reflector.end();
     }
 
@@ -133,10 +131,13 @@ public class Door extends SimpleField {
      */
     public void close() {
         Reflector.start();
-
-        openSides.put(this.orientation, false);
-        openSides.put(this.orientation.getOpposite(), false);
-
+        if(Reflector.ask("Van az ajtón tárgy?")) {}
+        else{
+            
+            openSides.put(this.orientation, false);
+            openSides.put(this.orientation.getOpposite(), false);
+            
+        }
         Reflector.end();
     }
 }

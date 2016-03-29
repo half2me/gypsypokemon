@@ -31,6 +31,7 @@ public class Game {
                     "5: ajtó kinyitása mérlegre lépéssel\n" +
                     "6: speciális falra lövés talajon, szakadékon keresztül \n" +
                     "7: Zpm felvétele és győzelem\n" +
+                    "8: Dobozt rakunk a mérlegre és átmegyünk az ajtón\n" +
                     "0: kilépés\n");
 
             Scanner reader = new Scanner(System.in);
@@ -134,9 +135,21 @@ public class Game {
                         FieldInterface a56 = new Ground();
                         a55.setNeighbor(Direction.RIGHT, a56);
                         a56.placeOn(Direction.RIGHT, new Zpm(a56, this));
-
                         Reflector.on();
                         player.action();
+                        Reflector.off();
+                    } continue;
+
+                    //mérlegre doboz letevése, majd átmenetel az ajtón
+                    case 8: {
+                        Door a45 = new Door(Direction.DOWN);
+                        FieldInterface a56 = new Scale(a45);
+                        FieldInterface a35 = new Ground();
+                        a55.setNeighbor(Direction.RIGHT, a56);
+                        a55.setNeighbor(Direction.UP, a45);
+                        Reflector.on();
+                        player.action();
+                        player.step(Direction.UP);
                         Reflector.off();
                     } continue;
 
