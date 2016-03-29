@@ -1,5 +1,8 @@
 package iitema.gypsypokemon.model;
 
+import iitema.gypsypokemon.Reflector;
+
+import java.sql.Ref;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +23,11 @@ public class Portal {
      * @param side side it is valid on
      */
     public static void set(Color color, FieldInterface field, Direction side) {
+        Reflector.start();
+
         Portal.portals.put(color, new Portal(field, side, color));
+
+        Reflector.end();
     }
 
     /**
@@ -30,6 +37,8 @@ public class Portal {
      * @return portal
      */
     public static Portal get(Color color) {
+        Reflector.start();
+        Reflector.end();
         return Portal.portals.get(color);
     }
 
@@ -40,12 +49,16 @@ public class Portal {
      * @return portal
      */
     public static Portal get(FieldInterface field) {
+        Reflector.start();
+
         Portal p = null;
         for (Map.Entry<Color, Portal> e : Portal.portals.entrySet()) {
             if (e.getValue().field == field) {
                 p = e.getValue();
             }
         }
+
+        Reflector.end();
         return p;
     }
 
@@ -57,12 +70,16 @@ public class Portal {
      * @return portal
      */
     public static Portal get(FieldInterface field, Direction side) {
+        Reflector.start();
+
         Portal p = null;
         for (Map.Entry<Color, Portal> e : Portal.portals.entrySet()) {
             if (e.getValue().field == field && e.getValue().side == side) {
                 p = e.getValue();
             }
         }
+
+        Reflector.end();
         return p;
     }
 
@@ -74,9 +91,13 @@ public class Portal {
      * @param color color of the portal
      */
     private Portal(FieldInterface field, Direction side, Color color) {
+        Reflector.start();
+
         this.field = field;
         this.side = side;
         this.color = color;
+
+        Reflector.end();
     }
 
     /**
@@ -86,8 +107,13 @@ public class Portal {
      * @return field
      */
     public FieldInterface link() {
+        Reflector.start();
+
         Portal otherPortal = Portal.portals.get(this.color.getOpposite());
-        return otherPortal.field.getNeighbor(otherPortal.side);
+        FieldInterface ret = otherPortal.field.getNeighbor(otherPortal.side);
+
+        Reflector.end();
+        return ret;
     }
 
     /**
@@ -96,6 +122,11 @@ public class Portal {
      * @return opposite portal
      */
     public Portal opposite() {
-        return Portal.portals.get(this.color.getOpposite());
+        Reflector.start();
+
+        Portal ret = Portal.portals.get(this.color.getOpposite());
+
+        Reflector.end();
+        return ret;0
     }
 }
