@@ -1,8 +1,4 @@
-package iitema.gypsypokemon.elements.blocks;
-
-import iitema.gypsypokemon.elements.Color;
-import iitema.gypsypokemon.elements.Direction;
-import iitema.gypsypokemon.elements.Portal;
+package iitema.gypsypokemon.model;
 
 public class SpecialWall extends Wall {
     /**

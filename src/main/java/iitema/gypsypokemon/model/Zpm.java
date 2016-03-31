@@ -1,7 +1,6 @@
-package iitema.gypsypokemon.elements.blocks;
+package iitema.gypsypokemon.model;
 
 import iitema.gypsypokemon.Game;
-import iitema.gypsypokemon.elements.Direction;
 
 public class Zpm implements ItemInterface{
 

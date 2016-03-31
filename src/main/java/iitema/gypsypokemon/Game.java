@@ -1,9 +1,9 @@
 package iitema.gypsypokemon;
 
-import iitema.gypsypokemon.elements.Direction;
-import iitema.gypsypokemon.elements.blocks.FieldInterface;
-import iitema.gypsypokemon.elements.blocks.Ground;
-import iitema.gypsypokemon.elements.blocks.Player;
+import iitema.gypsypokemon.model.Direction;
+import iitema.gypsypokemon.model.FieldInterface;
+import iitema.gypsypokemon.model.Ground;
+import iitema.gypsypokemon.model.Player;
 
 public class Game {
 

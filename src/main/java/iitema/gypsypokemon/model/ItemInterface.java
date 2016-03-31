@@ -1,6 +1,6 @@
-package iitema.gypsypokemon.elements.blocks;
+package iitema.gypsypokemon.model;
 
-import iitema.gypsypokemon.elements.Direction;
+import iitema.gypsypokemon.model.Direction;
 
 public interface ItemInterface {
     /**

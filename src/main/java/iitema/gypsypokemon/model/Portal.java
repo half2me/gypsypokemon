@@ -1,6 +1,4 @@
-package iitema.gypsypokemon.elements;
-
-import iitema.gypsypokemon.elements.blocks.FieldInterface;
+package iitema.gypsypokemon.model;
 
 import java.util.HashMap;
 import java.util.Map;
