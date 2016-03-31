@@ -1,9 +1,5 @@
-package iitema.gypsypokemon.elements.blocks;
+package iitema.gypsypokemon.model;
 
-import iitema.gypsypokemon.elements.Color;
-import iitema.gypsypokemon.elements.Direction;
-
-import java.util.ArrayList;
 import java.util.EnumMap;
 
 public class Door extends SimpleField {

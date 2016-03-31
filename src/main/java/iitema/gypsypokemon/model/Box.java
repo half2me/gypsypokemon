@@ -1,6 +1,4 @@
-package iitema.gypsypokemon.elements.blocks;
-
-import iitema.gypsypokemon.elements.Direction;
+package iitema.gypsypokemon.model;
 
 public class Box implements ItemInterface{
     /**

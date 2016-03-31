@@ -1,8 +1,6 @@
-package iitema.gypsypokemon.elements.blocks;
+package iitema.gypsypokemon.model;
 
 import iitema.gypsypokemon.Game;
-import iitema.gypsypokemon.elements.Color;
-import iitema.gypsypokemon.elements.Direction;
 
 public class Player implements PlayerInterface{
 
@@ -73,8 +71,9 @@ public class Player implements PlayerInterface{
      */
     @java.lang.Override
     public void shoot(Color color) {
+        FieldInterface field = this.field;
         do {
-            field = this.field.getNeighbor(this.dir);
+            field = field.getNeighbor(this.dir);
         } while (!field.shootAt(color, this.dir));
     }
 
