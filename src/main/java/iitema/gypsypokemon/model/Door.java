@@ -1,5 +1,7 @@
 package iitema.gypsypokemon.model;
 
+import iitema.gypsypokemon.Log;
+
 import java.util.EnumMap;
 
 public class Door extends SimpleField {
@@ -58,7 +60,9 @@ public class Door extends SimpleField {
     @Override
     public boolean placeOn(Direction dir, ItemInterface item) {
         if (this.openSides.get(dir)) {
-            return super.placeOn(dir, item);
+            boolean ret = super.placeOn(dir, item);
+            if (ret) Log.println(" placed Box in Door");
+            return ret;
         }
         return false;
     }
@@ -71,6 +75,7 @@ public class Door extends SimpleField {
     @Override
     public boolean removeItem(Direction dir) {
         if (this.openSides.get(dir)) {
+            Log.println(" from Door");
             return super.removeItem(dir);
         }
         return false;
@@ -82,6 +87,7 @@ public class Door extends SimpleField {
     public void open() {
         openSides.put(this.orientation, true);
         openSides.put(this.orientation.getOpposite(), true);
+        Log.println("Door opened");
     }
 
     /**
@@ -90,5 +96,14 @@ public class Door extends SimpleField {
     public void close() {
         openSides.put(this.orientation, false);
         openSides.put(this.orientation.getOpposite(), false);
+        Log.println("Door closed");
+    }
+
+    @Override
+    public boolean stepOn(Direction dir, PlayerInterface player) {
+        boolean ret = super.stepOn(dir, player);
+        if (ret) Log.println("Player" + player.getId() + " moved " + dir.toString() + " in Door");
+        else Log.println("Player" + player.getId() + " couldn't move " + dir.toString() + " in Door");
+        return ret;
     }
 }

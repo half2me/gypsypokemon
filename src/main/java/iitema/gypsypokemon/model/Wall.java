@@ -1,5 +1,7 @@
 package iitema.gypsypokemon.model;
 
+import iitema.gypsypokemon.Log;
+
 public class Wall extends SimpleField{
 
     /**
@@ -13,5 +15,17 @@ public class Wall extends SimpleField{
     @java.lang.Override
     protected boolean solid(Direction side) {
         return true;
+    }
+
+    @Override
+    public boolean shootAt(Color color, Direction dir) {
+        Log.println("Wall stopped the projectile");
+        return super.shootAt(color, dir);
+    }
+
+    @Override
+    public boolean stepOn(Direction dir, PlayerInterface player) {
+        Log.println("Player" + player.getId() + " couldn't move " + dir.toString() + " to Wall");
+        return super.stepOn(dir, player);
     }
 }

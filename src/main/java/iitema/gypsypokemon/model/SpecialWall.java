@@ -1,5 +1,7 @@
 package iitema.gypsypokemon.model;
 
+import iitema.gypsypokemon.Log;
+
 public class SpecialWall extends Wall {
     /**
      * Shoot at a field
@@ -11,6 +13,7 @@ public class SpecialWall extends Wall {
     @Override
     public boolean shootAt(Color color, Direction dir) {
         Portal.set(color, this, dir.getOpposite());
+        Log.println(color.toString() + " Portal created on Special Wall's " + dir.getOpposite() + " side");
         return true;
     }
 
@@ -21,6 +24,7 @@ public class SpecialWall extends Wall {
             // Needs to re-route through portal
             FieldInterface linkedField = portal.link();
             if (linkedField != null) {
+                Log.print(" through Portal");
                 return linkedField.placeOn(portal.opposite().side, item);
             }
         }
@@ -35,6 +39,7 @@ public class SpecialWall extends Wall {
             // Needs to re-route through portal
             FieldInterface linkedField = portal.link();
             if (linkedField != null) {
+                Log.print("Through Portal ");
                 return linkedField.getItem(portal.opposite().side);
             }
         }
@@ -73,6 +78,7 @@ public class SpecialWall extends Wall {
         Portal portal = Portal.get(this, dir.getOpposite());
         if (portal != null) {
             // Needs to re-route through portal
+            Log.println("Player" + player.getId() + " rerouted through portal");
             FieldInterface linkedField = portal.link();
             if (linkedField != null) {
                 if(dir != portal.opposite().side) {
@@ -80,7 +86,7 @@ public class SpecialWall extends Wall {
                 }
                 return linkedField.stepOn(portal.opposite().side, player);
             }
-        }
+        } else Log.println("Player" + player.getId() + " couldn't move " + dir.toString() + " to SpecialWall");
         // No portal, we can act as a normal wall
         return super.stepOn(dir, player);
     }

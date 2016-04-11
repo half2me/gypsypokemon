@@ -1,5 +1,7 @@
 package iitema.gypsypokemon.model;
 
+import iitema.gypsypokemon.Log;
+
 public class Scale extends SimpleField{
 
     private Door door;
@@ -18,9 +20,10 @@ public class Scale extends SimpleField{
     @Override
     public boolean stepOn(Direction dir, PlayerInterface player) {
         if (super.stepOn(dir, player)) {
+            Log.println("Player" + player.getId() + " moved " + dir.toString() + " to Scale");
             this.door.open();
             return true;
-        }
+        } else Log.println("Player" + player.getId() + " couldn't move " + dir.toString() + " to Scale");
         return false;
     }
 
@@ -35,6 +38,7 @@ public class Scale extends SimpleField{
     @Override
     public boolean placeOn(Direction dir, ItemInterface item) {
         if (super.placeOn(dir, item)) {
+            Log.println(" placed Box on Scale");
             this.door.open();
             return true;
         }
@@ -48,6 +52,7 @@ public class Scale extends SimpleField{
     @Override
     public boolean removeItem(Direction dir) {
         if (super.removeItem(dir)) {
+            Log.println(" from Scale");
             this.door.close();
             return true;
         }

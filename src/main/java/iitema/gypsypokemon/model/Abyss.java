@@ -1,5 +1,7 @@
 package iitema.gypsypokemon.model;
 
+import iitema.gypsypokemon.Log;
+
 public class Abyss extends SimpleField{
     /**
      * Returns solidity for item
@@ -23,6 +25,7 @@ public class Abyss extends SimpleField{
      */
     @Override
     public boolean stepOn(Direction dir, PlayerInterface player) {
+        Log.println("Player" + player.getId() + " moved " + dir.toString() + " into Abyss");
         player.move(this);
         player.kill();
         return true;
@@ -37,6 +40,7 @@ public class Abyss extends SimpleField{
      */
     @Override
     public boolean placeOn(Direction dir, ItemInterface item) {
+        Log.println(" threw Box in Abyss");
         return true;
     }
 }

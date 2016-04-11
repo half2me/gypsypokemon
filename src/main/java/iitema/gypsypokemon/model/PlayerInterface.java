@@ -36,4 +36,6 @@ public interface PlayerInterface{
      * Kills the player
      */
     void kill();
+
+    int getId();
 }

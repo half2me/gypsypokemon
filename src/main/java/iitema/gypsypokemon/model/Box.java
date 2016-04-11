@@ -1,5 +1,7 @@
 package iitema.gypsypokemon.model;
 
+import iitema.gypsypokemon.Log;
+
 public class Box implements ItemInterface{
     /**
      * Returns solidity for item
@@ -21,6 +23,7 @@ public class Box implements ItemInterface{
      */
     @Override
     public boolean pickUp() {
+        Log.print(" picked up Box");
         return true;
     }
 }

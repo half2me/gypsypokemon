@@ -1,5 +1,7 @@
 package iitema.gypsypokemon.model;
 
+import java.text.ParseException;
+
 /**
  * Direction
  *
@@ -19,5 +21,19 @@ public enum Direction {
 
     public Direction getOpposite() {
         return opposite;
+    }
+
+    public static Direction parse(String dir) throws ParseException {
+        if (dir.toUpperCase().equals("LEFT")) {
+            return Direction.LEFT;
+        } else if (dir.toUpperCase().equals("RIGHT")) {
+            return Direction.RIGHT;
+        } else if (dir.toUpperCase().equals("DOWN")) {
+            return Direction.DOWN;
+        } else if (dir.toUpperCase().equals("UP")) {
+            return Direction.UP;
+        } else {
+            throw new ParseException("Invalid direction", 0);
+        }
     }
 }
