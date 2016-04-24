@@ -1,11 +1,12 @@
 package iitema.gypsypokemon.model;
 
 import java.util.EnumMap;
+import java.util.Stack;
 
-public abstract class SimpleField implements FieldInterface{
+abstract class SimpleField implements FieldInterface{
 
-    protected EnumMap<Direction, FieldInterface> neighbors = new EnumMap<Direction, FieldInterface>(Direction.class);
-    protected ItemInterface item;
+    private EnumMap<Direction, FieldInterface> neighbors = new EnumMap<Direction, FieldInterface>(Direction.class);
+    Stack<ItemInterface> items = new Stack<ItemInterface>();
 
     /**
      * Returns solidity for item
@@ -15,8 +16,10 @@ public abstract class SimpleField implements FieldInterface{
      * @return solidity
      */
     protected boolean solid(Direction dir) {
-        if(this.item != null) {
-            return this.item.solid(dir);
+        for (ItemInterface item : items) {
+            if (item.solid(dir)) {
+                return true;
+            }
         }
         return false;
     }
@@ -45,16 +48,16 @@ public abstract class SimpleField implements FieldInterface{
 
     @Override
     public ItemInterface getItem(Direction dir){
-        return this.item;
+        if (!items.empty()) {
+            return items.peek();
+        }
+        return null;
     }
 
     @Override
     public boolean placeOn(Direction dir, ItemInterface item) {
-        if (this.item == null) {
-            this.item = item;
-            return true;
-        }
-        return false;
+        items.push(item);
+        return true;
     }
 
     /**
@@ -64,11 +67,11 @@ public abstract class SimpleField implements FieldInterface{
      */
     @Override
     public boolean removeItem(Direction dir) {
-        if (this.item == null) {
-            return false;
+        if (!items.empty()) {
+            items.pop();
+            return true;
         }
-        this.item = null;
-        return true;
+        return false;
     }
 
     /**
@@ -80,9 +83,12 @@ public abstract class SimpleField implements FieldInterface{
      */
     @Override
     public boolean shootAt(Color color, Direction dir) {
-        if (this.solid(dir)) {
-            return true;
-        } else return false;
+        for (ItemInterface item : items) {
+            if (item.solid(dir)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -94,18 +100,20 @@ public abstract class SimpleField implements FieldInterface{
      */
     @Override
     public boolean stepOn(Direction dir, PlayerInterface player) {
-        if(!this.solid(dir)) {
-            player.move(this);
-            return true;
+        for (ItemInterface item : items) {
+            if (item.solid(dir)) {
+                return false;
+            }
         }
-        return false;
+        player.move(this);
+        return true;
     }
 
     /**
      * Leave a field
      */
     @Override
-    public void stepOff() {
+    public void stepOff(PlayerInterface player) {
 
     }
 }

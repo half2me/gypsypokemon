@@ -20,7 +20,7 @@ public class Wall extends SimpleField{
     @Override
     public boolean shootAt(Color color, Direction dir) {
         Log.println("Wall stopped the projectile");
-        return super.shootAt(color, dir);
+        return true;
     }
 
     @Override

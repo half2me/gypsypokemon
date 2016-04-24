@@ -42,4 +42,8 @@ public class Zpm implements ItemInterface{
         }
         return false; // ZPM should no be picked up
     }
+
+    public float getWeight() {
+        return 0.0f;
+    }
 }

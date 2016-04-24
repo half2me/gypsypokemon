@@ -21,6 +21,18 @@ public class Game {
         }*/
     }
 
+    public void deletePlayer(PlayerInterface dead) {
+        for (int i = 0; i < 3; ++i) {
+            if (players[i] == dead) {
+                players[i] = null;
+                if (players[0] == null && players[1] == null) {
+                    endGame();
+                }
+                return;
+            }
+        }
+    }
+
     private void loadMap(String name) throws IOException {
         Map<Integer, Door> doors = new HashMap<Integer, Door>();
         List<int[][]> map = new ArrayList<int[][]>();

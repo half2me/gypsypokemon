@@ -18,4 +18,6 @@ public interface ItemInterface {
      * @return if the Item can be picked up
      */
     boolean pickUp();
+
+    float getWeight();
 }

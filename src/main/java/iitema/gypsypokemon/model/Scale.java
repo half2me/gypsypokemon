@@ -3,8 +3,10 @@ package iitema.gypsypokemon.model;
 import iitema.gypsypokemon.Log;
 
 public class Scale extends SimpleField{
+    private static float THRESHOLD = 1.9f;
 
     private Door door;
+    private float weight;
 
     public Scale(Door door){
         this.door = door;
@@ -21,7 +23,10 @@ public class Scale extends SimpleField{
     public boolean stepOn(Direction dir, PlayerInterface player) {
         if (super.stepOn(dir, player)) {
             Log.println("Player" + player.getId() + " moved " + dir.toString() + " to Scale");
-            this.door.open();
+            weight += player.getWeight();
+            if (weight > THRESHOLD) {
+                this.door.open();
+            }
             return true;
         } else Log.println("Player" + player.getId() + " couldn't move " + dir.toString() + " to Scale");
         return false;
@@ -31,15 +36,21 @@ public class Scale extends SimpleField{
      * Leave a field
      */
     @Override
-    public void stepOff() {
-        this.door.close();
+    public void stepOff(PlayerInterface player) {
+        weight -= player.getWeight();
+        if (weight < THRESHOLD) {
+            this.door.close();
+        }
     }
 
     @Override
     public boolean placeOn(Direction dir, ItemInterface item) {
         if (super.placeOn(dir, item)) {
             Log.println(" placed Box on Scale");
-            this.door.open();
+            weight += item.getWeight();
+            if (weight > THRESHOLD) {
+                this.door.open();
+            }
             return true;
         }
         return false;
@@ -51,9 +62,14 @@ public class Scale extends SimpleField{
      */
     @Override
     public boolean removeItem(Direction dir) {
-        if (super.removeItem(dir)) {
+        ItemInterface item = super.getItem(dir);
+        if (item != null) {
             Log.println(" from Scale");
-            this.door.close();
+            weight -= items.peek().getWeight();
+            super.removeItem(dir);
+            if (weight < THRESHOLD) {
+                this.door.close();
+            }
             return true;
         }
         return false;

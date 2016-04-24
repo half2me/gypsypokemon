@@ -28,10 +28,12 @@ public class Door extends SimpleField {
     @Override
     protected boolean solid(Direction dir) {
         if (this.openSides.get(dir)) {
-            if (this.item == null) {
-                return true;
+            for (ItemInterface item : items) {
+                if (item.solid(dir)) {
+                    return true;
+                }
             }
-            return this.item.solid(dir);
+            return false;
         }
         return false;
     }
@@ -44,8 +46,8 @@ public class Door extends SimpleField {
      */
     @Override
     public ItemInterface getItem(Direction dir) {
-        if (this.openSides.get(dir)) {
-            return this.item;
+        if (this.openSides.get(dir) && !items.empty()) {
+            return items.peek();
         }
         return null;
     }
@@ -84,7 +86,7 @@ public class Door extends SimpleField {
     /**
      * Opens a door
      */
-    public void open() {
+    void open() {
         openSides.put(this.orientation, true);
         openSides.put(this.orientation.getOpposite(), true);
         Log.println("Door opened");
@@ -93,7 +95,7 @@ public class Door extends SimpleField {
     /**
      * Closes a Door
      */
-    public void close() {
+    void close() {
         openSides.put(this.orientation, false);
         openSides.put(this.orientation.getOpposite(), false);
         Log.println("Door closed");

@@ -3,6 +3,8 @@ package iitema.gypsypokemon.model;
 import iitema.gypsypokemon.Log;
 
 public class Box implements ItemInterface{
+    private static float WEIGHT = 1.0f;
+
     /**
      * Returns solidity for item
      * If an item is solid, projectiles and players cannot walk over or step on.
@@ -25,5 +27,9 @@ public class Box implements ItemInterface{
     public boolean pickUp() {
         Log.print(" picked up Box");
         return true;
+    }
+
+    public float getWeight() {
+        return WEIGHT;
     }
 }

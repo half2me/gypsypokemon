@@ -20,7 +20,7 @@ public interface FieldInterface{
     /**
      * Leave a field
      */
-    void stepOff();
+    void stepOff(PlayerInterface player);
 
     /**
      * Get a neighbor of this field

@@ -4,12 +4,13 @@ import iitema.gypsypokemon.Game;
 import iitema.gypsypokemon.Log;
 
 public class Player implements PlayerInterface{
+    private static float WEIGHT = 2.0f;
 
-    private FieldInterface field;
+    protected FieldInterface field;
     private ItemInterface item;
     private Direction dir;
     private Game game;
-    public int id;
+    private int id;
 
     public Player(Game game, FieldInterface field, int id){
         this.field = field;
@@ -25,7 +26,7 @@ public class Player implements PlayerInterface{
      */
     @java.lang.Override
     public void move(FieldInterface field) {
-        this.field.stepOff();
+        this.field.stepOff(this);
         this.field = field;
     }
 
@@ -89,9 +90,13 @@ public class Player implements PlayerInterface{
      */
     @java.lang.Override
     public void kill() {
-       Log.println("Player" + id + " killed");
-        this.game.endGame();
+        Log.println("Player" + id + " killed");
+        game.deletePlayer(this);
     }
 
     public int getId() {return id; }
+
+    public float getWeight() {
+        return WEIGHT;
+    }
 }

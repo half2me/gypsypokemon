@@ -38,4 +38,6 @@ public interface PlayerInterface{
     void kill();
 
     int getId();
+
+    float getWeight();
 }
