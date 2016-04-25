@@ -12,15 +12,15 @@ public class Game {
 
     private FieldInterface field;
     private PlayerInterface[] players = new PlayerInterface[3];
+    private Replicator replicator = null;
 
-    private Game() {
-        /*FieldInterface f = this.field;
-        for (int i = 0; i < 10; i++) {
-            f.setNeighbor(Direction.RIGHT, new Ground());
-            f = f.getNeighbor(Direction.RIGHT);
-        }*/
-    }
+    private Game() { }
 
+    /**
+     * Removes the player from the game (if killed)
+     *
+     * @param dead player
+     */
     public void deletePlayer(PlayerInterface dead) {
         for (int i = 0; i < 3; ++i) {
             if (players[i] == dead) {
@@ -33,6 +33,12 @@ public class Game {
         }
     }
 
+    /**
+     * Loads a map
+     *
+     * @param name Name of the map
+     * @throws IOException
+     */
     private void loadMap(String name) throws IOException {
         Map<Integer, Door> doors = new HashMap<Integer, Door>();
         List<int[][]> map = new ArrayList<int[][]>();
@@ -127,7 +133,7 @@ public class Game {
                         break;
                     case 10:
                         f = new Ground();
-                        players[2] = new Replicator(this, f, 3);
+                        players[2] = replicator = new Replicator(this, f, 3);
                         break;
                     default:
                         throw new IOException("Invalid field identifier");
@@ -154,6 +160,9 @@ public class Game {
         }
     }
 
+    /**
+     * Processes input commands
+     */
     private void startGame() {
         class InvalidPlayerException extends Exception {}
 
@@ -205,13 +214,25 @@ public class Game {
         }
     }
 
+    /**
+     * End of the game
+     */
     public void endGame() {
+        if (replicator != null) {
+            replicator.stop();
+            replicator = null;
+        }
 
+        field = null;
+        for (int i = 0; i < 3; ++i) {
+            players[i] = null;
+        }
     }
 
-    public void pauseGame() {
-
-    }
+    /**
+     * Pause the game
+     */
+    public void pauseGame() { }
 
     public static void main(String[] args) {
         //System.out.println("Gypsy Pokemon!");

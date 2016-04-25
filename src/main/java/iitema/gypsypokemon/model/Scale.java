@@ -8,6 +8,11 @@ public class Scale extends SimpleField{
     private Door door;
     private float weight;
 
+    /**
+     * Creates a Scale
+     *
+     * @param door Controlled door
+     */
     public Scale(Door door){
         this.door = door;
     }
@@ -20,7 +25,7 @@ public class Scale extends SimpleField{
      * @return if player moved to the field or not
      */
     @Override
-    public boolean stepOn(Direction dir, PlayerInterface player) {
+    synchronized public boolean stepOn(Direction dir, PlayerInterface player) {
         if (super.stepOn(dir, player)) {
             Log.println("Player" + player.getId() + " moved " + dir.toString() + " to Scale");
             weight += player.getWeight();
@@ -34,17 +39,26 @@ public class Scale extends SimpleField{
 
     /**
      * Leave a field
+     *
+     * @param player Player who stepped off
      */
     @Override
-    public void stepOff(PlayerInterface player) {
+    synchronized public void stepOff(PlayerInterface player) {
         weight -= player.getWeight();
         if (weight < THRESHOLD) {
             this.door.close();
         }
     }
 
+    /**
+     * Place an item on the scale.
+     *
+     * @param dir direction from the placer's view
+     * @param item item
+     * @return True if the item could be placed
+     */
     @Override
-    public boolean placeOn(Direction dir, ItemInterface item) {
+    synchronized public boolean placeOn(Direction dir, ItemInterface item) {
         if (super.placeOn(dir, item)) {
             Log.println(" placed Box on Scale");
             weight += item.getWeight();
@@ -57,11 +71,12 @@ public class Scale extends SimpleField{
     }
 
     /**
-     * Remove the item on the field (if any)
+     * Remove the topmost item from the field
+     *
      * @return true on removed item, false if there is no item to remove
      */
     @Override
-    public boolean removeItem(Direction dir) {
+    synchronized public boolean removeItem(Direction dir) {
         ItemInterface item = super.getItem(dir);
         if (item != null) {
             Log.println(" from Scale");

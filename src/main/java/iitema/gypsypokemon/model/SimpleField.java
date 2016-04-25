@@ -15,7 +15,7 @@ abstract class SimpleField implements FieldInterface{
      * @param dir direction projectile is going
      * @return solidity
      */
-    protected boolean solid(Direction dir) {
+    synchronized protected boolean solid(Direction dir) {
         for (ItemInterface item : items) {
             if (item.solid(dir)) {
                 return true;
@@ -31,7 +31,7 @@ abstract class SimpleField implements FieldInterface{
      * @return neighbor in the direction specified
      */
     @Override
-    public FieldInterface getNeighbor(Direction dir) {
+    synchronized public FieldInterface getNeighbor(Direction dir) {
         return this.neighbors.get(dir);
     }
 
@@ -42,12 +42,12 @@ abstract class SimpleField implements FieldInterface{
      * @param field field to set as neighbor
      */
     @Override
-    public void setNeighbor(Direction dir, FieldInterface field) {
+    synchronized public void setNeighbor(Direction dir, FieldInterface field) {
         this.neighbors.put(dir, field);
     }
 
     @Override
-    public ItemInterface getItem(Direction dir){
+    synchronized public ItemInterface getItem(Direction dir){
         if (!items.empty()) {
             return items.peek();
         }
@@ -55,7 +55,7 @@ abstract class SimpleField implements FieldInterface{
     }
 
     @Override
-    public boolean placeOn(Direction dir, ItemInterface item) {
+    synchronized public boolean placeOn(Direction dir, ItemInterface item) {
         items.push(item);
         return true;
     }
@@ -66,7 +66,7 @@ abstract class SimpleField implements FieldInterface{
      * @return true on removed item, false if there is no item to remove
      */
     @Override
-    public boolean removeItem(Direction dir) {
+    synchronized public boolean removeItem(Direction dir) {
         if (!items.empty()) {
             items.pop();
             return true;
@@ -82,7 +82,7 @@ abstract class SimpleField implements FieldInterface{
      * @return true on shot absorbed, false on shot through
      */
     @Override
-    public boolean shootAt(Color color, Direction dir) {
+    synchronized public boolean shootAt(Color color, Direction dir) {
         for (ItemInterface item : items) {
             if (item.solid(dir)) {
                 return true;
@@ -99,7 +99,7 @@ abstract class SimpleField implements FieldInterface{
      * @return if player moved to the field or not
      */
     @Override
-    public boolean stepOn(Direction dir, PlayerInterface player) {
+    synchronized public boolean stepOn(Direction dir, PlayerInterface player) {
         for (ItemInterface item : items) {
             if (item.solid(dir)) {
                 return false;
@@ -113,7 +113,7 @@ abstract class SimpleField implements FieldInterface{
      * Leave a field
      */
     @Override
-    public void stepOff(PlayerInterface player) {
+    synchronized public void stepOff(PlayerInterface player) {
 
     }
 }

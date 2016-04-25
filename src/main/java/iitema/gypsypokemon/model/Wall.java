@@ -17,15 +17,29 @@ public class Wall extends SimpleField{
         return true;
     }
 
+    /**
+     * Shoot at the wall, one cannot shoot through it
+     *
+     * @param color color of projectile
+     * @param dir direction projectile is travelling
+     * @return True, the projectile is always stopped
+     */
     @Override
     public boolean shootAt(Color color, Direction dir) {
         Log.println("Wall stopped the projectile");
         return true;
     }
 
+    /**
+     * Step on the wall, one cannot step on the wall
+     *
+     * @param dir direction the player is facing
+     * @param player the player that is stepping on the field
+     * @return False, the wall cannot be stepped on
+     */
     @Override
     public boolean stepOn(Direction dir, PlayerInterface player) {
         Log.println("Player" + player.getId() + " couldn't move " + dir.toString() + " to Wall");
-        return super.stepOn(dir, player);
+        return false;
     }
 }

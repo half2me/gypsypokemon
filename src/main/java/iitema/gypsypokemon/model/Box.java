@@ -29,6 +29,9 @@ public class Box implements ItemInterface{
         return true;
     }
 
+    /**
+     * @return Weight of the item
+     */
     public float getWeight() {
         return WEIGHT;
     }

@@ -37,7 +37,13 @@ public interface PlayerInterface{
      */
     void kill();
 
+    /**
+     * @return ID of the player
+     */
     int getId();
 
+    /**
+     * @return Weight of the player
+     */
     float getWeight();
 }

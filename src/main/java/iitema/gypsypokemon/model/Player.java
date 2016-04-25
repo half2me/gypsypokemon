@@ -8,10 +8,17 @@ public class Player implements PlayerInterface{
 
     protected FieldInterface field;
     private ItemInterface item;
-    private Direction dir;
+    Direction dir;
     private Game game;
     private int id;
 
+    /**
+     * Creates a player.
+     *
+     * @param game The creator game object
+     * @param field Field the player is on
+     * @param id ID of the player
+     */
     public Player(Game game, FieldInterface field, int id){
         this.field = field;
         this.dir = Direction.RIGHT;
@@ -94,8 +101,14 @@ public class Player implements PlayerInterface{
         game.deletePlayer(this);
     }
 
+    /**
+     * @return ID of the player
+     */
     public int getId() {return id; }
 
+    /**
+     * @return Weight of the player
+     */
     public float getWeight() {
         return WEIGHT;
     }

@@ -9,6 +9,11 @@ public class Door extends SimpleField {
     private EnumMap<Direction, Boolean> openSides = new EnumMap<Direction, Boolean>(Direction.class);
     private Direction orientation;
 
+    /**
+     * Creates a door facing the given direction.
+     *
+     * @param dir Direction the door is facing
+     */
     public Door(Direction dir) {
         this.orientation = dir;
         openSides.put(Direction.LEFT, false);
@@ -26,7 +31,7 @@ public class Door extends SimpleField {
      * @return solidity
      */
     @Override
-    protected boolean solid(Direction dir) {
+    synchronized protected boolean solid(Direction dir) {
         if (this.openSides.get(dir)) {
             for (ItemInterface item : items) {
                 if (item.solid(dir)) {
@@ -45,7 +50,7 @@ public class Door extends SimpleField {
      * @return an item on the field or null if none
      */
     @Override
-    public ItemInterface getItem(Direction dir) {
+    synchronized public ItemInterface getItem(Direction dir) {
         if (this.openSides.get(dir) && !items.empty()) {
             return items.peek();
         }
@@ -60,7 +65,7 @@ public class Door extends SimpleField {
      * @return true if item could be placed, false if there is no space
      */
     @Override
-    public boolean placeOn(Direction dir, ItemInterface item) {
+    synchronized public boolean placeOn(Direction dir, ItemInterface item) {
         if (this.openSides.get(dir)) {
             boolean ret = super.placeOn(dir, item);
             if (ret) Log.println(" placed Box in Door");
@@ -75,7 +80,7 @@ public class Door extends SimpleField {
      * @return true on removed item, false if there is no item to remove
      */
     @Override
-    public boolean removeItem(Direction dir) {
+    synchronized public boolean removeItem(Direction dir) {
         if (this.openSides.get(dir)) {
             Log.println(" from Door");
             return super.removeItem(dir);
@@ -101,8 +106,11 @@ public class Door extends SimpleField {
         Log.println("Door closed");
     }
 
+    /**
+     * Same as in SimpleField, only used for logging
+     */
     @Override
-    public boolean stepOn(Direction dir, PlayerInterface player) {
+    synchronized public boolean stepOn(Direction dir, PlayerInterface player) {
         boolean ret = super.stepOn(dir, player);
         if (ret) Log.println("Player" + player.getId() + " moved " + dir.toString() + " in Door");
         else Log.println("Player" + player.getId() + " couldn't move " + dir.toString() + " in Door");

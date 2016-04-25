@@ -4,11 +4,17 @@ import iitema.gypsypokemon.Game;
 
 public class Zpm implements ItemInterface{
 
-    public static int total = 30;
-    public static int collected = 0;
+    private static int total = 30;
+    private static int collected = 0;
     private FieldInterface field;
     private Game game;
 
+    /**
+     * Creates a Zpm.
+     *
+     * @param field Field the Zpm is on
+     * @param game Game object that creates this Zpm
+     */
     public Zpm(FieldInterface field, Game game){
         this.field = field;
         this.game = game;
@@ -43,6 +49,9 @@ public class Zpm implements ItemInterface{
         return false; // ZPM should no be picked up
     }
 
+    /**
+     * @return Weight of the item
+     */
     public float getWeight() {
         return 0.0f;
     }

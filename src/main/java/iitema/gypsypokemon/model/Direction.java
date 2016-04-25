@@ -19,10 +19,20 @@ public enum Direction {
         DOWN.opposite = UP;
     }
 
+    /**
+     * @return Opposite direction
+     */
     public Direction getOpposite() {
         return opposite;
     }
 
+    /**
+     * Parses the color string and makes a color object out of it.
+     *
+     * @param dir direction string
+     * @return Direction object
+     * @throws ParseException
+     */
     public static Direction parse(String dir) throws ParseException {
         if (dir.toUpperCase().equals("LEFT")) {
             return Direction.LEFT;
