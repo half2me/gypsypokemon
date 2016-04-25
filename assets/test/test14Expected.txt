@@ -1,0 +1,2 @@
+Map loaded
+Player1 couldn't move RIGHT to Wall

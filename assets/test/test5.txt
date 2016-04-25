@@ -1,0 +1,6 @@
+load test5
+action 1
+step 1 down
+action 1
+step 1 right
+action 1

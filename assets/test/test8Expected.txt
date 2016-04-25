@@ -1,0 +1,3 @@
+Map loaded
+Player1 shot YELLOW RIGHT
+Wall stopped the projectile

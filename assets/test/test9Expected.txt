@@ -1,0 +1,3 @@
+Map loaded
+Player1 shot YELLOW RIGHT
+YELLOW Portal created on Special Wall's LEFT side

@@ -1,0 +1,4 @@
+load test15
+step 3 right
+step 1 right
+step 1 right

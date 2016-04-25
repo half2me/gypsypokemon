@@ -1,0 +1,3 @@
+Map loaded
+Player1 turned DOWN
+Player1 moved DOWN to Ground

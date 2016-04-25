@@ -1,0 +1,9 @@
+Map loaded
+Player1 shot YELLOW RIGHT
+YELLOW Portal created on Special Wall's LEFT side
+Player1 turned DOWN
+Player1 shot BLUE DOWN
+BLUE Portal created on Special Wall's UP side
+Player1 rerouted through portal
+Player1 turned LEFT
+Player1 moved LEFT to Ground

@@ -1,0 +1,6 @@
+Map loaded
+Player1 picked up Box from Ground
+Player1 turned DOWN
+Player1 placed Box on Ground
+Player1 turned RIGHT
+Player1 picked up nothing

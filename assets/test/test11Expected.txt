@@ -1,0 +1,12 @@
+Map loaded
+Player1 shot YELLOW RIGHT
+YELLOW Portal created on Special Wall's LEFT side
+Player1 turned DOWN
+Player1 shot BLUE DOWN
+BLUE Portal created on Special Wall's UP side
+Player1 turned LEFT
+Player1 picked up Box from Ground
+Player1 turned DOWN
+Player1 through Portal placed Box on Ground
+Player1 turned RIGHT
+Player1 picked up Box from Ground

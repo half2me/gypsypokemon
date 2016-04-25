@@ -1,0 +1,2 @@
+load test8
+shoot 1 yellow

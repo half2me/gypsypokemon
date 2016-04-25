@@ -1,0 +1,9 @@
+load test7
+action 1
+step 1 down
+action 1
+step 1 left
+action 1
+step 1 down
+action 1
+action 1

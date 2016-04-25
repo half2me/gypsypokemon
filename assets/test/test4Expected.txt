@@ -1,0 +1,5 @@
+Map loaded
+Player1 picked up Box from Ground
+Player1 turned DOWN
+Player1 threw Box in Abyss
+Player1 picked up nothing

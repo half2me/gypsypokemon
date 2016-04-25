@@ -1,0 +1,5 @@
+load test4
+action 1
+step 1 down
+action 1
+action 1

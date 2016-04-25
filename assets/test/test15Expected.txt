@@ -1,0 +1,5 @@
+Map loaded
+Player3 moved RIGHT into Abyss
+Player3 killed
+Player1 moved RIGHT to Ground
+Player1 moved RIGHT to Ground

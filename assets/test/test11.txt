@@ -1,0 +1,10 @@
+load test11
+shoot 1 yellow
+step 1 down
+shoot 1 blue
+step 1 left
+action 1
+step 1 down
+action 1
+step 1 right
+action 1

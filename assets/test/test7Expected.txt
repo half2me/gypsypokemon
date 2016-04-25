@@ -1,0 +1,11 @@
+Map loaded
+Player1 picked up Box from Ground
+Player1 turned DOWN
+Player1 placed Box on Scale
+Player1 turned LEFT
+Player1 picked up Box from Ground
+Player1 turned DOWN
+Player1 placed Box on Scale
+Door opened
+Player1 picked up Box from Scale
+Door closed
