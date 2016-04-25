@@ -158,7 +158,7 @@ public class Game {
         class InvalidPlayerException extends Exception {}
 
         Scanner reader = new Scanner(System.in);
-        while (true) {
+        while (reader.hasNextLine()) {
             try {
                 String[] cmd = reader.nextLine().split(" ");
                 if (cmd[0].toUpperCase().equals("STEP")) {
@@ -214,8 +214,8 @@ public class Game {
     }
 
     public static void main(String[] args) {
-        System.out.println("Gypsy Pokemon!");
-        System.out.println(System.getProperty("user.dir"));
+        //System.out.println("Gypsy Pokemon!");
+        //System.out.println(System.getProperty("user.dir"));
         Game game = new Game();
 
         game.startGame();
