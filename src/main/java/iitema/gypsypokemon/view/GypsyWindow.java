@@ -11,16 +11,13 @@ public class GypsyWindow extends JFrame {
     JPanel panel = new JPanel(new BorderLayout());
 
     public GypsyWindow(Game g) {
-        super();
+        super("gypsypokemon");
         this.game = g;
 
-        this.setTitle("gypsypokemon");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        this.add(panel);
-
-        canvas = new GypsyCanvas(game);
-        panel.add(canvas, BorderLayout.NORTH);
+        this.setLayout(new BorderLayout());
+        this.add(new GypsyCanvas(game), BorderLayout.NORTH);
 
         this.pack();
 

@@ -20,7 +20,6 @@ class GypsyCanvas extends JPanel
 
         game = g;
 
-        BufferedImage wall=null;
         try {
             wall = ImageIO.read(new File("assets\\wall.png"));
         } catch (IOException e) {
@@ -45,8 +44,6 @@ class GypsyCanvas extends JPanel
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        // Draws the image to the canvas
-        //g.drawImage(img, 0, 0, null);
         g.drawImage(wall, 0, 0, null);
 
     }
