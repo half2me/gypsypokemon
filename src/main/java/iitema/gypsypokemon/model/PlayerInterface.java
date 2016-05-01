@@ -46,4 +46,11 @@ public interface PlayerInterface{
      * @return Weight of the player
      */
     float getWeight();
+
+    /**
+     * Return the name of the sprite
+     *
+     * @return name of the sprite
+     */
+    String sprite();
 }
