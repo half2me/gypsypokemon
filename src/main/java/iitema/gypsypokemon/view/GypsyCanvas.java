@@ -7,6 +7,7 @@ import iitema.gypsypokemon.model.FieldInterface;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -26,6 +27,12 @@ class GypsyCanvas extends JPanel
 
         try {
             sprites.put("wall", ImageIO.read(new File("assets\\wall.png")));
+            sprites.put("ground", ImageIO.read(new File("assets\\ground.png")));
+            sprites.put("special-wall", ImageIO.read(new File("assets\\special-wall.png")));
+            sprites.put("abyss", ImageIO.read(new File("assets\\abyss.png")));
+            sprites.put("door-open", ImageIO.read(new File("assets\\door-open.png")));
+            sprites.put("door-closed", ImageIO.read(new File("assets\\door-closed.png")));
+            sprites.put("scale", ImageIO.read(new File("assets\\scale.png")));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -50,10 +57,26 @@ class GypsyCanvas extends JPanel
         int y = 0;
         for (FieldInterface row = game.getFields(); row != null; row = row.getNeighbor(Direction.DOWN)) {
             for (FieldInterface field = row; field != null; field = field.getNeighbor(Direction.RIGHT)) {
-                g.drawImage(sprites.get(field.sprite()), x * 32, y * 32, null);
-                y++;
+                String spriteName = field.sprite();
+                if (spriteName.startsWith("door")) {
+                    int oIndex = spriteName.lastIndexOf("-");
+                    String orientation = spriteName.substring(oIndex + 1);
+                    if (orientation.equals("left") || orientation.equals("right")) {
+                        AffineTransform at = new AffineTransform();
+                        at.translate(16, 16);
+                        at.rotate(Math.PI/2);
+                        at.translate(-16, -16);
+                        at.translate(y * 32, -x * 32);
+                        spriteName = spriteName.substring(0, oIndex);
+                        ((Graphics2D) g).drawImage(sprites.get(spriteName), at, null);
+                    }
+                } else {
+                    g.drawImage(sprites.get(spriteName), x * 32, y * 32, null);
+                }
+                x++;
             }
-            x++;
+            y++;
+            x = 0;
         }
     }
 }
