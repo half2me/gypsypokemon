@@ -4,6 +4,21 @@ import iitema.gypsypokemon.Log;
 
 public class Wall extends SimpleField{
 
+    @Override
+    protected String defaultSprite() {
+        return "wall";
+    }
+
+    /**
+     * Return the name of the sprite
+     *
+     * @return name of the sprite
+     */
+    @Override
+    public String sprite() {
+        return this.defaultSprite();
+    }
+
     /**
      * Returns solidity for item
      * If an item is solid, projectiles and players cannot walk over or step on.

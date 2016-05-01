@@ -102,4 +102,14 @@ public class Replicator extends Player {
 
         super.kill();
     }
+
+    /**
+     * Return the name of the sprite
+     *
+     * @return name of the sprite
+     */
+    @Override
+    public String sprite() {
+        return "replicator-" + this.dir.toString().toLowerCase();
+    }
 }

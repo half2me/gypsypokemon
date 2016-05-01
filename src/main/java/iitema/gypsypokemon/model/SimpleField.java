@@ -8,6 +8,8 @@ abstract class SimpleField implements FieldInterface{
     private EnumMap<Direction, FieldInterface> neighbors = new EnumMap<Direction, FieldInterface>(Direction.class);
     Stack<ItemInterface> items = new Stack<ItemInterface>();
 
+    protected abstract String defaultSprite();
+
     /**
      * Returns solidity for item
      * If an item is solid, projectiles and players cannot walk over or step on.
@@ -115,5 +117,21 @@ abstract class SimpleField implements FieldInterface{
     @Override
     synchronized public void stepOff(PlayerInterface player) {
 
+    }
+
+    /**
+     * Return the name of the sprite
+     *
+     * @return name of the sprite
+     */
+    @Override
+    public String sprite() {
+        if (items.size() > 1) {
+            return items.lastElement().sprite() + "-stacked";
+        } else if (items.size() == 1) {
+            return items.lastElement().sprite();
+        } else {
+            return this.defaultSprite();
+        }
     }
 }

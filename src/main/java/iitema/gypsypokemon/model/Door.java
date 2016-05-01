@@ -22,6 +22,11 @@ public class Door extends SimpleField {
         openSides.put(Direction.UP, false);
     }
 
+    @Override
+    protected String defaultSprite() {
+        return "door-" + (this.openSides.isEmpty() ? "open-" : "closed-") + this.orientation.toString().toLowerCase();
+    }
+
     /**
      * Returns solidity for item
      * If an item is solid, projectiles and players cannot walk over or step on.

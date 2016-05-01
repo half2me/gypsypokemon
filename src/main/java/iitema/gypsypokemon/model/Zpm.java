@@ -55,4 +55,14 @@ public class Zpm implements ItemInterface{
     public float getWeight() {
         return 0.0f;
     }
+
+    /**
+     * Return the name of the sprite
+     *
+     * @return name of the sprite
+     */
+    @Override
+    public String sprite() {
+        return "zpm";
+    }
 }

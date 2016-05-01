@@ -35,4 +35,14 @@ public class Box implements ItemInterface{
     public float getWeight() {
         return WEIGHT;
     }
+
+    /**
+     * Return the name of the sprite
+     *
+     * @return name of the sprite
+     */
+    @Override
+    public String sprite() {
+        return "box";
+    }
 }
