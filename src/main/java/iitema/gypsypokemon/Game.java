@@ -1,6 +1,7 @@
 package iitema.gypsypokemon;
 
 import iitema.gypsypokemon.model.*;
+import iitema.gypsypokemon.view.GypsyWindow;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -238,7 +239,13 @@ public class Game {
         //System.out.println("Gypsy Pokemon!");
         //System.out.println(System.getProperty("user.dir"));
         Game game = new Game();
+        try {
+            game.loadMap("map1");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //game.startGame();
 
-        game.startGame();
+        GypsyWindow w = new GypsyWindow(game);
     }
 }
