@@ -239,6 +239,10 @@ public class Game {
         return field;
     }
 
+    public PlayerInterface[] getPlayers() {
+        return players;
+    }
+
     public static void main(String[] args) {
         //System.out.println("Gypsy Pokemon!");
         //System.out.println(System.getProperty("user.dir"));

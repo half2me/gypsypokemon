@@ -1,9 +1,11 @@
 package iitema.gypsypokemon.view;
 
 import iitema.gypsypokemon.Game;
+import iitema.gypsypokemon.controller.GypsyListener;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyListener;
 
 public class GypsyWindow extends JFrame {
     Game game;
@@ -17,7 +19,9 @@ public class GypsyWindow extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.setLayout(new BorderLayout());
-        this.add(new GypsyCanvas(game), BorderLayout.NORTH);
+        canvas = new GypsyCanvas(game);
+        this.add(canvas, BorderLayout.NORTH);
+        this.addKeyListener(new GypsyListener(game, canvas));
 
         this.pack();
 

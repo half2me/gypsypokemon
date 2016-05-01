@@ -122,4 +122,8 @@ public class Player implements PlayerInterface{
     public String sprite() {
         return "player-" + (this.item == null ? "empty-" : "full-") + this.dir.toString().toLowerCase();
     }
+
+    public FieldInterface getField() {
+        return field;
+    }
 }

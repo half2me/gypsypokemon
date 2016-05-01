@@ -53,4 +53,6 @@ public interface PlayerInterface{
      * @return name of the sprite
      */
     String sprite();
+
+    public FieldInterface getField();
 }

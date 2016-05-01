@@ -126,12 +126,10 @@ abstract class SimpleField implements FieldInterface{
      */
     @Override
     public String sprite() {
-        if (items.size() > 1) {
-            return items.lastElement().sprite() + "-stacked";
-        } else if (items.size() == 1) {
-            return items.lastElement().sprite();
-        } else {
+        if (items.empty()) {
             return this.defaultSprite();
+        } else {
+            return this.defaultSprite() + ":" + items.lastElement().sprite();
         }
     }
 }
