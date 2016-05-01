@@ -235,6 +235,10 @@ public class Game {
      */
     public void pauseGame() { }
 
+    public FieldInterface getFields() {
+        return field;
+    }
+
     public static void main(String[] args) {
         //System.out.println("Gypsy Pokemon!");
         //System.out.println(System.getProperty("user.dir"));
