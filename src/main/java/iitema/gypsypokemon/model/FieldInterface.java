@@ -71,4 +71,11 @@ public interface FieldInterface{
      * @return true on shot absorbed, false on shot through
      */
     boolean shootAt(Color color, Direction dir);
+
+    /**
+     * Return the name of the sprite
+     *
+     * @return name of the sprite
+     */
+    String sprite();
 }

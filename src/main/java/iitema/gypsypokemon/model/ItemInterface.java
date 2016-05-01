@@ -23,4 +23,11 @@ public interface ItemInterface {
      * @return Weight of the item
      */
     float getWeight();
+
+    /**
+     * Return the name of the sprite
+     *
+     * @return name of the sprite
+     */
+    String sprite();
 }

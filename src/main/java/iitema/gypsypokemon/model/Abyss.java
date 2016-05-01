@@ -3,6 +3,11 @@ package iitema.gypsypokemon.model;
 import iitema.gypsypokemon.Log;
 
 public class Abyss extends SimpleField{
+    @Override
+    protected String defaultSprite() {
+        return "abyss";
+    }
+
     /**
      * Returns solidity for item
      * If an item is solid, projectiles and players cannot walk over or step on.
@@ -42,5 +47,15 @@ public class Abyss extends SimpleField{
     public boolean placeOn(Direction dir, ItemInterface item) {
         Log.println(" threw Box in Abyss");
         return true;
+    }
+
+    /**
+     * Return the name of the sprite
+     *
+     * @return name of the sprite
+     */
+    @Override
+    public String sprite() {
+        return "abyss";
     }
 }

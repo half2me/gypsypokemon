@@ -112,4 +112,14 @@ public class Player implements PlayerInterface{
     public float getWeight() {
         return WEIGHT;
     }
+
+    /**
+     * Return the name of the sprite
+     *
+     * @return name of the sprite
+     */
+    @Override
+    public String sprite() {
+        return "player-" + (this.item == null ? "empty-" : "full-") + this.dir.toString().toLowerCase();
+    }
 }

@@ -50,6 +50,11 @@ public class Scale extends SimpleField{
         }
     }
 
+    @Override
+    protected String defaultSprite() {
+        return "scale";
+    }
+
     /**
      * Place an item on the scale.
      *

@@ -40,6 +40,25 @@ public class SpecialWall extends Wall {
     }
 
     @Override
+    protected String defaultSprite() {
+        return "special-wall";
+    }
+
+    /**
+     * Return the name of the sprite
+     *
+     * @return name of the sprite
+     */
+    @Override
+    public String sprite() {
+        Portal portal = Portal.get(this);
+        return this.defaultSprite() + (
+                portal == null ? "" : ("-" +
+                        portal.side.toString().toLowerCase() + portal.color.toString().toLowerCase()
+                ));
+    }
+
+    @Override
     synchronized public ItemInterface getItem(Direction dir){
         Portal portal = Portal.get(this, dir.getOpposite());
         if (portal != null) {

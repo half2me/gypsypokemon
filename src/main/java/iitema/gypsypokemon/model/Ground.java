@@ -5,6 +5,11 @@ import iitema.gypsypokemon.Log;
 
 public class Ground extends SimpleField {
 
+    @Override
+    protected String defaultSprite() {
+        return "ground";
+    }
+
     /**
      * Same as in SimpleField, only used for logging
      */
