@@ -52,6 +52,7 @@ public class Player implements PlayerInterface{
             Log.println("Player" + id + " turned " + dir.toString());
             this.dir = dir;
         }
+        game.invalidate();
     }
 
     /**
@@ -76,6 +77,7 @@ public class Player implements PlayerInterface{
                 this.item = null;
             } else { Log.println(" couldn't put down Box"); }
         }
+        game.invalidate();
     }
 
     /**
@@ -90,6 +92,7 @@ public class Player implements PlayerInterface{
         do {
             field = field.getNeighbor(this.dir);
         } while (!field.shootAt(color, this.dir));
+        game.invalidate();
     }
 
     /**
@@ -99,6 +102,7 @@ public class Player implements PlayerInterface{
     public void kill() {
         Log.println("Player" + id + " killed");
         game.deletePlayer(this);
+        game.invalidate();
     }
 
     /**

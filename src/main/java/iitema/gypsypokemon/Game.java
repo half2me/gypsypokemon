@@ -1,6 +1,7 @@
 package iitema.gypsypokemon;
 
 import iitema.gypsypokemon.model.*;
+import iitema.gypsypokemon.view.GypsyCanvas;
 import iitema.gypsypokemon.view.GypsyWindow;
 
 import java.io.BufferedReader;
@@ -14,6 +15,9 @@ public class Game {
     private FieldInterface field;
     private PlayerInterface[] players = new PlayerInterface[3];
     private Replicator replicator = null;
+    private boolean paused = false;
+    private GypsyCanvas canvas;
+    private String map;
 
     private Game() { }
 
@@ -40,7 +44,9 @@ public class Game {
      * @param name Name of the map
      * @throws IOException
      */
-    private void loadMap(String name) throws IOException {
+    public void loadMap(String name) throws IOException {
+        this.map = name;
+
         Map<Integer, Door> doors = new HashMap<Integer, Door>();
         List<int[][]> map = new ArrayList<int[][]>();
 
@@ -53,7 +59,7 @@ public class Game {
         // parse input into the 'map' variable and load doors
         BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader("assets\\" + name + ".csv"));
+            br = new BufferedReader(new FileReader(name));
             int nColumns = -1;
 
             String rowStr;
@@ -159,6 +165,7 @@ public class Game {
             }
             rowPrev = fRow;
         }
+        invalidate();
     }
 
     /**
@@ -193,7 +200,7 @@ public class Game {
 
                 } else if (cmd[0].toUpperCase().equals("LOAD")) {
                     Log.disable();
-                    loadMap(cmd[1]);
+                    loadMap("assets\\" + cmd[1] + ".csv");
                     Log.enable();
                     Log.println("Map loaded");
                 } else if (cmd[0].toUpperCase().equals("EXIT")) {
@@ -215,6 +222,14 @@ public class Game {
         }
     }
 
+    public void restart() {
+        try {
+            loadMap(map);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * End of the game
      */
@@ -233,7 +248,24 @@ public class Game {
     /**
      * Pause the game
      */
-    public void pauseGame() { }
+    public void pauseGame() {
+        if (replicator != null) {
+            if (paused) {
+                replicator.start();
+            } else {
+                replicator.start();
+            }
+        }
+        paused = !paused;
+    }
+
+    public void invalidate() {
+        canvas.repaint();
+    }
+
+    public void setCanvas(GypsyCanvas c) {
+        canvas = c;
+    }
 
     public FieldInterface getFields() {
         return field;
@@ -244,16 +276,15 @@ public class Game {
     }
 
     public static void main(String[] args) {
-        //System.out.println("Gypsy Pokemon!");
-        //System.out.println(System.getProperty("user.dir"));
+        Log.disable();
         Game game = new Game();
+
+        GypsyWindow w = new GypsyWindow(game);
+        game.setCanvas(w.getCanvas());
         try {
-            game.loadMap("map1");
+            game.loadMap("assets\\map1.csv");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //game.startGame();
-
-        GypsyWindow w = new GypsyWindow(game);
     }
 }
