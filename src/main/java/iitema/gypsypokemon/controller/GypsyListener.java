@@ -4,13 +4,9 @@ import iitema.gypsypokemon.Game;
 import iitema.gypsypokemon.model.Color;
 import iitema.gypsypokemon.model.Direction;
 import iitema.gypsypokemon.model.PlayerInterface;
-import iitema.gypsypokemon.view.GypsyCanvas;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class GypsyListener extends AbstractAction {
     private Game game;

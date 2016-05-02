@@ -10,12 +10,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GypsyWindow extends JFrame {
-    private Game game;
     private GypsyCanvas canvas;
 
-    public GypsyWindow(Game g) {
+    public GypsyWindow(Game game) {
         super("gypsypokemon");
-        this.game = g;
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);

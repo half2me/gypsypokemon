@@ -17,10 +17,10 @@ import java.util.Map;
 
 public class GypsyCanvas extends JPanel
 {
-    Game game;
-    Map<String, BufferedImage> sprites = new HashMap<String, BufferedImage>();
+    private Game game;
+    private Map<String, BufferedImage> sprites = new HashMap<String, BufferedImage>();
 
-    public GypsyCanvas(Game g)
+    GypsyCanvas(Game g)
     {
         super();
 

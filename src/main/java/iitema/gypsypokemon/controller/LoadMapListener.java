@@ -14,7 +14,6 @@ public class LoadMapListener implements ActionListener {
     private Game game;
     private JFrame parent;
     private PauseListener lPause;
-    private GypsyCanvas canvas;
 
     public LoadMapListener(Game g, JFrame p, PauseListener l) {
         game = g;

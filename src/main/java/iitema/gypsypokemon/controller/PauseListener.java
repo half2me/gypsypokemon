@@ -23,7 +23,7 @@ public class PauseListener implements ActionListener {
         toggleUI();
     }
 
-    public void reset() {
+    void reset() {
         if (paused) {
             toggleUI();
         }

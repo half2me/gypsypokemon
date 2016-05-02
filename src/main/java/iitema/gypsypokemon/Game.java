@@ -253,7 +253,7 @@ public class Game {
             if (paused) {
                 replicator.start();
             } else {
-                replicator.start();
+                replicator.stop();
             }
         }
         paused = !paused;
@@ -263,7 +263,7 @@ public class Game {
         canvas.repaint();
     }
 
-    public void setCanvas(GypsyCanvas c) {
+    private void setCanvas(GypsyCanvas c) {
         canvas = c;
     }
 

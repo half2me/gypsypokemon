@@ -1,7 +1,6 @@
 package iitema.gypsypokemon.controller;
 
 import iitema.gypsypokemon.Game;
-import iitema.gypsypokemon.view.GypsyCanvas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
