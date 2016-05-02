@@ -49,20 +49,22 @@ public class GypsyListener extends AbstractAction {
     }
 
     public void addBindings(JPanel c) {
-        c.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke('w'), "w");
-        c.getActionMap().put("w", this);
-        c.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke('a'), "a");
-        c.getActionMap().put("a", this);
-        c.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke('s'), "s");
-        c.getActionMap().put("s", this);
-        c.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke('d'), "d");
-        c.getActionMap().put("d", this);
-        c.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke('q'), "q");
-        c.getActionMap().put("q", this);
-        c.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke('e'), "e");
-        c.getActionMap().put("e", this);
-        c.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke('f'), "f");
-        c.getActionMap().put("f", this);
+        InputMap inputMap =  c.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap actionMap = c.getActionMap();
+        inputMap.put(KeyStroke.getKeyStroke('w'), "w");
+        actionMap.put("w", this);
+        inputMap.put(KeyStroke.getKeyStroke('a'), "a");
+        actionMap.put("a", this);
+        inputMap.put(KeyStroke.getKeyStroke('s'), "s");
+        actionMap.put("s", this);
+        inputMap.put(KeyStroke.getKeyStroke('d'), "d");
+        actionMap.put("d", this);
+        inputMap.put(KeyStroke.getKeyStroke('q'), "q");
+        actionMap.put("q", this);
+        inputMap.put(KeyStroke.getKeyStroke('e'), "e");
+        actionMap.put("e", this);
+        inputMap.put(KeyStroke.getKeyStroke('f'), "f");
+        actionMap.put("f", this);
     }
 
     void enable() {
