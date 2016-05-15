@@ -43,6 +43,10 @@ public class GypsyCanvas extends JPanel
             sprites.put("replicator", ImageIO.read(new File("assets\\replicator.png")));
             sprites.put("zpm", ImageIO.read(new File("assets\\zpm.png")));
             sprites.put("box", ImageIO.read(new File("assets\\box.png")));
+            sprites.put("portal-blue", ImageIO.read(new File("assets\\portal-blue.png")));
+            sprites.put("portal-yellow", ImageIO.read(new File("assets\\portal-yellow.png")));
+            sprites.put("portal-red", ImageIO.read(new File("assets\\portal-red.png")));
+            sprites.put("portal-green", ImageIO.read(new File("assets\\portal-green.png")));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -82,12 +86,18 @@ public class GypsyCanvas extends JPanel
 
     private void drawSprite(Graphics g, String spriteName, int x, int y) {
         String itemSpriteName = null;
+        String[] portals = null;
         if (spriteName.contains(":")) {
             int i = spriteName.indexOf(':');
-            itemSpriteName = spriteName.substring(i + 1);
+            if (spriteName.startsWith("special-wall")) {
+                portals = spriteName.substring(i + 1).split(":");
+            } else {
+                itemSpriteName = spriteName.substring(i + 1);
+            }
             spriteName = spriteName.substring(0, i);
         }
-        if (spriteName.startsWith("door") || spriteName.startsWith("player") || spriteName.startsWith("replicator")) {
+        if (spriteName.startsWith("door") || spriteName.startsWith("player") || spriteName.startsWith("replicator")
+                || spriteName.startsWith("portal")) {
             int oIndex = spriteName.lastIndexOf("-");
             String orientation = spriteName.substring(oIndex + 1);
             AffineTransform at = new AffineTransform();
@@ -108,6 +118,11 @@ public class GypsyCanvas extends JPanel
         }
         if (itemSpriteName != null) {
             g.drawImage(sprites.get(itemSpriteName), x * 32, y * 32, null);
+        }
+        if (portals != null) {
+            for (String portal : portals) {
+                drawSprite(g, "portal-" + portal, x, y);
+            }
         }
     }
 }

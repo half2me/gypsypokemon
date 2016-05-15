@@ -2,6 +2,8 @@ package iitema.gypsypokemon.model;
 
 import iitema.gypsypokemon.Log;
 
+import java.security.DigestException;
+
 public class SpecialWall extends Wall {
     /**
      * Shoot at a field
@@ -51,11 +53,14 @@ public class SpecialWall extends Wall {
      */
     @Override
     public String sprite() {
-        Portal portal = Portal.get(this);
-        return this.defaultSprite() + (
-                portal == null ? "" : ("-" +
-                        portal.side.toString().toLowerCase() + portal.color.toString().toLowerCase()
-                ));
+        String sprite = this.defaultSprite();
+        for (Direction dir : Direction.all()) {
+            Portal portal = Portal.get(this, dir);
+            if (portal != null) {
+                sprite += ":" + portal.color.toString().toLowerCase() + "-" + portal.side.toString().toLowerCase();
+            }
+        }
+        return sprite;
     }
 
     @Override

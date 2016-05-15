@@ -11,6 +11,7 @@ public enum Direction {
     LEFT, RIGHT, UP, DOWN;
 
     private Direction opposite;
+    private static Direction[] all = null;
 
     static {
         LEFT.opposite = RIGHT;
@@ -45,5 +46,16 @@ public enum Direction {
         } else {
             throw new ParseException("Invalid direction", 0);
         }
+    }
+
+    public static Direction[] all(){
+        if (all == null) {
+            all = new Direction[4];
+            all[0] = Direction.LEFT;
+            all[1] = Direction.RIGHT;
+            all[2] = Direction.UP;
+            all[3] = Direction.DOWN;
+        }
+        return all;
     }
 }
