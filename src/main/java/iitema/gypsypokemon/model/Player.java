@@ -124,7 +124,7 @@ public class Player implements PlayerInterface{
      */
     @Override
     public String sprite() {
-        return "player-" + (this.item == null ? "empty-" : "full-") + this.dir.toString().toLowerCase();
+        return "player" + id + "-" + (this.item == null ? "empty-" : "full-") + this.dir.toString().toLowerCase();
     }
 
     public FieldInterface getField() {

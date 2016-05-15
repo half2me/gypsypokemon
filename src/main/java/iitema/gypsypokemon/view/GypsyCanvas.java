@@ -8,6 +8,8 @@ import iitema.gypsypokemon.model.PlayerInterface;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -34,8 +36,11 @@ public class GypsyCanvas extends JPanel
             sprites.put("door-open", ImageIO.read(new File("assets\\door-open.png")));
             sprites.put("door-closed", ImageIO.read(new File("assets\\door-closed.png")));
             sprites.put("scale", ImageIO.read(new File("assets\\scale.png")));
-            sprites.put("player-full", ImageIO.read(new File("assets\\player-full.png")));
-            sprites.put("player-empty", ImageIO.read(new File("assets\\player-empty.png")));
+            sprites.put("player1-full", ImageIO.read(new File("assets\\player1-full.png")));
+            sprites.put("player1-empty", ImageIO.read(new File("assets\\player1-empty.png")));
+            sprites.put("player2-full", ImageIO.read(new File("assets\\player2-full.png")));
+            sprites.put("player2-empty", ImageIO.read(new File("assets\\player2-empty.png")));
+            sprites.put("replicator", ImageIO.read(new File("assets\\replicator.png")));
             sprites.put("zpm", ImageIO.read(new File("assets\\zpm.png")));
             sprites.put("box", ImageIO.read(new File("assets\\box.png")));
         } catch (IOException e) {
@@ -82,14 +87,14 @@ public class GypsyCanvas extends JPanel
             itemSpriteName = spriteName.substring(i + 1);
             spriteName = spriteName.substring(0, i);
         }
-        if (spriteName.startsWith("door") || spriteName.startsWith("player")) {
+        if (spriteName.startsWith("door") || spriteName.startsWith("player") || spriteName.startsWith("replicator")) {
             int oIndex = spriteName.lastIndexOf("-");
             String orientation = spriteName.substring(oIndex + 1);
             AffineTransform at = new AffineTransform();
             at.translate(x * 32, y * 32);
             at.translate(16, 16);
             if (orientation.equals("left")) {
-                at.rotate(Math.PI / 2);
+                at.rotate(1.5 * Math.PI);
             } else if (orientation.equals("right")) {
                 at.rotate(0.5 * Math.PI);
             } else if (orientation.equals("down")) {
