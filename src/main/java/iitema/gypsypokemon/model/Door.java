@@ -24,7 +24,7 @@ public class Door extends SimpleField {
 
     @Override
     protected String defaultSprite() {
-        return "door-" + (this.openSides.isEmpty() ? "open-" : "closed-") + this.orientation.toString().toLowerCase();
+        return "door-" + (this.openSides.get(orientation) ? "open-" : "closed-") + this.orientation.toString().toLowerCase();
     }
 
     /**
@@ -116,7 +116,11 @@ public class Door extends SimpleField {
      */
     @Override
     synchronized public boolean stepOn(Direction dir, PlayerInterface player) {
-        boolean ret = super.stepOn(dir, player);
+        boolean ret = false;
+        if (openSides.get(dir) && super.stepOn(dir, player)) {
+            ret = true;
+        }
+
         if (ret) Log.println("Player" + player.getId() + " moved " + dir.toString() + " in Door");
         else Log.println("Player" + player.getId() + " couldn't move " + dir.toString() + " in Door");
         return ret;
