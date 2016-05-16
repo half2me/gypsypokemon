@@ -2,15 +2,18 @@ package iitema.gypsypokemon;
 
 import iitema.gypsypokemon.model.*;
 import iitema.gypsypokemon.model.Box;
+import iitema.gypsypokemon.model.Color;
 import iitema.gypsypokemon.view.GypsyCanvas;
 import iitema.gypsypokemon.view.GypsyWindow;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.*;
+import java.util.List;
 
 public class Game {
 
@@ -20,6 +23,9 @@ public class Game {
     private boolean paused = false;
     private GypsyCanvas canvas;
     private String map;
+
+    public boolean ended = false;
+    public boolean win = false;
 
     private Game() { }
 
@@ -57,6 +63,11 @@ public class Game {
         for (int i = 0; i < 3; ++i) {
             players[i] = null;
         }
+        replicator = null;
+        Zpm.total = 0;
+        Zpm.collected = 0;
+        ended = false;
+        win = false;
 
         // parse input into the 'map' variable and load doors
         BufferedReader br = null;
@@ -131,6 +142,7 @@ public class Game {
                     case 7:
                         f = new Ground();
                         f.placeOn(Direction.RIGHT, new Zpm(f, this));
+                        Zpm.total++;
                         break;
                     case 8:
                         f = new Ground();
@@ -241,13 +253,17 @@ public class Game {
     public void endGame() {
         if (replicator != null) {
             replicator.stop();
-            replicator = null;
+            //replicator = null;
         }
-
+        /*
         field = null;
         for (int i = 0; i < 3; ++i) {
             players[i] = null;
+        }*/
+        if (Zpm.total == Zpm.collected) {
+            win = true;
         }
+        ended = true;
     }
 
     /**

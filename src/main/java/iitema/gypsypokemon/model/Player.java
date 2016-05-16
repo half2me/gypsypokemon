@@ -47,7 +47,10 @@ public class Player implements PlayerInterface{
     @java.lang.Override
     public void step(Direction dir) {
         if(this.dir == dir) {
-            this.field.getNeighbor(dir).stepOn(dir, this);
+            FieldInterface neighbor = this.field.getNeighbor(dir);
+            if (neighbor != null) {
+                neighbor.stepOn(dir, this);
+            }
         } else {
             Log.println("Player" + id + " turned " + dir.toString());
             this.dir = dir;

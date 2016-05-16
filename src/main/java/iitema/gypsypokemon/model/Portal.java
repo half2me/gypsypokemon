@@ -87,7 +87,7 @@ public class Portal {
      */
     public FieldInterface link() {
         Portal otherPortal = Portal.portals.get(this.color.getOpposite());
-        return otherPortal.field.getNeighbor(otherPortal.side);
+        return otherPortal != null ? otherPortal.field.getNeighbor(otherPortal.side) : null;
     }
 
     /**

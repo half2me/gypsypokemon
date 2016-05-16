@@ -4,8 +4,8 @@ import iitema.gypsypokemon.Game;
 
 public class Zpm implements ItemInterface{
 
-    private static int total = 30;
-    private static int collected = 0;
+    public static int total = 0;
+    public static int collected = 0;
     private FieldInterface field;
     private Game game;
 

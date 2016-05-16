@@ -10,35 +10,7 @@ import java.util.Random;
 public class Replicator extends Player {
 
     private volatile boolean stop;
-    private Thread aiThread = new Thread(){
-
-        /**
-         * Ai of the replicator
-         */
-        public void run() {
-            Random rand = new Random();
-            Direction prevDir = Direction.RIGHT;
-            FieldInterface prevField = field.getNeighbor(Direction.LEFT);
-            try {
-                while (!stop) {
-                    sleep(800);
-                    List<Direction> chosables = new ArrayList<Direction>(Arrays.asList(Direction.all()));
-                    if (prevField == field) {
-                        prevDir = prevDir.getOpposite();
-                    }
-                    chosables.remove(prevDir.getOpposite());
-                    prevDir = chosables.get(rand.nextInt(3));
-                    prevField = field;
-                    if (dir != prevDir) {
-                        step(prevDir);
-                    }
-                    step(prevDir);
-                }
-            } catch (InterruptedException e){
-                e.printStackTrace();
-            }
-        }
-    };
+    private Thread aiThread;
 
     public Replicator(Game game, FieldInterface field, int id) {
         super(game, field, id);
@@ -49,6 +21,35 @@ public class Replicator extends Player {
      */
     public void start(){
         stop = false;
+        aiThread = new Thread(){
+
+            /**
+             * Ai of the replicator
+             */
+            public void run() {
+                Random rand = new Random();
+                Direction prevDir = Direction.RIGHT;
+                FieldInterface prevField = field.getNeighbor(Direction.LEFT);
+                try {
+                    while (!stop) {
+                        List<Direction> chosables = new ArrayList<Direction>(Arrays.asList(Direction.all()));
+                        if (prevField == field) {
+                            prevDir = prevDir.getOpposite();
+                        }
+                        chosables.remove(prevDir.getOpposite());
+                        prevDir = chosables.get(rand.nextInt(3));
+                        prevField = field;
+                        if (dir != prevDir) {
+                            step(prevDir);
+                        }
+                        step(prevDir);
+                        sleep(800);
+                    }
+                } catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+        };
         aiThread.start();
     }
 

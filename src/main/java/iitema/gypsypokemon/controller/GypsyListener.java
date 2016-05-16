@@ -27,7 +27,7 @@ public class GypsyListener extends AbstractAction {
         shoot c1  q   z
         shoot c2  e   i
          */
-        if (enabled) {
+        if (enabled && !game.ended) {
             PlayerInterface players[] = game.getPlayers();
             Object command = e.getActionCommand();
             if (players[0] != null) {
@@ -45,22 +45,23 @@ public class GypsyListener extends AbstractAction {
                     players[0].shoot(Color.YELLOW);
                 } else if (command.equals("f")) {
                     players[0].action();
-                } else if (players[1] != null ) {
-                    if (command.equals("u")) {
-                        players[1].step(Direction.UP);
-                    } else if (command.equals("h")) {
-                        players[1].step(Direction.LEFT);
-                    } else if (command.equals("j")) {
-                        players[1].step(Direction.DOWN);
-                    } else if (command.equals("k")) {
-                        players[1].step(Direction.RIGHT);
-                    } else if (command.equals("z")) {
-                        players[1].shoot(Color.RED);
-                    } else if (command.equals("i")) {
-                        players[1].shoot(Color.GREEN);
-                    } else if (command.equals("l")) {
-                        players[1].action();
-                    }
+                }
+            }
+            if (players[1] != null ) {
+                if (command.equals("u")) {
+                    players[1].step(Direction.UP);
+                } else if (command.equals("h")) {
+                    players[1].step(Direction.LEFT);
+                } else if (command.equals("j")) {
+                    players[1].step(Direction.DOWN);
+                } else if (command.equals("k")) {
+                    players[1].step(Direction.RIGHT);
+                } else if (command.equals("z")) {
+                    players[1].shoot(Color.RED);
+                } else if (command.equals("i")) {
+                    players[1].shoot(Color.GREEN);
+                } else if (command.equals("l")) {
+                    players[1].action();
                 }
             }
         }
