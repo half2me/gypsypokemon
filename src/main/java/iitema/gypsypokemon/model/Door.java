@@ -45,7 +45,7 @@ public class Door extends SimpleField {
             }
             return false;
         }
-        return false;
+        return true;
     }
 
     /**
@@ -116,10 +116,7 @@ public class Door extends SimpleField {
      */
     @Override
     synchronized public boolean stepOn(Direction dir, PlayerInterface player) {
-        boolean ret = false;
-        if (openSides.get(dir) && super.stepOn(dir, player)) {
-            ret = true;
-        }
+        boolean ret = super.stepOn(dir, player);
 
         if (ret) Log.println("Player" + player.getId() + " moved " + dir.toString() + " in Door");
         else Log.println("Player" + player.getId() + " couldn't move " + dir.toString() + " in Door");

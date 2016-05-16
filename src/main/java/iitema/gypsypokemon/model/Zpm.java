@@ -61,8 +61,7 @@ public class Zpm implements ItemInterface{
                 placed = f.placeOn(Direction.DOWN, new Zpm(f, game));
             }
             Zpm.total++;
-        }
-        if(Zpm.collected == Zpm.total) {
+        } else if(Zpm.collected == Zpm.total) {
             game.endGame();
         }
         return false; // ZPM should no be picked up

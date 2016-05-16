@@ -38,7 +38,7 @@ public class Game {
         for (int i = 0; i < 3; ++i) {
             if (players[i] == dead) {
                 players[i] = null;
-                if (players[0] == null && players[1] == null) {
+                if (players[0] == null || players[1] == null) {
                     endGame();
                 }
                 return;
@@ -68,6 +68,7 @@ public class Game {
         Zpm.collected = 0;
         ended = false;
         win = false;
+        Portal.clear();
 
         // parse input into the 'map' variable and load doors
         BufferedReader br = null;

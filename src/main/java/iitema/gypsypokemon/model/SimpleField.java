@@ -85,10 +85,8 @@ abstract class SimpleField implements FieldInterface{
      */
     @Override
     synchronized public boolean shootAt(Color color, Direction dir) {
-        for (ItemInterface item : items) {
-            if (item.solid(dir)) {
-                return true;
-            }
+        if (this.solid(dir)) {
+            return true;
         }
         return false;
     }
@@ -102,10 +100,8 @@ abstract class SimpleField implements FieldInterface{
      */
     @Override
     synchronized public boolean stepOn(Direction dir, PlayerInterface player) {
-        for (ItemInterface item : items) {
-            if (item.solid(dir)) {
-                return false;
-            }
+        if (this.solid(dir)) {
+            return false;
         }
         player.move(this);
         return true;

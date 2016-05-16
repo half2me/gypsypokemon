@@ -20,6 +20,10 @@ public class Portal {
      * @param side side it is valid on
      */
     public static void set(Color color, FieldInterface field, Direction side) {
+        Portal old = get(field, side);
+        if (old != null) {
+            portals.remove(old.color);
+        }
         Portal.portals.put(color, new Portal(field, side, color));
     }
 
@@ -97,5 +101,9 @@ public class Portal {
      */
     public Portal opposite() {
         return Portal.portals.get(this.color.getOpposite());
+    }
+
+    public static void clear() {
+        portals.clear();
     }
 }
