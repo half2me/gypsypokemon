@@ -11,6 +11,7 @@ public class Player implements PlayerInterface{
     Direction dir;
     private Game game;
     private int id;
+    private int zpm = 0;
 
     /**
      * Creates a player.
@@ -71,6 +72,8 @@ public class Player implements PlayerInterface{
                 if(item.pickUp()) {
                     this.item = item;
                     this.field.getNeighbor(this.dir).removeItem(this.dir);
+                } else {
+                    zpm++;
                 }
             } else { Log.println("Player" + id + " picked up nothing"); }
         } else {
@@ -143,5 +146,9 @@ public class Player implements PlayerInterface{
 
     public FieldInterface getField() {
         return field;
+    }
+
+    public int getZpms() {
+        return zpm;
     }
 }

@@ -85,13 +85,13 @@ public class GypsyCanvas extends JPanel
         if (game.ended) {
             ((Graphics2D)g).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
             g.setFont(new Font("Georgia", Font.PLAIN, 48));
+            g.setColor(Color.GREEN);
             String text;
-            if (game.win) {
-                g.setColor(Color.GREEN);
-                text = "You won!";
+            PlayerInterface players[] = game.getPlayers();
+            if (players[0] != null && players[1] != null && players[0].getZpms() > players[1].getZpms() || players[1] == null) {
+                text = "O'Neil won!";
             } else {
-                g.setColor(Color.RED);
-                text = "You lost!";
+                text = "Jaffa won!";
             }
             g.drawString(text, 230, 296);
         }

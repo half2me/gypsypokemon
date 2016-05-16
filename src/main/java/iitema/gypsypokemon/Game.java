@@ -25,7 +25,6 @@ public class Game {
     private String map;
 
     public boolean ended = false;
-    public boolean win = false;
 
     private Game() { }
 
@@ -67,7 +66,6 @@ public class Game {
         Zpm.total = 0;
         Zpm.collected = 0;
         ended = false;
-        win = false;
         Portal.clear();
 
         // parse input into the 'map' variable and load doors
@@ -261,9 +259,6 @@ public class Game {
         for (int i = 0; i < 3; ++i) {
             players[i] = null;
         }*/
-        if (Zpm.total == Zpm.collected) {
-            win = true;
-        }
         ended = true;
     }
 

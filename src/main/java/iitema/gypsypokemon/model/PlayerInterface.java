@@ -55,4 +55,6 @@ public interface PlayerInterface{
     String sprite();
 
     public FieldInterface getField();
+
+    public int getZpms();
 }
