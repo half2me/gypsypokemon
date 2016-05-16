@@ -48,6 +48,7 @@ public class Scale extends SimpleField{
         if (weight < THRESHOLD) {
             this.door.close();
         }
+        super.stepOff(player);
     }
 
     @Override

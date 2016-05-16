@@ -30,13 +30,15 @@ public class PauseListener implements ActionListener {
     }
 
     private void toggleUI() {
-        if (paused) {
-            btPause.setText("Pause");
-            gl.enable();
-        } else {
-            btPause.setText("Continue");
-            gl.disable();
+        if (!game.ended) {
+            if (paused) {
+                btPause.setText("Pause");
+                gl.enable();
+            } else {
+                btPause.setText("Continue");
+                gl.disable();
+            }
+            paused = !paused;
         }
-        paused = !paused;
     }
 }

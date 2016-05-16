@@ -8,6 +8,7 @@ public class Door extends SimpleField {
 
     private EnumMap<Direction, Boolean> openSides = new EnumMap<Direction, Boolean>(Direction.class);
     private Direction orientation;
+    private  boolean closeWhenEmpty = false;
 
     /**
      * Creates a door facing the given direction.
@@ -88,7 +89,11 @@ public class Door extends SimpleField {
     synchronized public boolean removeItem(Direction dir) {
         if (this.openSides.get(dir)) {
             Log.println(" from Door");
-            return super.removeItem(dir);
+            boolean removed = super.removeItem(dir);
+            if (closeWhenEmpty && items.empty() && numPlayers == 0) {
+                close();
+            }
+            return removed;
         }
         return false;
     }
@@ -99,6 +104,7 @@ public class Door extends SimpleField {
     void open() {
         openSides.put(this.orientation, true);
         openSides.put(this.orientation.getOpposite(), true);
+        closeWhenEmpty = false;
         Log.println("Door opened");
     }
 
@@ -106,9 +112,13 @@ public class Door extends SimpleField {
      * Closes a Door
      */
     void close() {
-        openSides.put(this.orientation, false);
-        openSides.put(this.orientation.getOpposite(), false);
-        Log.println("Door closed");
+        if (this.items.empty() && numPlayers == 0) {
+            openSides.put(this.orientation, false);
+            openSides.put(this.orientation.getOpposite(), false);
+            Log.println("Door closed");
+        } else {
+            closeWhenEmpty = true;
+        }
     }
 
     /**
@@ -121,5 +131,13 @@ public class Door extends SimpleField {
         if (ret) Log.println("Player" + player.getId() + " moved " + dir.toString() + " in Door");
         else Log.println("Player" + player.getId() + " couldn't move " + dir.toString() + " in Door");
         return ret;
+    }
+
+    @Override
+    public synchronized void stepOff(PlayerInterface player) {
+        super.stepOff(player);
+        if (closeWhenEmpty && items.empty() && numPlayers == 0) {
+            close();
+        }
     }
 }

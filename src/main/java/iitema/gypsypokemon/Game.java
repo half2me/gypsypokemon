@@ -67,6 +67,7 @@ public class Game {
         Zpm.collected = 0;
         ended = false;
         Portal.clear();
+        this.paused = false;
 
         // parse input into the 'map' variable and load doors
         BufferedReader br = null;
@@ -252,13 +253,7 @@ public class Game {
     public void endGame() {
         if (replicator != null) {
             replicator.stop();
-            //replicator = null;
         }
-        /*
-        field = null;
-        for (int i = 0; i < 3; ++i) {
-            players[i] = null;
-        }*/
         ended = true;
     }
 
@@ -266,6 +261,7 @@ public class Game {
      * Pause the game
      */
     public void pauseGame() {
+        if (!ended) {
         if (replicator != null) {
             if (paused) {
                 replicator.start();
@@ -274,6 +270,7 @@ public class Game {
             }
         }
         paused = !paused;
+        }
     }
 
     public void invalidate() {
@@ -308,7 +305,7 @@ public class Game {
         GypsyWindow w = new GypsyWindow(game);
         game.setCanvas(w.getCanvas());
         try {
-            game.loadMap("assets\\map1.csv");
+            game.loadMap("assets\\map2.csv");
         } catch (IOException e) {
             e.printStackTrace();
         }

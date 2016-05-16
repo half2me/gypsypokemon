@@ -6,6 +6,7 @@ import java.util.Stack;
 abstract class SimpleField implements FieldInterface{
 
     private EnumMap<Direction, FieldInterface> neighbors = new EnumMap<Direction, FieldInterface>(Direction.class);
+    protected int numPlayers = 0;
     Stack<ItemInterface> items = new Stack<ItemInterface>();
 
     protected abstract String defaultSprite();
@@ -58,8 +59,11 @@ abstract class SimpleField implements FieldInterface{
 
     @Override
     synchronized public boolean placeOn(Direction dir, ItemInterface item) {
-        items.push(item);
-        return true;
+        if (numPlayers == 0) {
+            items.push(item);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -103,6 +107,7 @@ abstract class SimpleField implements FieldInterface{
         if (this.solid(dir)) {
             return false;
         }
+        numPlayers++;
         player.move(this);
         return true;
     }
@@ -112,7 +117,7 @@ abstract class SimpleField implements FieldInterface{
      */
     @Override
     synchronized public void stepOff(PlayerInterface player) {
-
+        numPlayers--;
     }
 
     /**
