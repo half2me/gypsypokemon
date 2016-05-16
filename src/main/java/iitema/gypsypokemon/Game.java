@@ -1,9 +1,11 @@
 package iitema.gypsypokemon;
 
 import iitema.gypsypokemon.model.*;
+import iitema.gypsypokemon.model.Box;
 import iitema.gypsypokemon.view.GypsyCanvas;
 import iitema.gypsypokemon.view.GypsyWindow;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -165,6 +167,9 @@ public class Game {
             }
             rowPrev = fRow;
         }
+        if (replicator != null) {
+            replicator.start();
+        }
         invalidate();
     }
 
@@ -260,7 +265,16 @@ public class Game {
     }
 
     public void invalidate() {
-        canvas.repaint();
+        if (SwingUtilities.isEventDispatchThread()) {
+            canvas.repaint();
+        } else {
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    canvas.repaint();
+                }
+            });
+        }
     }
 
     private void setCanvas(GypsyCanvas c) {

@@ -2,6 +2,9 @@ package iitema.gypsypokemon.model;
 
 import iitema.gypsypokemon.Game;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class Replicator extends Player {
@@ -14,35 +17,22 @@ public class Replicator extends Player {
          */
         public void run() {
             Random rand = new Random();
+            Direction prevDir = Direction.RIGHT;
+            FieldInterface prevField = field.getNeighbor(Direction.LEFT);
             try {
                 while (!stop) {
-                    sleep(1000);
-                    switch (rand.nextInt(3)) {
-                        case 0:
-                            if (dir != Direction.LEFT) {
-                                step(Direction.LEFT);
-                            }
-                            step(Direction.LEFT);
-                            break;
-                        case 1:
-                            if (dir != Direction.RIGHT) {
-                                step(Direction.RIGHT);
-                            }
-                            step(Direction.RIGHT);
-                            break;
-                        case 2:
-                            if (dir != Direction.UP) {
-                                step(Direction.UP);
-                            }
-                            step(Direction.UP);
-                            break;
-                        case 3:
-                            if (dir != Direction.DOWN) {
-                                step(Direction.DOWN);
-                            }
-                            step(Direction.DOWN);
-                            break;
+                    sleep(800);
+                    List<Direction> chosables = new ArrayList<Direction>(Arrays.asList(Direction.all()));
+                    if (prevField == field) {
+                        prevDir = prevDir.getOpposite();
                     }
+                    chosables.remove(prevDir.getOpposite());
+                    prevDir = chosables.get(rand.nextInt(3));
+                    prevField = field;
+                    if (dir != prevDir) {
+                        step(prevDir);
+                    }
+                    step(prevDir);
                 }
             } catch (InterruptedException e){
                 e.printStackTrace();
@@ -73,6 +63,8 @@ public class Replicator extends Player {
      * Kills the replicator. Exchanges the field it is on to a Ground if dies in an Abyss.
      */
     public void kill() {
+        this.stop = true;
+
         Ground g = new Ground();
 
         FieldInterface left =  field.getNeighbor(Direction.LEFT);
