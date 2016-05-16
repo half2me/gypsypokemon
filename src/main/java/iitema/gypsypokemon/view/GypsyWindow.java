@@ -59,7 +59,9 @@ public class GypsyWindow extends JFrame {
                     br.close();
                 } catch (IOException e) {}
         }
-        help.add(new JLabel(sb.toString()));
+        JLabel helpLabel = new JLabel(sb.toString());
+        helpLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        help.add(helpLabel);
         help.pack();
 
         JButton btHelp = new JButton("Help");

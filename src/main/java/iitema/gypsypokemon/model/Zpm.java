@@ -58,7 +58,14 @@ public class Zpm implements ItemInterface{
                 for (int i = 0; i < y; ++i) {
                     f = f.getNeighbor(Direction.DOWN);
                 }
-                placed = f.placeOn(Direction.DOWN, new Zpm(f, game));
+                if (f.getItem(Direction.DOWN) == null) {
+                    placed = f.placeOn(Direction.DOWN, new Zpm(f, game));
+                    if (placed) {
+                        if (f.getItem(Direction.DOWN) == null) {
+                            placed = false;
+                        }
+                    }
+                }
             }
             Zpm.total++;
         } else if(Zpm.collected == Zpm.total) {
