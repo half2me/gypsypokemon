@@ -92,9 +92,20 @@ public class Player implements PlayerInterface{
     public void shoot(Color color) {
         FieldInterface field = this.field;
         Log.println("Player" + id + " shot " + color.toString() + " " + dir.toString());
-        do {
+
+        boolean hit = false;
+        while (!hit) {
             field = field.getNeighbor(this.dir);
-        } while (!field.shootAt(color, this.dir));
+            hit = field.shootAt(color, this.dir);
+            if (!hit) {
+                Replicator r = (Replicator) game.getPlayers()[2];
+                if (r != null && r.getField() == field) {
+                    hit = true;
+                    r.stop();
+                    game.deletePlayer(r);
+                }
+            }
+        }
         game.invalidate();
     }
 
