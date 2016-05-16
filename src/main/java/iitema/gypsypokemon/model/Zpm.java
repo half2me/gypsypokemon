@@ -2,12 +2,15 @@ package iitema.gypsypokemon.model;
 
 import iitema.gypsypokemon.Game;
 
+import java.util.Random;
+
 public class Zpm implements ItemInterface{
 
     public static int total = 0;
     public static int collected = 0;
     private FieldInterface field;
     private Game game;
+    private Random rand = new Random();
 
     /**
      * Creates a Zpm.
@@ -43,6 +46,22 @@ public class Zpm implements ItemInterface{
         Zpm.collected++;
         this.field.removeItem(Direction.DOWN); // in case ZPM is in the door
         this.field.removeItem(Direction.LEFT); // in case ZPM is in the door
+        if (Zpm.collected % 2 == 0) {
+            boolean placed = false;
+            while(!placed) {
+                FieldInterface f = game.getFields();
+                int x = rand.nextInt(20);
+                int y = rand.nextInt(20);
+                for (int i = 0; i < x; ++i) {
+                    f = f.getNeighbor(Direction.RIGHT);
+                }
+                for (int i = 0; i < y; ++i) {
+                    f = f.getNeighbor(Direction.DOWN);
+                }
+                placed = f.placeOn(Direction.DOWN, new Zpm(f, game));
+            }
+            Zpm.total++;
+        }
         if(Zpm.collected == Zpm.total) {
             game.endGame();
         }

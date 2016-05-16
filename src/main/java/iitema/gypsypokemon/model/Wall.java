@@ -57,4 +57,9 @@ public class Wall extends SimpleField{
         Log.println("Player" + player.getId() + " couldn't move " + dir.toString() + " to Wall");
         return false;
     }
+
+    @Override
+    public synchronized boolean placeOn(Direction dir, ItemInterface item) {
+        return false;
+    }
 }
