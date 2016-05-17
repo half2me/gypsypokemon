@@ -8,8 +8,6 @@ import iitema.gypsypokemon.model.PlayerInterface;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -17,12 +15,19 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GypsyCanvas extends JPanel
+/**
+ * Canvas the game is drawn on
+ */
+public class GameCanvas extends JPanel
 {
     private Game game;
     private Map<String, BufferedImage> sprites = new HashMap<String, BufferedImage>();
 
-    GypsyCanvas(Game g)
+    /**
+     *
+     * @param g game
+     */
+    GameCanvas(Game g)
     {
         super();
 
@@ -64,6 +69,10 @@ public class GypsyCanvas extends JPanel
         return new Dimension(640, 640);
     }
 
+    /**
+     * Draws the current state of the game
+     * @param g graphics
+     */
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
@@ -89,7 +98,7 @@ public class GypsyCanvas extends JPanel
             String text;
             PlayerInterface players[] = game.getPlayers();
             if (players[0] != null && players[1] != null && players[0].getZpms() > players[1].getZpms() || players[1] == null) {
-                text = "O'Neil won!";
+                text = "O'Neill won!";
             } else {
                 text = "Jaffa won!";
             }
@@ -97,6 +106,13 @@ public class GypsyCanvas extends JPanel
         }
     }
 
+    /**
+     * Draws a sprite by name to the given field coordinates
+     * @param g graphics
+     * @param spriteName sprite name
+     * @param x x coordinate
+     * @param y y coordinate
+     */
     private void drawSprite(Graphics g, String spriteName, int x, int y) {
         String itemSpriteName = null;
         String[] portals = null;

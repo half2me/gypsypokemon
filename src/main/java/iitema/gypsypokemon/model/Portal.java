@@ -7,9 +7,7 @@ public class Portal {
     private static HashMap<Color, Portal> portals = new HashMap<Color, Portal>();
 
     public FieldInterface field;
-
     public Direction side;
-
     public Color color;
 
     /**
@@ -103,6 +101,9 @@ public class Portal {
         return Portal.portals.get(this.color.getOpposite());
     }
 
+    /**
+     * Removes all portals
+     */
     public static void clear() {
         portals.clear();
     }

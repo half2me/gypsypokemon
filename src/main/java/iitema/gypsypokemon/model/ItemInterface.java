@@ -1,7 +1,5 @@
 package iitema.gypsypokemon.model;
 
-import iitema.gypsypokemon.model.Direction;
-
 public interface ItemInterface {
     /**
      * Returns solidity for item

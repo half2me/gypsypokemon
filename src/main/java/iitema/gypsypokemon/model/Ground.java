@@ -1,6 +1,5 @@
 package iitema.gypsypokemon.model;
 
-
 import iitema.gypsypokemon.Log;
 
 public class Ground extends SimpleField {

@@ -48,6 +48,10 @@ public enum Direction {
         }
     }
 
+    /**
+     *
+     * @return Array containing all 4 directions
+     */
     public static Direction[] all(){
         if (all == null) {
             all = new Direction[4];

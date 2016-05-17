@@ -1,7 +1,7 @@
 package iitema.gypsypokemon.view;
 
 import iitema.gypsypokemon.Game;
-import iitema.gypsypokemon.controller.GypsyListener;
+import iitema.gypsypokemon.controller.KeyboardListener;
 import iitema.gypsypokemon.controller.LoadMapListener;
 import iitema.gypsypokemon.controller.PauseListener;
 import iitema.gypsypokemon.controller.RestartListener;
@@ -14,20 +14,20 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class GypsyWindow extends JFrame {
-    private GypsyCanvas canvas;
+public class GameWindow extends JFrame {
+    private GameCanvas canvas;
     private JDialog help;
 
-    public GypsyWindow(Game game) {
-        super("gypsypokemon");
+    public GameWindow(Game game) {
+        super("Stargate Reloaded - The Return of O'Neill");
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
 
         this.setLayout(new BorderLayout());
-        canvas = new GypsyCanvas(game);
+        canvas = new GameCanvas(game);
         this.add(canvas, BorderLayout.CENTER);
-        GypsyListener gl = new GypsyListener(game);
+        KeyboardListener gl = new KeyboardListener(game);
         gl.addBindings(canvas);
 
         JPanel panel = new JPanel(new FlowLayout());
@@ -87,7 +87,7 @@ public class GypsyWindow extends JFrame {
         this.setVisible(true);
     }
 
-    public GypsyCanvas getCanvas() {
+    public GameCanvas getCanvas() {
         return canvas;
     }
 }

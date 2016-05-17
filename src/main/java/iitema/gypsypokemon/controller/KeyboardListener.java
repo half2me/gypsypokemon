@@ -8,11 +8,14 @@ import iitema.gypsypokemon.model.PlayerInterface;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class GypsyListener extends AbstractAction {
+/**
+ * Handles keyboard input
+ */
+public class KeyboardListener extends AbstractAction {
     private Game game;
     private boolean enabled = true;
 
-    public GypsyListener(Game g) {
+    public KeyboardListener(Game g) {
         game = g;
     }
 
@@ -67,6 +70,10 @@ public class GypsyListener extends AbstractAction {
         }
     }
 
+    /**
+     * Binds keys to the canvas panel
+     * @param c canvas
+     */
     public void addBindings(JPanel c) {
         InputMap inputMap =  c.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         ActionMap actionMap = c.getActionMap();
@@ -100,10 +107,16 @@ public class GypsyListener extends AbstractAction {
         actionMap.put("action2", this);
     }
 
+    /**
+     * Disables keyboard handling
+     */
     void enable() {
         enabled = true;
     }
 
+    /**
+     * Enables keyboard handling
+     */
     void disable() {
         enabled = false;
     }

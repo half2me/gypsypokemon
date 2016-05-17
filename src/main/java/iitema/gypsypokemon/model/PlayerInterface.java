@@ -54,7 +54,15 @@ public interface PlayerInterface{
      */
     String sprite();
 
+    /**
+     *
+     * @return the field the player is standing on
+     */
     public FieldInterface getField();
 
+    /**
+     *
+     * @return the number of zmps the player collected
+     */
     public int getZpms();
 }

@@ -3,11 +3,10 @@ package iitema.gypsypokemon;
 import iitema.gypsypokemon.model.*;
 import iitema.gypsypokemon.model.Box;
 import iitema.gypsypokemon.model.Color;
-import iitema.gypsypokemon.view.GypsyCanvas;
-import iitema.gypsypokemon.view.GypsyWindow;
+import iitema.gypsypokemon.view.GameCanvas;
+import iitema.gypsypokemon.view.GameWindow;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -21,7 +20,7 @@ public class Game {
     private PlayerInterface[] players = new PlayerInterface[3];
     private Replicator replicator = null;
     private boolean paused = false;
-    private GypsyCanvas canvas;
+    private GameCanvas canvas;
     private String map;
 
     public boolean ended = false;
@@ -214,7 +213,7 @@ public class Game {
                     }
                     players[index].action();
                 } else if (cmd[0].toUpperCase().equals("NEW")) {
-
+                    restart();
                 } else if (cmd[0].toUpperCase().equals("LOAD")) {
                     Log.disable();
                     loadMap("assets\\" + cmd[1] + ".csv");
@@ -239,6 +238,9 @@ public class Game {
         }
     }
 
+    /**
+     * Reloads the last map
+     */
     public void restart() {
         try {
             loadMap(map);
@@ -258,7 +260,7 @@ public class Game {
     }
 
     /**
-     * Pause the game
+     * Pauses the game
      */
     public void pauseGame() {
         if (!ended) {
@@ -273,6 +275,9 @@ public class Game {
         }
     }
 
+    /**
+     * The game state has changed, needs to be redrawn
+     */
     public void invalidate() {
         if (SwingUtilities.isEventDispatchThread()) {
             canvas.repaint();
@@ -286,14 +291,26 @@ public class Game {
         }
     }
 
-    private void setCanvas(GypsyCanvas c) {
+    /**
+     *
+     * @param c canvas the game is drawn on
+     */
+    private void setCanvas(GameCanvas c) {
         canvas = c;
     }
 
+    /**
+     *
+     * @return the top-left field of the map
+     */
     public FieldInterface getFields() {
         return field;
     }
 
+    /**
+     *
+     * @return size 3 array of players
+     */
     public PlayerInterface[] getPlayers() {
         return players;
     }
@@ -302,7 +319,7 @@ public class Game {
         Log.disable();
         Game game = new Game();
 
-        GypsyWindow w = new GypsyWindow(game);
+        GameWindow w = new GameWindow(game);
         game.setCanvas(w.getCanvas());
         try {
             game.loadMap("assets\\map2.csv");

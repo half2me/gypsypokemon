@@ -133,6 +133,10 @@ public class Door extends SimpleField {
         return ret;
     }
 
+    /**
+     * Step off the door, closes door if there's not enough weight on the scale
+     * @param player player
+     */
     @Override
     public synchronized void stepOff(PlayerInterface player) {
         super.stepOff(player);

@@ -2,11 +2,9 @@ package iitema.gypsypokemon.model;
 
 import iitema.gypsypokemon.Log;
 
-import java.security.DigestException;
-
 public class SpecialWall extends Wall {
     /**
-     * Shoot at a field
+     * Shoot at the wall, creates a portal on the side
      *
      * @param color color of projectile
      * @param dir   direction projectile is travelling
@@ -41,6 +39,10 @@ public class SpecialWall extends Wall {
         return super.placeOn(dir, item);
     }
 
+    /**
+     *
+     * @return sprite name when there are no portals on the wall
+     */
     @Override
     protected String defaultSprite() {
         return "special-wall";
@@ -63,6 +65,11 @@ public class SpecialWall extends Wall {
         return sprite;
     }
 
+    /**
+     * Returns the topmost item from the field on the other side of the portal
+     * @param dir
+     * @return item
+     */
     @Override
     synchronized public ItemInterface getItem(Direction dir){
         Portal portal = Portal.get(this, dir.getOpposite());
@@ -80,7 +87,7 @@ public class SpecialWall extends Wall {
 
 
     /**
-     * Remove the item on the field (if any)
+     * Removes the item from the field on the other side of the portal
      *
      * @return true on removed item, false if there is no item to remove
      */
@@ -99,7 +106,7 @@ public class SpecialWall extends Wall {
     }
 
     /**
-     * Try to step on a field
+     * Try to step in the portal, teleports player to the other side if portal of opposing color is present
      *
      * @param dir    direction the player is facing
      * @param player the player that is stepping on the field

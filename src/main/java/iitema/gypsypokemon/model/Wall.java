@@ -58,6 +58,12 @@ public class Wall extends SimpleField{
         return false;
     }
 
+    /**
+     * Place an item on the wall, always returns false
+     * @param dir direction
+     * @param item item
+     * @return if the item could be placed
+     */
     @Override
     public synchronized boolean placeOn(Direction dir, ItemInterface item) {
         return false;

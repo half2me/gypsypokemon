@@ -12,6 +12,12 @@ public class Replicator extends Player {
     private volatile boolean stop;
     private Thread aiThread;
 
+    /**
+     *
+     * @param game game
+     * @param field starting field
+     * @param id id
+     */
     public Replicator(Game game, FieldInterface field, int id) {
         super(game, field, id);
     }
